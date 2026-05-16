@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dropdown / select</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .col { display: flex; flex-direction: column; gap: 8px; }
+  .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); }
+  .trigger {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface); border: 1px solid var(--border-1);
+    border-radius: 4px; padding: 0 10px; height: 36px;
+    font: 14px var(--font-sans); color: var(--fg-1); cursor: pointer;
+    justify-content: space-between; width: 100%;
+  }
+  .trigger.open { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-ring); }
+  .trigger .v { color: var(--fg-1); }
+  .trigger .placeholder { color: var(--fg-3); }
+  .trigger .chev { color: var(--fg-3); }
+  .menu {
+    background: var(--surface); border: 1px solid var(--border-1);
+    border-radius: 6px; box-shadow: var(--shadow-2);
+    padding: 4px; min-width: 220px;
+  }
+  .item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 10px; font-size: 13px; color: var(--fg-1);
+    border-radius: 4px; cursor: pointer;
+  }
+  .item.hover { background: rgba(31,63,224,0.08); color: var(--fg-1); }
+  .item.active { color: var(--accent); font-weight: 500; }
+  .item .check { width: 14px; color: var(--accent); }
+  .item .mono { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-left: auto; }
+  .sep { height: 1px; background: var(--border-1); margin: 4px -4px; }
+  .grouphd { padding: 6px 10px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); }
+  .item.danger { color: var(--danger); }
+  .item.danger.hover { background: rgba(154,34,34,0.08); }
+  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 7px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; background: var(--bg-3); border-radius: 2px; color: var(--fg-2); margin-left: auto; }
+</style>
+</head>
+<body class="sr-preview">
+<div class="grid">
+  <div class="col">
+    <span class="tag">Closed · placeholder</span>
+    <button class="trigger"><span class="placeholder">Choose a region</span>
+      <span class="chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+    </button>
+    <span class="tag" style="margin-top:6px">With value</span>
+    <button class="trigger"><span class="v" style="font-family:var(--font-mono); font-size:13px">us-east-1</span>
+      <span class="chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></span>
+    </button>
+  </div>
+  <div class="col">
+    <span class="tag">Open + menu</span>
+    <button class="trigger open"><span class="v" style="font-family:var(--font-mono); font-size:13px">us-east-1</span>
+      <span class="chev" style="color:var(--accent)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></span>
+    </button>
+    <div class="menu">
+      <div class="grouphd">— Americas</div>
+      <div class="item active">
+        <span class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <span style="font-family:var(--font-mono)">us-east-1</span>
+        <span class="mono">Virginia</span>
+      </div>
+      <div class="item hover">
+        <span class="check"></span>
+        <span style="font-family:var(--font-mono)">us-west-2</span>
+        <span class="mono">Oregon</span>
+      </div>
+      <div class="item">
+        <span class="check"></span>
+        <span style="font-family:var(--font-mono)">sa-east-1</span>
+        <span class="mono">São Paulo</span>
+      </div>
+      <div class="sep"></div>
+      <div class="grouphd">— EMEA</div>
+      <div class="item">
+        <span class="check"></span>
+        <span style="font-family:var(--font-mono)">eu-west-1</span>
+        <span class="mono">Ireland</span>
+      </div>
+      <div class="item">
+        <span class="check"></span>
+        <span style="font-family:var(--font-mono)">eu-central-1</span>
+        <span class="mono">Frankfurt</span>
+      </div>
+      <div class="sep"></div>
+      <div class="item danger">
+        <span class="check"></span>
+        <span>Disconnect region…</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Accordion</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 8px; display: block; }
+
+  /* Bordered */
+  .acc { background: var(--surface); border: 1px solid var(--border-1); border-radius: 8px; overflow: hidden; }
+  .acc .item { border-bottom: 1px solid var(--border-1); }
+  .acc .item:last-child { border-bottom: 0; }
+  .acc .head { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; cursor: pointer; gap: 12px; }
+  .acc .head .ttl { font-size: 14px; font-weight: 500; color: var(--fg-1); flex: 1; }
+  .acc .head .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; }
+  .acc .head .chev { color: var(--fg-3); transition: transform 200ms var(--ease-standard); display: inline-flex; }
+  .acc .item.open .chev { transform: rotate(180deg); }
+  .acc .body { padding: 0 14px 14px; font-size: 13px; color: var(--fg-2); line-height: 1.55; }
+  .acc .body code { font-family: var(--font-mono); background: var(--bg-3); padding: 1px 5px; border-radius: 2px; }
+
+  /* Flush, line-only style */
+  .acc-flush .item { border-bottom: 1px solid var(--border-1); }
+  .acc-flush .head { padding: 14px 0; }
+  .acc-flush .body { padding: 0 0 16px; }
+  .acc-flush { border: 0; background: transparent; border-radius: 0; }
+
+  /* FAQ style */
+  .num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--fg-3); width: 28px; flex-shrink: 0; }
+</style>
+</head>
+<body class="sr-preview">
+<div class="grid">
+  <div>
+    <span class="tag">Bordered · stacked</span>
+    <div class="acc">
+      <div class="item open">
+        <div class="head"><div class="ttl">What is a typed payload?</div><span class="chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></span></div>
+        <div class="body">A typed payload carries its <code>schema-id</code> in the header, so consumers reject anything that doesn't match. Breaking changes fail at the boundary, not in production.</div>
+      </div>
+      <div class="item">
+        <div class="head"><div class="ttl">How is the registry versioned?</div><span class="chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></span></div>
+      </div>
+      <div class="item">
+        <div class="head"><div class="ttl">Can I self-host?</div><span class="chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></span></div>
+      </div>
+      <div class="item">
+        <div class="head"><div class="ttl">What does p95 latency include?</div><span class="chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <span class="tag">Flush · editorial FAQ</span>
+    <div class="acc-flush">
+      <div class="item open">
+        <div class="head" style="align-items: flex-start">
+          <span class="num">01</span>
+          <div class="ttl" style="font-family:var(--font-display); font-size:20px; font-weight:400; letter-spacing: -0.01em">How long does the migration take?</div>
+          <span class="chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></span>
+        </div>
+        <div class="body" style="padding-left:28px; padding-right:0">Most teams move their first pipeline in under an hour and finish a full migration in a fortnight. We pair you with a solutions engineer for anything above 50 pipelines.</div>
+      </div>
+      <div class="item">
+        <div class="head" style="align-items: flex-start">
+          <span class="num">02</span>
+          <div class="ttl" style="font-family:var(--font-display); font-size:20px; font-weight:400; letter-spacing: -0.01em">Do you handle PII redaction?</div>
+          <span class="chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="head" style="align-items: flex-start">
+          <span class="num">03</span>
+          <div class="ttl" style="font-family:var(--font-display); font-size:20px; font-weight:400; letter-spacing: -0.01em">What's the SLA?</div>
+          <span class="chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

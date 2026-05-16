@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cards</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--border-1); border-radius: 8px; padding: 20px; box-shadow: var(--shadow-1); display: flex; flex-direction: column; gap: 12px; }
+  .head { display: flex; justify-content: space-between; align-items: flex-start; }
+  .title { font-family: var(--font-sans); font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+  .sub { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; text-transform: uppercase; }
+  .stat-row { display: flex; gap: 24px; }
+  .stat { display: flex; flex-direction: column; gap: 2px; }
+  .stat .v { font-family: var(--font-display); font-size: 28px; line-height: 1; letter-spacing: -0.02em; }
+  .stat .k { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; text-transform: uppercase; }
+  .meta-row { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 12px; color: var(--fg-2); padding: 5px 0; border-bottom: 1px solid var(--border-1); }
+  .meta-row:last-child { border-bottom: 0; }
+  .meta-row .key { color: var(--fg-3); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 8px; vertical-align: middle; }
+</style>
+</head>
+<body class="sr-preview">
+  <div class="grid">
+    <div class="card">
+      <div class="head">
+        <div>
+          <div class="sub">Pipeline</div>
+          <div class="title" style="margin-top:4px"><span class="dot" style="background:#1F6B47"></span>orders.normalize</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="v">12.4</span><span class="k">p95 ms</span></div>
+        <div class="stat"><span class="v">3.2 K</span><span class="k">rows / min</span></div>
+        <div class="stat"><span class="v">0</span><span class="k">errors · 24h</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="head">
+        <div>
+          <div class="sub">Source</div>
+          <div class="title" style="margin-top:4px">postgres-primary</div>
+        </div>
+      </div>
+      <div>
+        <div class="meta-row"><span class="key">Region</span><span>us-east-1</span></div>
+        <div class="meta-row"><span class="key">Schema</span><span>v2.4.1</span></div>
+        <div class="meta-row"><span class="key">Last run</span><span>14:02:11Z</span></div>
+        <div class="meta-row"><span class="key">Owner</span><span>data-platform</span></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

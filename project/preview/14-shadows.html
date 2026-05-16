@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Elevation / shadows</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; padding: 24px 0; }
+  .cell { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .card {
+    width: 180px; height: 120px; background: var(--surface);
+    border-radius: 8px;
+  }
+  .s1 { box-shadow: 0 1px 0 rgba(14,15,18,0.04), 0 1px 2px rgba(14,15,18,0.04); border: 1px solid rgba(14,15,18,0.06); }
+  .s2 { box-shadow: 0 4px 12px rgba(14,15,18,0.06), 0 1px 2px rgba(14,15,18,0.06); border: 1px solid rgba(14,15,18,0.04); }
+  .s3 { box-shadow: 0 24px 48px rgba(14,15,18,0.12), 0 2px 4px rgba(14,15,18,0.08); }
+  .name { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--fg-3); text-transform: uppercase; }
+  .desc { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); }
+</style>
+</head>
+<body class="sr-preview">
+  <div class="grid">
+    <div class="cell"><div class="card s1"></div><div class="name">shadow-1</div><div class="desc">resting cards</div></div>
+    <div class="cell"><div class="card s2"></div><div class="name">shadow-2</div><div class="desc">menus, popovers</div></div>
+    <div class="cell"><div class="card s3"></div><div class="name">shadow-3</div><div class="desc">dialogs only</div></div>
+  </div>
+</body>
+</html>

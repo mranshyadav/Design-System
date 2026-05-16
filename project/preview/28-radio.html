@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Radio</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .col { display: flex; flex-direction: column; gap: 10px; }
+  .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 4px; }
+  .r { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 4px 0; font-size: 14px; color: var(--fg-1); }
+  .r .dot { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--border-2); background: var(--surface); margin-top: 2px; flex-shrink: 0; position: relative; transition: border-color 120ms var(--ease-standard); }
+  .r.on .dot { border-color: var(--accent); }
+  .r.on .dot::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--accent); }
+  .r.disabled { opacity: 0.45; cursor: not-allowed; }
+  .r .sub { display: block; font-size: 12px; color: var(--fg-3); margin-top: 2px; }
+  /* Card-style radio */
+  .cards { display: flex; flex-direction: column; gap: 8px; }
+  .card-r {
+    display: flex; align-items: flex-start; gap: 12px; padding: 14px;
+    background: var(--surface); border: 1px solid var(--border-1);
+    border-radius: 6px; cursor: pointer; transition: border-color 120ms var(--ease-standard);
+  }
+  .card-r.on { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); background: rgba(31,63,224,0.03); }
+  .card-r .dot { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--border-2); margin-top: 2px; flex-shrink: 0; position: relative; }
+  .card-r.on .dot { border-color: var(--accent); }
+  .card-r.on .dot::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--accent); }
+  .card-r .ttl { font-size: 14px; font-weight: 500; color: var(--fg-1); }
+  .card-r .desc { font-size: 12px; color: var(--fg-2); margin-top: 4px; }
+  .card-r .price { margin-left: auto; font-family: var(--font-mono); font-size: 13px; color: var(--fg-1); }
+  /* Segmented */
+  .seg { display: inline-flex; padding: 2px; background: var(--bg-3); border-radius: 6px; }
+  .seg button { background: transparent; border: 0; padding: 6px 14px; font-size: 13px; color: var(--fg-2); border-radius: 4px; cursor: pointer; font: 500 13px var(--font-sans); }
+  .seg button.on { background: var(--surface); color: var(--fg-1); box-shadow: var(--shadow-1); }
+</style>
+</head>
+<body class="sr-preview">
+<div class="grid">
+  <div class="col">
+    <span class="tag">Standard</span>
+    <label class="r on"><span class="dot"></span><span>Schema-enforced (strict)<span class="sub">Reject any payload with extra or missing fields.</span></span></label>
+    <label class="r"><span class="dot"></span><span>Schema-flexible (warn)<span class="sub">Accept unknown fields, emit a warning.</span></span></label>
+    <label class="r disabled"><span class="dot"></span><span>Schema-off<span class="sub">Not available on this plan.</span></span></label>
+
+    <span class="tag" style="margin-top:14px">Inline · segmented</span>
+    <div class="seg">
+      <button>Daily</button>
+      <button class="on">Weekly</button>
+      <button>Monthly</button>
+    </div>
+  </div>
+  <div class="col">
+    <span class="tag">Card style</span>
+    <div class="cards">
+      <label class="card-r on">
+        <span class="dot"></span>
+        <div>
+          <div class="ttl">Production</div>
+          <div class="desc">Versioned schemas, signed payloads, 12-month retention.</div>
+        </div>
+        <div class="price">$0 / 1M</div>
+      </label>
+      <label class="card-r">
+        <span class="dot"></span>
+        <div>
+          <div class="ttl">Staging</div>
+          <div class="desc">Same guarantees, 30-day retention, no SLA.</div>
+        </div>
+        <div class="price">$0 / 1M</div>
+      </label>
+      <label class="card-r">
+        <span class="dot"></span>
+        <div>
+          <div class="ttl">Dev</div>
+          <div class="desc">Local-first, no retention. Free.</div>
+        </div>
+        <div class="price">free</div>
+      </label>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Data table</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  table { width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: 13px; background: var(--surface); border: 1px solid var(--border-1); border-radius: 8px; overflow: hidden; }
+  thead th { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-3); text-align: left; padding: 10px 14px; background: var(--bg-3); border-bottom: 1px solid var(--border-1); }
+  tbody td { padding: 12px 14px; border-bottom: 1px solid var(--border-1); color: var(--fg-1); vertical-align: middle; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tr.selected td { background: rgba(31,63,224,0.06); }
+  tr.selected td:first-child { box-shadow: inset 2px 0 0 var(--accent); }
+  td.mono { font-family: var(--font-mono); }
+  td.num { font-family: var(--font-mono); text-align: right; font-variant-numeric: tabular-nums; }
+  td.muted { color: var(--fg-3); }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+  .name { font-weight: 500; }
+</style>
+</head>
+<body class="sr-preview">
+  <table>
+    <thead>
+      <tr><th>Pipeline</th><th>Status</th><th>Schema</th><th style="text-align:right">p95</th><th class="muted">Updated</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="name">orders.normalize</span></td>
+        <td><span class="dot" style="background:#1F6B47"></span>deployed</td>
+        <td class="mono">v2.4.1</td>
+        <td class="num">12.4 ms</td>
+        <td class="mono muted">14:02</td>
+      </tr>
+      <tr class="selected">
+        <td><span class="name">events.dedupe</span></td>
+        <td><span class="dot" style="background:#1F6B47"></span>deployed</td>
+        <td class="mono">v1.0.7</td>
+        <td class="num">9.1 ms</td>
+        <td class="mono muted">13:58</td>
+      </tr>
+      <tr>
+        <td><span class="name">payments.audit</span></td>
+        <td><span class="dot" style="background:#8A5A14"></span>throttled</td>
+        <td class="mono">v3.2.0</td>
+        <td class="num">48.6 ms</td>
+        <td class="mono muted">13:41</td>
+      </tr>
+      <tr>
+        <td><span class="name">users.enrich</span></td>
+        <td><span class="dot" style="background:#9A2222"></span>failed</td>
+        <td class="mono">v0.9.2</td>
+        <td class="num muted">—</td>
+        <td class="mono muted">13:22</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

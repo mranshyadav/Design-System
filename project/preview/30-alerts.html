@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alerts</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .stack { display: grid; gap: 10px; }
+  .alert {
+    display: grid; grid-template-columns: 18px 1fr auto;
+    gap: 12px; align-items: flex-start;
+    padding: 12px 14px; border-radius: 6px; border: 1px solid;
+    font-size: 13px; line-height: 1.5;
+  }
+  .alert .ic { display: inline-flex; padding-top: 1px; }
+  .alert .body { color: var(--fg-1); }
+  .alert .ttl { font-weight: 500; }
+  .alert .desc { color: var(--fg-2); margin-top: 2px; }
+  .alert .actions { display: inline-flex; gap: 8px; align-items: center; }
+  .alert .actions a { font-size: 13px; font-weight: 500; }
+  .alert .x { background: transparent; border: 0; cursor: pointer; color: inherit; opacity: 0.65; }
+
+  .a-info    { background: var(--surface); border-color: var(--border-1); }
+  .a-info .ic { color: var(--fg-2); }
+
+  .a-ok      { background: rgba(31,107,71,0.08); border-color: rgba(31,107,71,0.30); }
+  .a-ok .ic  { color: #1F6B47; }
+
+  .a-warn    { background: rgba(138,90,20,0.08); border-color: rgba(138,90,20,0.30); }
+  .a-warn .ic{ color: #8A5A14; }
+
+  .a-err     { background: rgba(154,34,34,0.08); border-color: rgba(154,34,34,0.30); }
+  .a-err .ic { color: #9A2222; }
+  .a-err a   { color: #9A2222; }
+
+  .a-banner  { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .a-banner .body, .a-banner .body * { color: var(--paper); }
+  .a-banner .desc { color: var(--graphite-25); }
+  .a-banner .ic { color: var(--paper); }
+  .a-banner a { color: var(--paper); text-decoration: underline; text-underline-offset: 3px; }
+  .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; }
+</style>
+</head>
+<body class="sr-preview">
+<div class="stack">
+  <div class="alert a-info">
+    <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span>
+    <div class="body">
+      <div class="ttl">Maintenance window</div>
+      <div class="desc">us-east-1 will be unavailable Saturday 02:00–03:00 UTC for registry upgrade.</div>
+    </div>
+    <button class="x">×</button>
+  </div>
+
+  <div class="alert a-ok">
+    <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+    <div class="body"><div class="ttl">Pipeline deployed</div><div class="desc">orders.normalize v2.4.1 is live in us-east-1.</div></div>
+    <span class="meta">14:02:11Z</span>
+  </div>
+
+  <div class="alert a-warn">
+    <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+    <div class="body"><div class="ttl">Schema deprecation</div><div class="desc">orders.v1 will be removed in 30 days. 3 consumers still depend on it.</div></div>
+    <div class="actions"><a href="#">View consumers →</a></div>
+  </div>
+
+  <div class="alert a-err">
+    <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg></span>
+    <div class="body">
+      <div class="ttl">Schema mismatch on field <code style="font-family:var(--font-mono); background:rgba(154,34,34,0.10); padding:1px 4px; border-radius:2px">account_id</code></div>
+      <div class="desc">Expected <code style="font-family:var(--font-mono)">string</code>, received <code style="font-family:var(--font-mono)">null</code>. 14 payloads quarantined.</div>
+    </div>
+    <div class="actions"><a href="#">View payload →</a></div>
+  </div>
+
+  <div class="alert a-banner">
+    <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+    <div class="body"><div class="ttl">v2.4 is here — typed payloads now generally available.</div><div class="desc">Migrate from beta in under an hour. <a href="#">Read the guide</a>.</div></div>
+    <button class="x">×</button>
+  </div>
+</div>
+</body>
+</html>

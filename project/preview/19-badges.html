@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Badges & status</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid { display: grid; gap: 14px; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); width: 110px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 2px; border: 1px solid;
+  }
+  .b-ok { color: #1F6B47; border-color: rgba(31,107,71,0.3); background: rgba(31,107,71,0.08); }
+  .b-warn { color: #8A5A14; border-color: rgba(138,90,20,0.3); background: rgba(138,90,20,0.08); }
+  .b-err { color: #9A2222; border-color: rgba(154,34,34,0.3); background: rgba(154,34,34,0.08); }
+  .b-neutral { color: var(--fg-2); border-color: var(--border-1); background: var(--surface); }
+  .b-accent { color: #1F3FE0; border-color: rgba(31,63,224,0.3); background: rgba(31,63,224,0.08); }
+  .dot { width: 6px; height: 6px; border-radius: 50%; }
+  .status { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--fg-2); }
+</style>
+</head>
+<body class="sr-preview">
+  <div class="grid">
+    <div class="row">
+      <span class="tag">Tag · semantic</span>
+      <span class="badge b-ok"><span class="dot" style="background:#1F6B47"></span>deployed</span>
+      <span class="badge b-warn"><span class="dot" style="background:#8A5A14"></span>throttled</span>
+      <span class="badge b-err"><span class="dot" style="background:#9A2222"></span>failed</span>
+      <span class="badge b-neutral">queued</span>
+      <span class="badge b-accent">v2.4.1</span>
+    </div>
+    <div class="row">
+      <span class="tag">Status dot</span>
+      <span class="status"><span class="dot" style="background:#1F6B47"></span>healthy</span>
+      <span class="status"><span class="dot" style="background:#8A5A14"></span>degraded</span>
+      <span class="status"><span class="dot" style="background:#9A2222"></span>down</span>
+      <span class="status"><span class="dot" style="background:var(--graphite-40)"></span>idle</span>
+    </div>
+    <div class="row">
+      <span class="tag">Pill (rare)</span>
+      <span class="badge b-neutral" style="border-radius:9999px; padding:3px 10px">+12 more</span>
+      <span class="badge b-accent" style="border-radius:9999px; padding:3px 10px">3 changes</span>
+    </div>
+  </div>
+</body>
+</html>

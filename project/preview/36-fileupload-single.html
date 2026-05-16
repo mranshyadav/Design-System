@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>File uploader — single</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid { display: grid; gap: 14px; }
+  .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); }
+  .drop {
+    border: 1.5px dashed var(--border-2); border-radius: 8px;
+    padding: 32px 24px; text-align: center; background: var(--surface);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    cursor: pointer;
+  }
+  .drop.active { border-color: var(--accent); background: rgba(31,63,224,0.04); }
+  .drop .ic { width: 36px; height: 36px; border-radius: 8px; background: var(--bg-3); color: var(--fg-2); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 4px; }
+  .drop .ttl { font-size: 14px; color: var(--fg-1); }
+  .drop .ttl b { font-weight: 500; }
+  .drop .ttl a { color: var(--accent); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+  .drop .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); }
+
+  .file {
+    background: var(--surface); border: 1px solid var(--border-1);
+    border-radius: 8px; padding: 12px 14px;
+    display: grid; grid-template-columns: 36px 1fr auto; gap: 12px; align-items: center;
+  }
+  .file .ic { width: 36px; height: 36px; border-radius: 6px; background: var(--bg-3); color: var(--fg-2); display: inline-flex; align-items: center; justify-content: center; }
+  .name { font-size: 14px; color: var(--fg-1); }
+  .row2 { display: flex; gap: 8px; align-items: center; margin-top: 4px; }
+  .row2 .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; }
+  .bar { height: 4px; background: var(--graphite-08); border-radius: 9999px; max-width: 340px; flex: 1; overflow: hidden; }
+  .bar > span { display: block; height: 100%; background: var(--accent); border-radius: 9999px; }
+  .actions { display: inline-flex; gap: 6px; }
+  .iconbtn { background: transparent; border: 0; color: var(--fg-3); width: 28px; height: 28px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+  .iconbtn:hover { background: var(--bg-3); color: var(--fg-1); }
+  .ok { color: #1F6B47; }
+  .err { color: #9A2222; }
+  .errmsg { font-size: 12px; color: var(--danger); margin-top: 4px; }
+</style>
+</head>
+<body class="sr-preview">
+<div class="grid">
+  <div class="tag">— Empty dropzone</div>
+  <div class="drop">
+    <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg></span>
+    <div class="ttl"><b>Drop a schema file</b> or <a>browse</a></div>
+    <div class="meta">.json · .yaml · .proto · max 4 MB</div>
+  </div>
+
+  <div class="tag" style="margin-top:8px">— Uploading · 62%</div>
+  <div class="file">
+    <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+    <div>
+      <div class="name">orders.v2.4.1.proto</div>
+      <div class="row2"><div class="bar"><span style="width:62%"></span></div><span class="meta">2.6 MB / 4.2 MB</span></div>
+    </div>
+    <div class="actions"><button class="iconbtn">×</button></div>
+  </div>
+
+  <div class="tag" style="margin-top:8px">— Done</div>
+  <div class="file">
+    <span class="ic ok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 14l2 2 4-4"/></svg></span>
+    <div>
+      <div class="name">orders.v2.4.1.proto</div>
+      <div class="row2"><span class="meta">4.2 MB</span><span class="meta" style="color:#1F6B47">· uploaded 14:02:11Z</span></div>
+    </div>
+    <div class="actions"><button class="iconbtn">⇣</button><button class="iconbtn">×</button></div>
+  </div>
+
+  <div class="tag" style="margin-top:8px">— Error</div>
+  <div class="file" style="border-color: rgba(154,34,34,0.3); background: rgba(154,34,34,0.04)">
+    <span class="ic err"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg></span>
+    <div>
+      <div class="name">users.csv</div>
+      <div class="errmsg">Unsupported format · only .json, .yaml, .proto allowed</div>
+    </div>
+    <div class="actions"><button class="iconbtn">×</button></div>
+  </div>
+</div>
+</body>
+</html>

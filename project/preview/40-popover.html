@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Popover</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 32px; padding-top: 8px; }
+  .col { position: relative; min-height: 220px; }
+  .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 8px; display: block; }
+  .anchor {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 10px; background: var(--surface); border: 1px solid var(--border-2);
+    border-radius: 4px; font-size: 13px; color: var(--fg-1); cursor: pointer;
+  }
+  .pop {
+    background: var(--surface); border: 1px solid var(--border-1);
+    border-radius: 8px; box-shadow: var(--shadow-2);
+    padding: 14px; width: 280px; position: relative;
+    margin-top: 10px;
+  }
+  .pop::before {
+    content: ""; position: absolute; top: -6px; left: 16px;
+    width: 10px; height: 10px; background: var(--surface);
+    border-top: 1px solid var(--border-1); border-left: 1px solid var(--border-1);
+    transform: rotate(45deg);
+  }
+  .pop .ttl { font-size: 13px; font-weight: 500; }
+  .pop .desc { font-size: 12px; color: var(--fg-2); margin-top: 4px; line-height: 1.5; }
+  .pop .actions { display: flex; gap: 6px; margin-top: 10px; }
+  .btn-primary { background: var(--ink); color: var(--paper); border: 0; border-radius: 4px; padding: 6px 10px; font: 500 12px var(--font-sans); }
+  .btn-ghost { background: transparent; color: var(--fg-1); border: 1px solid var(--border-1); border-radius: 4px; padding: 6px 10px; font: 500 12px var(--font-sans); }
+  .row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 12px; }
+  .row .k { color: var(--fg-3); }
+  .row .v { font-family: var(--font-mono); }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .input { width: 100%; box-sizing: border-box; background: var(--bg-3); border: 1px solid var(--border-1); border-radius: 4px; padding: 6px 8px; font: 13px var(--font-sans); }
+  .lab { font-size: 12px; color: var(--fg-2); }
+  /* menu popover */
+  .menu .item { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 4px; font-size: 13px; }
+  .menu .item:hover { background: var(--bg-3); }
+  .menu .item .ic { color: var(--fg-3); }
+  .menu .sep { height: 1px; background: var(--border-1); margin: 4px -4px; }
+  .menu .item.danger { color: var(--danger); }
+  .pop.menu { padding: 4px; width: 220px; }
+  .swatchgrid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .sw { aspect-ratio: 1; border-radius: 4px; border: 1px solid var(--border-1); cursor: pointer; }
+  .sw.on { box-shadow: 0 0 0 2px var(--accent); }
+</style>
+</head>
+<body class="sr-preview">
+<div class="grid">
+  <div class="col">
+    <span class="tag">— Confirm</span>
+    <span class="anchor">Delete <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+    <div class="pop">
+      <div class="ttl">Delete this run?</div>
+      <div class="desc">Removes the run from history but keeps audit logs.</div>
+      <div class="actions"><button class="btn-ghost">Cancel</button><button class="btn-primary">Delete</button></div>
+    </div>
+  </div>
+
+  <div class="col">
+    <span class="tag">— Info / definition</span>
+    <span class="anchor">p95 latency <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span>
+    <div class="pop">
+      <div class="ttl">p95 latency</div>
+      <div class="desc">95th percentile end-to-end latency, measured over the last 24 hours. Excludes retried events.</div>
+      <div class="row"><span class="k">Window</span><span class="v">24 h</span></div>
+      <div class="row"><span class="k">Region</span><span class="v">us-east-1</span></div>
+    </div>
+  </div>
+
+  <div class="col">
+    <span class="tag">— Form · inline edit</span>
+    <span class="anchor">Edit owner</span>
+    <div class="pop">
+      <div class="field">
+        <span class="lab">Owner team</span>
+        <input class="input" value="data-platform" />
+      </div>
+      <div class="actions" style="justify-content: flex-end"><button class="btn-ghost">Cancel</button><button class="btn-primary">Save</button></div>
+    </div>
+  </div>
+
+  <div class="col">
+    <span class="tag">— Menu</span>
+    <span class="anchor">Actions <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+    <div class="pop menu">
+      <div class="item"><span class="ic">⎘</span>Duplicate</div>
+      <div class="item"><span class="ic">↗</span>Open in editor</div>
+      <div class="item"><span class="ic">⏸</span>Pause ingestion</div>
+      <div class="sep"></div>
+      <div class="item danger"><span class="ic">⌫</span>Delete pipeline</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

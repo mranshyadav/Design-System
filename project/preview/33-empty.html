@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Empty states</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .empty {
+    background: var(--surface); border: 1px solid var(--border-1);
+    border-radius: 8px; padding: 32px 24px; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    min-height: 220px; justify-content: center;
+  }
+  .empty.dashed { border-style: dashed; background: transparent; }
+  .empty .ic { width: 40px; height: 40px; border-radius: 8px; background: var(--bg-3); display: inline-flex; align-items: center; justify-content: center; color: var(--fg-2); margin-bottom: 6px; }
+  .empty .ttl { font-size: 16px; font-weight: 600; color: var(--fg-1); }
+  .empty .desc { font-size: 13px; color: var(--fg-2); max-width: 280px; line-height: 1.5; }
+  .empty .ax { display: inline-flex; gap: 8px; margin-top: 8px; }
+  .btn-primary { background: var(--ink); color: var(--paper); border: 0; border-radius: 4px; padding: 8px 14px; font: 500 13px var(--font-sans); }
+  .btn-ghost { background: var(--surface); color: var(--fg-1); border: 1px solid var(--border-1); border-radius: 4px; padding: 8px 14px; font: 500 13px var(--font-sans); }
+  .empty .crumb { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); }
+</style>
+</head>
+<body class="sr-preview">
+<div class="grid">
+  <div class="empty">
+    <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a10 10 0 1 0 20 0 10 10 0 0 0-20 0z"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></span>
+    <div class="crumb">— No pipelines</div>
+    <div class="ttl">Nothing's running yet</div>
+    <div class="desc">Connect a source and SRIIO will start ingesting in under a minute.</div>
+    <div class="ax">
+      <button class="btn-primary">Connect a source</button>
+      <button class="btn-ghost">Read the docs</button>
+    </div>
+  </div>
+
+  <div class="empty dashed">
+    <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg></span>
+    <div class="crumb">— No results</div>
+    <div class="ttl">No pipelines match <span style="font-family:var(--font-mono)">"users."</span></div>
+    <div class="desc">Try a broader query, or remove a filter.</div>
+    <div class="ax">
+      <button class="btn-ghost">Clear filters</button>
+    </div>
+  </div>
+
+  <div class="empty">
+    <span class="ic" style="background:rgba(154,34,34,0.10); color:#9A2222"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg></span>
+    <div class="crumb" style="color:#9A2222">— Disconnected</div>
+    <div class="ttl">Source postgres-primary is unreachable</div>
+    <div class="desc">We can't reach the host. Check VPC rules or reissue credentials.</div>
+    <div class="ax">
+      <button class="btn-primary">Retry connection</button>
+    </div>
+  </div>
+
+  <div class="empty">
+    <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+    <div class="crumb">— All clear</div>
+    <div class="ttl">Inbox zero</div>
+    <div class="desc">No alerts in the last 24 hours. We'll let you know when something changes.</div>
+  </div>
+</div>
+</body>
+</html>

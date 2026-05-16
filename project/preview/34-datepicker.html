@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Date picker</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid { display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: flex-start; }
+  .input { display: inline-flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border-1); border-radius: 4px; padding: 0 10px; height: 36px; font: 14px var(--font-sans); color: var(--fg-1); width: 100%; }
+  .input.focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-ring); }
+  .input .ic { color: var(--fg-3); }
+  .input .v { font-family: var(--font-mono); font-size: 13px; }
+  .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 6px; display: block; }
+
+  .cal { background: var(--surface); border: 1px solid var(--border-1); border-radius: 8px; box-shadow: var(--shadow-2); padding: 14px; width: 304px; }
+  .cal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .cal-head .m { font-size: 14px; font-weight: 500; }
+  .cal-head button { background: transparent; border: 0; padding: 4px; cursor: pointer; color: var(--fg-2); width: 28px; height: 28px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; }
+  .cal-head button:hover { background: var(--bg-3); }
+  .dow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: 4px; }
+  .dow span { text-align: center; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--fg-3); padding: 4px 0; }
+  .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+  .day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--fg-1); border-radius: 4px; cursor: pointer; font-variant-numeric: tabular-nums; font-family: var(--font-mono); }
+  .day:hover { background: var(--bg-3); }
+  .day.muted { color: var(--graphite-25); }
+  .day.today { box-shadow: inset 0 0 0 1px var(--border-2); }
+  .day.sel { background: var(--accent); color: #fff; font-weight: 500; }
+  .day.in-range { background: rgba(31,63,224,0.08); border-radius: 0; }
+  .day.range-start { background: var(--accent); color: #fff; border-radius: 4px 0 0 4px; }
+  .day.range-end { background: var(--accent); color: #fff; border-radius: 0 4px 4px 0; }
+  .footer { display: flex; justify-content: space-between; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border-1); }
+  .ghost { background: transparent; border: 0; font: 500 12px var(--font-sans); color: var(--fg-2); cursor: pointer; }
+  .primary { background: var(--ink); color: var(--paper); border: 0; border-radius: 4px; padding: 6px 12px; font: 500 12px var(--font-sans); cursor: pointer; }
+</style>
+</head>
+<body class="sr-preview">
+<div class="grid">
+  <div>
+    <span class="tag">Inputs</span>
+    <div style="display:flex; flex-direction:column; gap:10px">
+      <div class="input">
+        <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+        <span class="v">2026-05-16</span>
+      </div>
+      <div class="input focus">
+        <span class="ic" style="color:var(--accent)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+        <span class="v">2026-05-16 → 2026-05-22</span>
+      </div>
+      <div class="input">
+        <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+        <span style="color:var(--fg-3)">Pick a date</span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <span class="tag">Range picker · open</span>
+    <div class="cal">
+      <div class="cal-head">
+        <button>‹</button>
+        <span class="m">May 2026</span>
+        <button>›</button>
+      </div>
+      <div class="dow"><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span></div>
+      <div class="days" id="days"></div>
+      <div class="footer">
+        <button class="ghost">Last 7 days</button>
+        <div style="display:flex; gap:6px"><button class="ghost">Cancel</button><button class="primary">Apply</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const days = document.getElementById("days");
+  // May 2026 starts on Friday; render Mo-first layout.
+  // First Monday shown = Apr 27
+  const start = new Date(2026, 3, 27);
+  for (let i = 0; i < 42; i++) {
+    const d = new Date(start); d.setDate(start.getDate() + i);
+    const m = d.getMonth() === 4;
+    const dn = d.getDate();
+    const dateNum = (d.getMonth() * 100) + dn;
+    const cell = document.createElement("div");
+    cell.className = "day";
+    if (!m) cell.classList.add("muted");
+    if (m && dn === 16) cell.classList.add("range-start");
+    else if (m && dn === 22) cell.classList.add("range-end");
+    else if (m && dn > 16 && dn < 22) cell.classList.add("in-range");
+    else if (m && dn === 18) cell.classList.add("today");
+    cell.textContent = dn;
+    days.appendChild(cell);
+  }
+</script>
+</body>
+</html>

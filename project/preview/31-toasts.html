@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Toasts</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .stage { background: var(--graphite-04); border: 1px dashed var(--border-1); padding: 28px; border-radius: 8px; position: relative; min-height: 280px; }
+  .anchor { position: absolute; bottom: 16px; right: 16px; display: flex; flex-direction: column; gap: 10px; width: 340px; }
+  .toast {
+    display: grid; grid-template-columns: 18px 1fr auto;
+    gap: 12px; align-items: flex-start;
+    padding: 12px 14px; border-radius: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border-1);
+    box-shadow: var(--shadow-2);
+    font-size: 13px; line-height: 1.5;
+  }
+  .toast .ic { display: inline-flex; padding-top: 1px; }
+  .toast .ttl { font-weight: 500; color: var(--fg-1); }
+  .toast .desc { color: var(--fg-2); margin-top: 2px; font-family: var(--font-mono); font-size: 11px; }
+  .toast .x { background: transparent; border: 0; cursor: pointer; color: var(--fg-3); padding: 0; }
+  .toast.success .ic { color: #1F6B47; }
+  .toast.error   .ic { color: #9A2222; }
+  .toast.info    .ic { color: var(--accent); }
+  .toast .undo { color: var(--accent); font-weight: 500; font-size: 13px; margin-top: 4px; display: inline-block; }
+  .toast .sp { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--border-2); border-top-color: var(--accent); animation: spin 800ms linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg) } }
+  .label { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; text-transform: uppercase; position: absolute; top: 16px; left: 16px; }
+  .progress { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--accent); width: 60%; border-radius: 0 0 6px 6px; }
+</style>
+</head>
+<body class="sr-preview">
+<div class="stage">
+  <span class="label">— Stack · bottom-right</span>
+  <div class="anchor">
+    <div class="toast info" style="position:relative; overflow:hidden">
+      <span class="ic"><div class="sp"></div></span>
+      <div><div class="ttl">Deploying orders.normalize…</div><div class="desc">v2.4.0 → v2.4.1 · est. 12 s</div></div>
+      <button class="x">×</button>
+      <div class="progress"></div>
+    </div>
+
+    <div class="toast success">
+      <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+      <div>
+        <div class="ttl">Pipeline deployed</div>
+        <div class="desc">orders.normalize · 14:02:11Z</div>
+        <a href="#" class="undo">View →</a>
+      </div>
+      <button class="x">×</button>
+    </div>
+
+    <div class="toast error">
+      <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg></span>
+      <div>
+        <div class="ttl">Couldn't connect to source</div>
+        <div class="desc">postgres-primary · timeout after 5 s</div>
+        <a href="#" class="undo">Retry</a>
+      </div>
+      <button class="x">×</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
