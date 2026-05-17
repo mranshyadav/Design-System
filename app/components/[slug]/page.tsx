@@ -907,7 +907,7 @@ export default function ComponentDocPage({ params }: { params: { slug: string } 
     <div className="h-screen overflow-hidden flex flex-col bg-white dark:bg-gray-950">
       <DocNavbar currentSlug={params.slug} />
 
-      <div className="flex overflow-hidden" style={{ height: 'calc(100vh - 56px)' }}>
+      <div className="flex overflow-hidden" style={{ height: 'calc(100vh - 72px)' }}>
         <DocLeftSidebar activeId={params.slug} />
 
         {/* ── center content ── */}

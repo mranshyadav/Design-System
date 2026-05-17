@@ -42,7 +42,7 @@ const features = [
 export function Features() {
   return (
     <section className="py-20 lg:py-28 bg-gray-50/50 dark:bg-gray-900/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16">
         {/* Header */}
         <div className="text-center mb-16">
           <p className="text-xs font-semibold uppercase tracking-widest text-accent-500 mb-3">Why SRIIO UI</p>

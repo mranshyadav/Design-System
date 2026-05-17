@@ -12,14 +12,14 @@ export default function DocsPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16 pt-24 pb-16 lg:pt-28 lg:pb-20">
           <p className="text-xs font-semibold uppercase tracking-widest text-accent-500 mb-3">Documentation</p>
           <h1 className="text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-3">Docs</h1>
           <p className="text-gray-500 dark:text-gray-400 text-lg max-w-xl">Everything you need to build with SRIIO UI. From installation to advanced customization.</p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16 py-12">
         <div className="grid sm:grid-cols-2 gap-5 mb-10">
           {sections.map((s, i) => (
             <div key={i} className="p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition-all duration-200">

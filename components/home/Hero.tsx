@@ -106,14 +106,14 @@ function MiniMockup() {
 
 export function Hero() {
   return (
-    <section className="relative pt-28 pb-20 lg:pt-36 lg:pb-28 overflow-hidden">
+    <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
       {/* Background grid */}
       <div className="absolute inset-0 bg-grid-light dark:bg-grid-dark opacity-60 pointer-events-none" />
       {/* Gradient orbs */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent-500/10 dark:bg-accent-500/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-blue-400/10 dark:bg-blue-400/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
           {/* Left — text */}
