@@ -6,10 +6,12 @@ import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import clsx from 'clsx'
 
 const navLinks = [
-  { href: '/components', label: 'Components' },
-  { href: '/blocks',     label: 'Blocks' },
-  { href: '/templates',  label: 'Templates' },
-  { href: '/docs',       label: 'Docs' },
+  { href: '/',          label: 'Home' },
+  { href: '/blocks',    label: 'Blocks' },
+  { href: '/figma',     label: 'Figma' },
+  { href: '/docs',      label: 'Docs' },
+  { href: '/about',     label: 'About' },
+  { href: '/contact',   label: 'Contact' },
 ]
 
 export function Navbar() {
