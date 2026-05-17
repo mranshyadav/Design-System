@@ -20,14 +20,14 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16 pt-24 pb-16 lg:pt-28 lg:pb-20">
+        <div className="layout-container pt-24 pb-16 lg:pt-28 lg:pb-20">
           <p className="text-xs font-semibold uppercase tracking-widest text-accent-500 mb-3">Contact</p>
           <h1 className="text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-3">Get in touch</h1>
           <p className="text-gray-500 dark:text-gray-400 text-lg max-w-xl">Have a question, found a bug, or want to contribute? We'd love to hear from you.</p>
         </div>
       </div>
 
-      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16 py-12">
+      <div className="layout-container py-12">
         <div className="grid lg:grid-cols-[1fr_380px] gap-8">
 
           {/* Form */}

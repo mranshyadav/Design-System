@@ -398,7 +398,7 @@ export default function ComponentsPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       {/* Header */}
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16 pt-24 pb-10 lg:pt-28 lg:pb-14">
+        <div className="layout-container pt-24 pb-10 lg:pt-28 lg:pb-14">
           <div className="max-w-2xl mb-8">
             <p className="text-xs font-semibold uppercase tracking-widest text-accent-500 mb-2">Components</p>
             <h1 className="text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-3">
@@ -449,7 +449,7 @@ export default function ComponentsPage() {
       </div>
 
       {/* Grid */}
-      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16 py-10">
+      <div className="layout-container py-10">
         <div className="flex items-center justify-between mb-6">
           <p className="text-sm text-gray-500 dark:text-gray-400">
             <span className="font-semibold text-gray-900 dark:text-white">{filtered.length}</span> components

@@ -907,12 +907,12 @@ export default function ComponentDocPage({ params }: { params: { slug: string } 
     <div className="h-screen overflow-hidden flex flex-col bg-white dark:bg-gray-950">
       <DocNavbar currentSlug={params.slug} />
 
-      <div className="flex overflow-hidden" style={{ height: 'calc(100vh - 72px)' }}>
+      <div className="layout-container flex overflow-hidden" style={{ height: 'calc(100vh - 72px)' }}>
         <DocLeftSidebar activeId={params.slug} />
 
         {/* ── center content ── */}
         <main ref={centerRef} className="flex-1 overflow-y-auto scrollbar-hide">
-          <div className="px-6 py-10">
+          <div className="px-8 lg:px-12 py-12">
 
             {/* breadcrumb */}
             <nav className="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500 mb-6">

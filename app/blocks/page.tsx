@@ -94,7 +94,7 @@ export default function BlocksPage() {
 
       {/* Page header */}
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 pt-24 pb-10">
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16">
+        <div className="layout-container">
           <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-2">UI Blocks</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 max-w-2xl leading-relaxed">
             47+ professionally designed, copy-paste ready UI sections built with React and Tailwind CSS. Each block is fully responsive, dark-mode compatible, and production-ready — no extra dependencies required.
@@ -103,7 +103,7 @@ export default function BlocksPage() {
       </div>
 
       {/* Main content */}
-      <div id="blocks" className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16 py-8">
+      <div id="blocks" className="layout-container py-8">
 
         {/* Search + filter */}
         <div className="mb-8">

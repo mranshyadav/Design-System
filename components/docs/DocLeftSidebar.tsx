@@ -28,9 +28,9 @@ export function DocLeftSidebar({ activeId }: DocLeftSidebarProps) {
     : sortedComponents
 
   return (
-    <aside className="w-[260px] h-full flex-shrink-0 border-r border-gray-200 dark:border-gray-800 flex flex-col bg-white dark:bg-gray-950">
+    <aside className="hidden lg:flex w-[280px] h-full flex-shrink-0 border-r border-gray-200 dark:border-gray-800 flex-col bg-white dark:bg-gray-950">
       {/* Filter input */}
-      <div className="px-3 py-3 border-b border-gray-100 dark:border-gray-800/50">
+      <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-800/50">
         <div className="relative">
           <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
@@ -45,7 +45,7 @@ export function DocLeftSidebar({ activeId }: DocLeftSidebarProps) {
 
       {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto scrollbar-hide py-3">
-        <div className="px-2">
+        <div className="px-3">
 
           {/* Getting Started */}
           {!query.trim() && (

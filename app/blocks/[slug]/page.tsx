@@ -157,7 +157,7 @@ export default function BlockDetailPage({ params }: { params: { slug: string } }
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       {/* Breadcrumb */}
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16 pt-20 pb-4">
+        <div className="layout-container pt-20 pb-4">
           <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
             <Link href="/" className="hover:text-gray-900 dark:hover:text-white transition-colors">Home</Link>
             <span>/</span>
@@ -170,7 +170,7 @@ export default function BlockDetailPage({ params }: { params: { slug: string } }
         </div>
       </div>
 
-      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16 py-8">
+      <div className="layout-container py-8">
         <div className="grid lg:grid-cols-[1fr_300px] gap-8">
           {/* Main content */}
           <div>

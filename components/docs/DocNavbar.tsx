@@ -30,7 +30,7 @@ export function DocNavbar({ currentSlug }: DocNavbarProps) {
 
   return (
     <header className="h-[72px] flex-shrink-0 z-50 bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl border-b border-gray-200 dark:border-gray-800">
-      <div className="h-full flex items-center px-5 sm:px-8 gap-4">
+      <div className="layout-container h-full flex items-center gap-4">
 
         {/* LEFT: Logo + version */}
         <div className="w-[260px] flex-shrink-0 flex items-center gap-3">

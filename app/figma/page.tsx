@@ -12,14 +12,14 @@ export default function FigmaPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       {/* Breadcrumb + header */}
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16 pt-20 pb-4 border-b border-gray-100 dark:border-gray-800/60">
+        <div className="layout-container pt-20 pb-4 border-b border-gray-100 dark:border-gray-800/60">
           <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
             <Link href="/" className="hover:text-gray-900 dark:hover:text-white transition-colors">Home</Link>
             <span>/</span>
             <span className="text-gray-900 dark:text-white font-medium">Figma</span>
           </div>
         </div>
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16 py-10 lg:py-14">
+        <div className="layout-container py-10 lg:py-14">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-12 rounded-2xl bg-[#1ABCFE]/10 flex items-center justify-center">
               <Figma size={22} className="text-[#1ABCFE]" />
@@ -35,7 +35,7 @@ export default function FigmaPage() {
         </div>
       </div>
 
-      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16 py-12">
+      <div className="layout-container py-12">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
           {resources.map((r, i) => (
             <div key={i} className="p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md hover:border-accent-200 dark:hover:border-accent-700 transition-all duration-200 group cursor-pointer">

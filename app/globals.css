@@ -42,6 +42,11 @@
 }
 
 @layer utilities {
+  /* ── single shared container used on every page and in the navbar ── */
+  .layout-container {
+    @apply w-full max-w-[1520px] mx-auto px-5 sm:px-8 lg:px-14 2xl:px-[72px];
+  }
+
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-500 to-blue-400;
   }

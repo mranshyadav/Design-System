@@ -113,7 +113,7 @@ export function Hero() {
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent-500/10 dark:bg-accent-500/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-blue-400/10 dark:bg-blue-400/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16">
+      <div className="relative layout-container">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
           {/* Left — text */}

@@ -8,7 +8,7 @@ export function BlocksHero() {
       <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-blue-400/5 dark:bg-blue-400/8 blur-3xl pointer-events-none" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgb(0,0,0,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgb(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgb(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgb(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
 
-      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16 py-16 lg:py-24">
+      <div className="layout-container py-16 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent-500/8 dark:bg-accent-500/12 border border-accent-500/20 text-accent-600 dark:text-accent-400 text-xs font-semibold mb-5">

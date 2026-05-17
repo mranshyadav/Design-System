@@ -4,7 +4,7 @@ import { ArrowRight, Github, Zap } from 'lucide-react'
 export function CTASection() {
   return (
     <section className="py-20 lg:py-28">
-      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16">
+      <div className="layout-container">
         <div className="relative overflow-hidden rounded-3xl bg-accent-500 px-8 py-16 lg:px-16 lg:py-20 text-center">
           {/* Background decoration */}
           <div className="absolute inset-0 bg-gradient-to-br from-accent-400 via-accent-500 to-blue-600 opacity-90" />

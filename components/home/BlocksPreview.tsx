@@ -142,7 +142,7 @@ export function BlocksPreview() {
 
   return (
     <section className="py-20 lg:py-28 bg-gray-50/50 dark:bg-gray-900/30">
-      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16">
+      <div className="layout-container">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
           <div>

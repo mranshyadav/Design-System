@@ -17,7 +17,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16 pt-24 pb-16 lg:pt-28 lg:pb-24">
+        <div className="layout-container pt-24 pb-16 lg:pt-28 lg:pb-24">
           <div className="max-w-2xl">
             <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-accent-500 shadow-md shadow-accent-500/25 mb-6">
               <Zap size={22} className="text-white" />
@@ -35,7 +35,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 2xl:px-16 py-12 space-y-10">
+      <div className="layout-container py-12 space-y-10">
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {stats.map((s, i) => (
