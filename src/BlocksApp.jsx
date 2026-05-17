@@ -71,7 +71,7 @@ export function BlocksApp() {
 
           {/* Footer */}
           <div style={{ padding: '12px 16px', borderTop: '1px solid var(--border-1)' }}>
-            <a href="/" style={{ fontSize: 'var(--fs-12)', color: 'var(--accent)', textDecoration: 'none', fontWeight: 500 }}>
+            <a href="#" onClick={() => window.location.reload()} style={{ fontSize: 'var(--fs-12)', color: 'var(--accent)', textDecoration: 'none', fontWeight: 500 }}>
               ← Component Library
             </a>
           </div>

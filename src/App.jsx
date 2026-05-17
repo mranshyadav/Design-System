@@ -139,7 +139,7 @@ function AppContent() {
           <p style={{ color: 'var(--fg-2)', fontSize: 'var(--fs-16)', margin: 0, maxWidth: 560 }}>
             25+ production-ready React components built on the SRIIO design system — technical, minimal, and corporate-trustworthy.
           </p>
-          <a href="/blocks" style={{ flexShrink: 0, border: '1px solid var(--border-1)', borderRadius: 'var(--radius-6)', padding: '8px 16px', fontSize: 'var(--fs-13)', fontWeight: 500, color: 'var(--accent)', textDecoration: 'none', background: 'var(--surface)', whiteSpace: 'nowrap' }}>
+          <a href="#blocks" onClick={() => window.location.reload()} style={{ flexShrink: 0, border: '1px solid var(--border-1)', borderRadius: 'var(--radius-6)', padding: '8px 16px', fontSize: 'var(--fs-13)', fontWeight: 500, color: 'var(--accent)', textDecoration: 'none', background: 'var(--surface)', whiteSpace: 'nowrap' }}>
             View Product Blocks →
           </a>
         </div>

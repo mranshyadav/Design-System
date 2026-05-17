@@ -4,7 +4,7 @@ import './index.css'
 import App from './App.jsx'
 import { BlocksApp } from './BlocksApp.jsx'
 
-const isBlocks = window.location.pathname.startsWith('/blocks')
+const isBlocks = window.location.hash === '#blocks'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
