@@ -1,7 +1,6 @@
 'use client'
 import { useState, useMemo } from 'react'
 import { blocks, categories } from '@/lib/data'
-import { BlocksHero } from '@/components/blocks/BlocksHero'
 import { SearchFilters } from '@/components/blocks/SearchFilters'
 import { BlockCard } from '@/components/blocks/BlockCard'
 import { Sidebar } from '@/components/blocks/Sidebar'
@@ -92,10 +91,17 @@ export default function BlocksPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-      <BlocksHero />
+
+      {/* Page header */}
+      <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 pt-24 pb-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-1">UI Blocks</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Copy-paste ready sections for React & Next.js</p>
+        </div>
+      </div>
 
       {/* Main content */}
-      <div id="blocks" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div id="blocks" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         {/* Search + filter */}
         <div className="mb-8">
