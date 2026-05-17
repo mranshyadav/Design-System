@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Motion tokens</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .block { background: var(--surface); border: 1px solid var(--border-1); border-radius: 8px; padding: 20px; }
+  .tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 14px; }
+  .row { display: grid; grid-template-columns: 100px 1fr 70px; gap: 12px; align-items: center; padding: 6px 0; }
+  .label { font-family: var(--font-mono); font-size: 12px; color: var(--fg-2); }
+  .val { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); text-align: right; }
+  .curve { width: 100%; height: 28px; }
+  .curve path { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+  .dot {
+    width: 12px; height: 12px; border-radius: 50%; background: var(--accent);
+    animation-iteration-count: infinite; animation-duration: 2400ms;
+  }
+  .track { position: relative; height: 28px; background: var(--bg-3); border-radius: 14px; padding: 0 8px; display: flex; align-items: center; overflow: hidden; }
+  @keyframes glide {
+    0%   { transform: translateX(0); }
+    40%  { transform: translateX(220px); }
+    50%  { transform: translateX(220px); }
+    90%  { transform: translateX(0); }
+    100% { transform: translateX(0); }
+  }
+  .dot.standard { animation-name: glide; animation-timing-function: cubic-bezier(0.2,0.7,0.1,1.0); }
+</style>
+</head>
+<body class="sr-preview">
+  <div class="grid">
+    <div class="block">
+      <div class="tag">Durations</div>
+      <div class="row"><span class="label">instant</span><div class="track"></div><span class="val">80 ms</span></div>
+      <div class="row"><span class="label">fast</span><div class="track"></div><span class="val">120 ms</span></div>
+      <div class="row"><span class="label">base</span><div class="track"></div><span class="val">200 ms</span></div>
+      <div class="row"><span class="label">slow</span><div class="track"></div><span class="val">320 ms</span></div>
+    </div>
+    <div class="block">
+      <div class="tag">Easing · standard</div>
+      <div class="track" style="margin-bottom:10px"><div class="dot standard"></div></div>
+      <svg class="curve" viewBox="0 0 100 30" preserveAspectRatio="none">
+        <path d="M0,30 C20,9 30,3 100,0" />
+      </svg>
+      <div class="row" style="margin-top:8px"><span class="label">cubic-bezier</span><span></span><span class="val">0.2,0.7,0.1,1.0</span></div>
+      <div class="row"><span class="label">no bounces</span><span></span><span class="val">no springs</span></div>
+    </div>
+  </div>
+</body>
+</html>

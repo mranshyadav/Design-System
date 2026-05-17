@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Accent — signal color</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 10px; }
+  .swatch { height: 200px; border-radius: 8px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--border-1); }
+  .name { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .hex { font-family: var(--font-mono); font-size: 13px; }
+  .primary { background: #1F3FE0; color: #fff; }
+  .hover { background: #1A36BF; color: #fff; }
+  .press { background: #15309A; color: #fff; }
+  .soft { background: rgba(31,63,224,0.08); color: #1F3FE0; }
+  .note { margin-top: 10px; font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; text-transform: uppercase; }
+</style>
+</head>
+<body class="sr-preview">
+  <div class="grid">
+    <div class="swatch primary"><div class="name">— accent</div><div class="hex">#1F3FE0</div></div>
+    <div class="swatch hover"><div class="name">hover</div><div class="hex">#1A36BF</div></div>
+    <div class="swatch press"><div class="name">press</div><div class="hex">#15309A</div></div>
+    <div class="swatch soft"><div class="name">soft / 8%</div><div class="hex">tint</div></div>
+  </div>
+  <div class="note">One signal color. Rationed: one accented element per screen.</div>
+</body>
+</html>

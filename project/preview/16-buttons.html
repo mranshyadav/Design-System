@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Buttons</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid { display: grid; gap: 18px; }
+  .row { display: flex; gap: 10px; align-items: center; }
+  .tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); width: 110px; }
+  .btn {
+    font-family: var(--font-sans); font-size: 14px; font-weight: 500;
+    padding: 8px 14px; border-radius: 4px; border: 1px solid transparent;
+    cursor: pointer; line-height: 1.2; letter-spacing: -0.005em;
+  }
+  .btn--primary { background: #0E0F12; color: #fff; }
+  .btn--primary-hover { background: #2A2D33; color: #fff; }
+  .btn--accent { background: #1F3FE0; color: #fff; }
+  .btn--accent-hover { background: #1A36BF; color: #fff; }
+  .btn--secondary { background: #fff; color: #0E0F12; border-color: #D6D8DC; }
+  .btn--secondary-hover { background: #F1F2F4; color: #0E0F12; border-color: #B4B8BF; }
+  .btn--ghost { background: transparent; color: #0E0F12; }
+  .btn--ghost-hover { background: rgba(14,15,18,0.04); color: #0E0F12; }
+  .btn--danger { background: #fff; color: #9A2222; border-color: rgba(154,34,34,0.3); }
+  .btn--disabled { background: #0E0F12; color: #fff; opacity: 0.45; cursor: not-allowed; }
+  .btn--focus { background: #1F3FE0; color: #fff; box-shadow: 0 0 0 2px #F4F1EA, 0 0 0 4px rgba(31,63,224,0.35); }
+</style>
+</head>
+<body class="sr-preview">
+  <div class="grid">
+    <div class="row">
+      <span class="tag">Primary · ink</span>
+      <button class="btn btn--primary">Save changes</button>
+      <button class="btn btn--primary-hover">hover</button>
+      <button class="btn btn--disabled">disabled</button>
+    </div>
+    <div class="row">
+      <span class="tag">Accent</span>
+      <button class="btn btn--accent">Deploy</button>
+      <button class="btn btn--accent-hover">hover</button>
+      <button class="btn btn--focus">focused</button>
+    </div>
+    <div class="row">
+      <span class="tag">Secondary</span>
+      <button class="btn btn--secondary">Cancel</button>
+      <button class="btn btn--secondary-hover">hover</button>
+      <button class="btn btn--ghost">Ghost</button>
+      <button class="btn btn--ghost-hover">hover</button>
+    </div>
+    <div class="row">
+      <span class="tag">Destructive</span>
+      <button class="btn btn--danger">Delete source</button>
+    </div>
+  </div>
+</body>
+</html>

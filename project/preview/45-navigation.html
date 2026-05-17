@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Navigation</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .stack { display: grid; gap: 24px; }
+  .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); display: block; margin-bottom: 8px; }
+
+  /* Top nav (marketing) */
+  .topnav { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: var(--paper); border: 1px solid var(--border-1); border-radius: 8px; }
+  .topnav .wm { font-family: var(--font-display); font-style: italic; font-size: 20px; letter-spacing: -0.02em; }
+  .topnav nav { display: flex; gap: 4px; }
+  .topnav nav a { padding: 6px 10px; font-size: 13px; color: var(--fg-2); border-radius: 4px; }
+  .topnav nav a:hover { background: var(--bg-3); color: var(--fg-1); }
+  .topnav .right { display: flex; gap: 8px; align-items: center; }
+  .btn-ink { background: var(--ink); color: var(--paper); padding: 7px 12px; border-radius: 4px; font: 500 13px var(--font-sans); }
+
+  /* Sidebar */
+  .side { width: 240px; background: var(--paper); border: 1px solid var(--border-1); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 4px; }
+  .side .sec { padding: 6px 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); margin-top: 6px; }
+  .side a { display: flex; align-items: center; gap: 10px; padding: 6px 8px; font-size: 13px; color: var(--fg-2); border-radius: 4px; }
+  .side a:hover { background: var(--bg-3); color: var(--fg-1); }
+  .side a.on { color: var(--accent); background: rgba(31,63,224,0.08); box-shadow: inset 2px 0 0 var(--accent); }
+  .side a .ic { font-family: var(--font-mono); font-size: 14px; color: var(--fg-3); width: 16px; text-align: center; }
+  .side a.on .ic { color: var(--accent); }
+  .side a .ct { margin-left: auto; font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); }
+
+  /* Breadcrumb */
+  .crumb { display: flex; align-items: center; gap: 8px; font-size: 14px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border-1); border-radius: 4px; }
+  .crumb a { color: var(--fg-3); }
+  .crumb .sep { color: var(--graphite-25); font-family: var(--font-mono); }
+  .crumb .here { color: var(--fg-1); font-weight: 500; }
+
+  /* Bottom tab bar (mobile) */
+  .bottom { display: grid; grid-template-columns: repeat(5, 1fr); background: var(--surface); border: 1px solid var(--border-1); border-radius: 12px; padding: 6px; width: 360px; }
+  .bottom button { background: transparent; border: 0; padding: 8px 4px; display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--fg-3); font: 11px var(--font-sans); cursor: pointer; border-radius: 6px; }
+  .bottom button.on { color: var(--accent); background: rgba(31,63,224,0.08); }
+  .bottom button .ic { font-family: var(--font-mono); font-size: 16px; line-height: 1; }
+
+  .twocol { display: grid; grid-template-columns: 240px 1fr; gap: 20px; align-items: flex-start; }
+</style>
+</head>
+<body class="sr-preview">
+<div class="stack">
+  <div>
+    <span class="tag">Top nav · marketing</span>
+    <div class="topnav">
+      <span class="wm">SRIIO</span>
+      <nav><a>Platform</a><a>Schemas</a><a>Docs</a><a>Pricing</a><a>Changelog</a></nav>
+      <div class="right"><a style="font-size:13px">Sign in</a><a class="btn-ink">Start free →</a></div>
+    </div>
+  </div>
+
+  <div class="twocol">
+    <div>
+      <span class="tag">Sidebar · product</span>
+      <aside class="side">
+        <div class="sec">— Workspace</div>
+        <a class="on"><span class="ic">▦</span>Pipelines<span class="ct">12</span></a>
+        <a><span class="ic">◇</span>Sources<span class="ct">5</span></a>
+        <a><span class="ic">≡</span>Schemas<span class="ct">38</span></a>
+        <a><span class="ic">◈</span>Registry</a>
+        <a><span class="ic">◉</span>Audit log</a>
+        <div class="sec">— Develop</div>
+        <a><span class="ic">▷</span>Playground</a>
+        <a><span class="ic">{ }</span>SDKs</a>
+      </aside>
+    </div>
+    <div>
+      <span class="tag">Breadcrumb</span>
+      <div class="crumb">
+        <a>acme-prod</a><span class="sep">/</span>
+        <a>pipelines</a><span class="sep">/</span>
+        <a>orders.normalize</a><span class="sep">/</span>
+        <span class="here">runs</span>
+      </div>
+
+      <span class="tag" style="margin-top:18px">Bottom tab bar · mobile</span>
+      <div class="bottom">
+        <button class="on"><span class="ic">▦</span>Pipelines</button>
+        <button><span class="ic">◇</span>Sources</button>
+        <button><span class="ic">⌖</span>Activity</button>
+        <button><span class="ic">⌕</span>Search</button>
+        <button><span class="ic">○</span>You</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

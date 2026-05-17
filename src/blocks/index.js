@@ -1,0 +1,7 @@
+export { DashboardStats } from './DashboardStats.jsx'
+export { CRUDTable } from './CRUDTable.jsx'
+export { SettingsPage } from './SettingsPage.jsx'
+export { UserManagement } from './UserManagement.jsx'
+export { KanbanBoard } from './KanbanBoard.jsx'
+export { Notifications } from './Notifications.jsx'
+export { PricingTable } from './PricingTable.jsx'

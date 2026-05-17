@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Avatars</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .stack { display: grid; gap: 14px; }
+  .row { display: flex; gap: 12px; align-items: center; }
+  .tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); width: 110px; flex-shrink: 0; }
+  .av { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 500; color: var(--paper); background: var(--graphite-85); border-radius: 50%; position: relative; flex-shrink: 0; }
+  .av.sq { border-radius: 4px; }
+  .av.s-24 { width: 24px; height: 24px; font-size: 10px; }
+  .av.s-32 { width: 32px; height: 32px; font-size: 12px; }
+  .av.s-40 { width: 40px; height: 40px; font-size: 14px; }
+  .av.s-56 { width: 56px; height: 56px; font-size: 18px; }
+  .av.c-1 { background: var(--ink); }
+  .av.c-2 { background: var(--graphite-70); }
+  .av.c-3 { background: var(--graphite-55); }
+  .av.c-4 { background: var(--accent); }
+  .av.c-5 { background: #1F6B47; }
+  .av.c-6 { background: #8A5A14; }
+  .status { position: absolute; bottom: 0; right: 0; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--paper); }
+  .status.s-on { background: #1F6B47; }
+  .status.s-busy { background: #9A2222; }
+  .status.s-away { background: #8A5A14; }
+  .group { display: inline-flex; }
+  .group .av { border: 2px solid var(--paper); margin-left: -8px; }
+  .group .av:first-child { margin-left: 0; }
+  .group .more { background: var(--graphite-04); color: var(--fg-2); font-family: var(--font-mono); font-size: 11px; }
+  .row .name { font-size: 13px; color: var(--fg-1); }
+  .row .name .sub { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); display: block; margin-top: 2px; }
+</style>
+</head>
+<body class="sr-preview">
+  <div class="stack">
+    <div class="row"><span class="tag">Sizes</span>
+      <span class="av s-24 c-2">PR</span>
+      <span class="av s-32 c-3">JL</span>
+      <span class="av s-40 c-1">DM</span>
+      <span class="av s-56 c-4">KS</span>
+    </div>
+    <div class="row"><span class="tag">Shapes</span>
+      <span class="av s-40 c-1">PR</span>
+      <span class="av s-40 sq c-2">JL</span>
+      <span class="av s-40 c-4">+</span>
+      <span class="av s-40 c-3" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22><rect fill=%22%23B4B8BF%22 width=%2240%22 height=%2240%22/><circle cx=%2220%22 cy=%2216%22 r=%226%22 fill=%22%23F4F1EA%22/><path d=%22M8 36 C8 26 32 26 32 36 Z%22 fill=%22%23F4F1EA%22/></svg>');"></span>
+    </div>
+    <div class="row"><span class="tag">With status</span>
+      <span class="av s-40 c-1">PR<span class="status s-on"></span></span>
+      <span class="av s-40 c-2">JL<span class="status s-away"></span></span>
+      <span class="av s-40 c-3">DM<span class="status s-busy"></span></span>
+    </div>
+    <div class="row"><span class="tag">Stack</span>
+      <span class="group">
+        <span class="av s-32 c-1">PR</span>
+        <span class="av s-32 c-2">JL</span>
+        <span class="av s-32 c-5">DM</span>
+        <span class="av s-32 c-3">KS</span>
+        <span class="av s-32 more">+6</span>
+      </span>
+    </div>
+    <div class="row"><span class="tag">With label</span>
+      <span class="av s-40 c-1">PR</span>
+      <span class="name">Priya Ramanathan<span class="sub">priya@northwind.dev</span></span>
+    </div>
+  </div>
+</body>
+</html>

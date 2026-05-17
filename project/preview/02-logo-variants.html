@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Logo variants</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+  .cell {
+    background: var(--surface); border: 1px solid var(--border-1);
+    border-radius: var(--radius-8);
+    height: 180px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cell.dark { background: var(--ink); }
+  .cell.paper { background: var(--paper); }
+  .cell img.wm { height: 56px; }
+  .cell img.mk { height: 64px; }
+  .label {
+    display: flex; justify-content: space-between;
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--fg-3); letter-spacing: 0.04em; text-transform: uppercase;
+    margin-top: 10px;
+  }
+  .labels { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .labels span { text-align: center; font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; text-transform: uppercase; }
+</style>
+</head>
+<body class="sr-preview">
+  <div class="grid">
+    <div class="cell"><img class="wm" src="../assets/sriio-wordmark.svg" alt="" /></div>
+    <div class="cell dark"><img class="wm" src="../assets/sriio-wordmark-inverse.svg" alt="" /></div>
+    <div class="cell paper"><img class="mk" src="../assets/sriio-mark.svg" alt="" /></div>
+  </div>
+  <div class="labels" style="margin-top:10px">
+    <span>Wordmark · surface</span>
+    <span>Wordmark · ink</span>
+    <span>Mark · 1:1</span>
+  </div>
+</body>
+</html>

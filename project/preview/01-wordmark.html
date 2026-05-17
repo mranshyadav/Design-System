@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wordmark</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .stage {
+    display: flex; align-items: center; justify-content: center;
+    height: 240px; background: var(--paper);
+    border: 1px solid var(--border-1); border-radius: var(--radius-8);
+  }
+  .stage img { height: 96px; width: auto; display: block; }
+  .row {
+    display: flex; gap: 12px; align-items: center; justify-content: flex-end;
+    margin-top: 12px;
+  }
+  .pill {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--fg-3); letter-spacing: 0.04em; text-transform: uppercase;
+  }
+</style>
+</head>
+<body class="sr-preview">
+  <div class="stage">
+    <img src="../assets/sriio-wordmark.svg" alt="SRIIO" />
+  </div>
+  <div class="row">
+    <span class="pill">Primary wordmark</span>
+    <span class="pill">·</span>
+    <span class="pill">Instrument Serif Italic 64px</span>
+  </div>
+</body>
+</html>

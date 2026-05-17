@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Body, label, metadata</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .block { background: var(--surface); border: 1px solid var(--border-1); border-radius: 8px; padding: 20px; }
+  .tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 10px; }
+  .lead { font-size: 18px; line-height: 1.5; color: var(--fg-2); }
+  .body { font-size: 15px; line-height: 1.5; color: var(--fg-1); margin-top: 8px; }
+  .small { font-size: 13px; line-height: 1.5; color: var(--fg-3); margin-top: 8px; }
+  .label { font-size: 13px; font-weight: 500; color: var(--fg-2); }
+  .meta { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); }
+  .meta-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border-1); }
+  .meta-row:last-child { border-bottom: 0; }
+</style>
+</head>
+<body class="sr-preview">
+  <div class="grid">
+    <div class="block">
+      <div class="tag">Body</div>
+      <div class="lead">Typed end-to-end, versioned, audited.</div>
+      <div class="body">Every payload carries its schema. Breaking changes fail at the boundary, not in production.</div>
+      <div class="small">15 / 1.5 default · 18 / 1.5 lead · 13 / 1.5 small</div>
+    </div>
+    <div class="block">
+      <div class="tag">Metadata · mono</div>
+      <div class="meta-row"><span class="label">Region</span><span class="meta">us-east-1</span></div>
+      <div class="meta-row"><span class="label">p95 latency</span><span class="meta">12.4 ms</span></div>
+      <div class="meta-row"><span class="label">Last run</span><span class="meta">2026-05-16 14:02</span></div>
+      <div class="meta-row"><span class="label">Schema</span><span class="meta">v2.4.1</span></div>
+    </div>
+  </div>
+</body>
+</html>

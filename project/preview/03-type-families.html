@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Type families</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .fam { border: 1px solid var(--border-1); background: var(--surface); border-radius: 8px; padding: 20px; }
+  .fam .label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 12px; }
+  .fam .spec { font-size: 11px; font-family: var(--font-mono); color: var(--fg-3); margin-top: 8px; }
+  .serif { font-family: var(--font-display); font-style: italic; font-size: 48px; line-height: 1; color: var(--fg-1); letter-spacing: -0.02em; }
+  .sans { font-family: var(--font-sans); font-size: 44px; line-height: 1; font-weight: 500; color: var(--fg-1); letter-spacing: -0.02em; }
+  .mono { font-family: var(--font-mono); font-size: 40px; line-height: 1; font-weight: 500; color: var(--fg-1); }
+</style>
+</head>
+<body class="sr-preview">
+  <div class="grid">
+    <div class="fam">
+      <div class="label">Display · Serif</div>
+      <div class="serif">Aa</div>
+      <div class="spec">Instrument Serif · Italic · 400</div>
+    </div>
+    <div class="fam">
+      <div class="label">UI · Sans</div>
+      <div class="sans">Aa</div>
+      <div class="spec">Geist · 400 / 500 / 600</div>
+    </div>
+    <div class="fam">
+      <div class="label">Data · Mono</div>
+      <div class="mono">Aa</div>
+      <div class="spec">Geist Mono · 400 / 500</div>
+    </div>
+  </div>
+</body>
+</html>

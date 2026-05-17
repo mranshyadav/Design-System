@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Search bar — variants</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .stack { display: grid; gap: 12px; }
+  .row { display: grid; grid-template-columns: 110px 1fr; gap: 16px; align-items: center; }
+  .tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); }
+  .field { display: inline-flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border-1); border-radius: 4px; padding: 0 10px; height: 36px; width: 100%; max-width: 460px; }
+  .field input { border: 0; outline: 0; background: transparent; font: 14px/1.4 var(--font-sans); color: var(--fg-1); flex: 1; height: 100%; }
+  .field input::placeholder { color: var(--fg-3); }
+  .ic { color: var(--fg-3); display: inline-flex; }
+  .kbd { font-family: var(--font-mono); font-size: 11px; color: var(--fg-2); background: var(--bg-3); border: 1px solid var(--border-1); border-radius: 3px; padding: 1px 5px; }
+  .field.focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-ring); }
+  .field.lg { height: 44px; padding: 0 12px; }
+  .field.lg input { font-size: 15px; }
+  .clear { background: var(--graphite-15); color: var(--paper); border-radius: 50%; width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; cursor: pointer; line-height: 1; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px 3px 10px; background: rgba(31,63,224,0.08); color: var(--accent); border-radius: 2px; font-size: 12px; font-family: var(--font-mono); font-weight: 500; }
+  .chip .x { color: var(--accent); cursor: pointer; }
+  .results { background: var(--surface); border: 1px solid var(--border-1); border-radius: 4px; box-shadow: var(--shadow-2); margin-top: 4px; max-width: 460px; }
+  .res-head { padding: 8px 12px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); border-bottom: 1px solid var(--border-1); }
+  .res { padding: 8px 12px; font-size: 13px; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid var(--border-1); }
+  .res:last-child { border-bottom: 0; }
+  .res .meta { margin-left: auto; font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); }
+  .res.hover { background: rgba(31,63,224,0.06); }
+  .res .hi { color: var(--accent); }
+</style>
+</head>
+<body class="sr-preview">
+<div class="stack">
+  <div class="row"><span class="tag">Default</span>
+    <div class="field">
+      <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg></span>
+      <input placeholder="Search pipelines, sources, schemas…" />
+      <span class="kbd">⌘K</span>
+    </div>
+  </div>
+  <div class="row"><span class="tag">Focus + value</span>
+    <div class="field focus">
+      <span class="ic" style="color:var(--accent)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg></span>
+      <input value="orders." />
+      <span class="clear">×</span>
+    </div>
+  </div>
+  <div class="row"><span class="tag">With filters</span>
+    <div class="field">
+      <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg></span>
+      <span class="chip">region:us-east-1<span class="x">×</span></span>
+      <span class="chip">status:failed<span class="x">×</span></span>
+      <input placeholder="Refine…" />
+    </div>
+  </div>
+  <div class="row"><span class="tag">Large + dropdown</span>
+    <div>
+      <div class="field lg focus">
+        <span class="ic" style="color:var(--accent)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg></span>
+        <input value="orders" />
+      </div>
+      <div class="results">
+        <div class="res-head">— Pipelines · 2</div>
+        <div class="res hover"><span style="font-family:var(--font-mono)"><span class="hi">orders</span>.normalize</span><span class="meta">v2.4.1</span></div>
+        <div class="res"><span style="font-family:var(--font-mono)"><span class="hi">orders</span>.audit</span><span class="meta">v1.1.0</span></div>
+        <div class="res-head" style="border-top:1px solid var(--border-1)">— Schemas · 1</div>
+        <div class="res"><span style="font-family:var(--font-mono)"><span class="hi">Orders</span>Event</span><span class="meta">schema</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

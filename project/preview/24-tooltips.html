@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tooltips</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .stage { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 48px; padding: 30px 16px; align-items: center; }
+  .anchor { display: inline-flex; align-items: center; justify-content: center; padding: 6px 10px; background: var(--surface); border: 1px solid var(--border-1); border-radius: 4px; font-size: 13px; color: var(--fg-1); position: relative; width: max-content; }
+  .tip {
+    position: absolute; background: var(--ink); color: var(--paper);
+    font-family: var(--font-sans); font-size: 12px; font-weight: 500;
+    padding: 5px 8px; border-radius: 4px; white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(14,15,18,0.18);
+    z-index: 2;
+  }
+  .tip .kbd { font-family: var(--font-mono); background: rgba(244,241,234,0.15); padding: 1px 5px; border-radius: 2px; margin-left: 6px; font-size: 10px; }
+  .tip::after { content: ""; position: absolute; width: 8px; height: 8px; background: var(--ink); transform: rotate(45deg); }
+  .tip.top    { bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); }
+  .tip.top::after { top: 100%; left: 50%; transform: translate(-50%, -50%) rotate(45deg); }
+  .tip.bot    { top: calc(100% + 8px); left: 50%; transform: translateX(-50%); }
+  .tip.bot::after { bottom: 100%; left: 50%; transform: translate(-50%, 50%) rotate(45deg); }
+  .tip.right  { left: calc(100% + 8px); top: 50%; transform: translateY(-50%); }
+  .tip.right::after { right: 100%; top: 50%; transform: translate(50%, -50%) rotate(45deg); }
+  .tip.left   { right: calc(100% + 8px); top: 50%; transform: translateY(-50%); }
+  .tip.left::after { left: 100%; top: 50%; transform: translate(-50%, -50%) rotate(45deg); }
+  .tip.rich {
+    background: var(--surface); color: var(--fg-1);
+    border: 1px solid var(--border-1);
+    box-shadow: 0 4px 12px rgba(14,15,18,0.10);
+    white-space: normal; max-width: 240px; padding: 10px 12px;
+    font-weight: 400; line-height: 1.5;
+  }
+  .tip.rich::after { background: var(--surface); border-right: 1px solid var(--border-1); border-bottom: 1px solid var(--border-1); }
+  .tip.rich .ttl { font-weight: 500; display: block; margin-bottom: 4px; }
+  .tip.rich .meta { display: block; font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-top: 6px; }
+  .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); position: absolute; bottom: -22px; left: 0; right: 0; text-align: center; }
+</style>
+</head>
+<body class="sr-preview">
+  <div class="stage">
+    <div class="anchor">Top<span class="tip top">Tooltip text<span class="kbd">⌘K</span></span><span class="tag">top</span></div>
+    <div class="anchor">Right<span class="tip right">Right placement</span><span class="tag">right</span></div>
+    <div class="anchor">Bottom<span class="tip bot">Bottom placement</span><span class="tag">bottom</span></div>
+    <div class="anchor">Left<span class="tip left">Left placement</span><span class="tag">left</span></div>
+    <div class="anchor" style="grid-column: span 2; justify-self: center;">
+      Schema info
+      <span class="tip rich top">
+        <span class="ttl">orders.v2.4.1</span>
+        Typed pipeline schema. 14 fields, 3 nullable.
+        <span class="meta">Last updated 14:02:11Z</span>
+      </span>
+      <span class="tag">rich</span>
+    </div>
+  </div>
+</body>
+</html>

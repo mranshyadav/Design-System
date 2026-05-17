@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Steps / stepper</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .stack { display: grid; gap: 28px; }
+  .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); display: block; margin-bottom: 14px; }
+
+  /* Horizontal */
+  .hs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .step { display: flex; flex-direction: column; gap: 8px; position: relative; padding-right: 16px; }
+  .step .row { display: flex; align-items: center; gap: 0; }
+  .step .dot { width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 1.5px solid var(--border-2); display: inline-flex; align-items: center; justify-content: center; color: var(--fg-3); font-family: var(--font-mono); font-size: 12px; flex-shrink: 0; }
+  .step .line { flex: 1; height: 1px; background: var(--border-1); margin-left: 10px; }
+  .step:last-child .line { display: none; }
+  .step.done .dot { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .step.done .line { background: var(--ink); }
+  .step.cur .dot { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 0 0 4px var(--accent-ring); }
+  .step .meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-3); }
+  .step .ttl { font-size: 13px; font-weight: 500; color: var(--fg-2); }
+  .step.cur .ttl { color: var(--fg-1); }
+  .step.done .ttl { color: var(--fg-1); }
+  .step .desc { font-size: 12px; color: var(--fg-3); }
+
+  /* Vertical */
+  .vs { display: flex; flex-direction: column; }
+  .vstep { display: grid; grid-template-columns: 28px 1fr; gap: 12px; position: relative; padding-bottom: 14px; }
+  .vstep:last-child { padding-bottom: 0; }
+  .vstep .col1 { display: flex; flex-direction: column; align-items: center; }
+  .vstep .dot { width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 1.5px solid var(--border-2); display: inline-flex; align-items: center; justify-content: center; color: var(--fg-3); font-family: var(--font-mono); font-size: 11px; }
+  .vstep .vline { flex: 1; width: 1px; background: var(--border-1); margin-top: 2px; min-height: 14px; }
+  .vstep:last-child .vline { display: none; }
+  .vstep.done .dot { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .vstep.done .vline { background: var(--ink); }
+  .vstep.cur .dot { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .vstep .col2 { padding-bottom: 6px; }
+  .vstep .ttl { font-size: 14px; font-weight: 500; color: var(--fg-1); }
+  .vstep .desc { font-size: 12px; color: var(--fg-3); margin-top: 2px; }
+  .vstep .time { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-left: 10px; }
+
+  .twocol { display: grid; grid-template-columns: 1fr 280px; gap: 32px; align-items: flex-start; }
+</style>
+</head>
+<body class="sr-preview">
+<div class="stack">
+  <div>
+    <span class="tag">Horizontal · progress</span>
+    <div class="hs">
+      <div class="step done"><div class="row"><span class="dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></span><span class="line"></span></div><span class="meta">step 1</span><span class="ttl">Connect source</span></div>
+      <div class="step done"><div class="row"><span class="dot"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></span><span class="line"></span></div><span class="meta">step 2</span><span class="ttl">Define schema</span></div>
+      <div class="step cur"><div class="row"><span class="dot">3</span><span class="line"></span></div><span class="meta">step 3 · current</span><span class="ttl">Map fields</span><span class="desc">Choose how source columns map to schema fields.</span></div>
+      <div class="step"><div class="row"><span class="dot">4</span><span class="line"></span></div><span class="meta">step 4</span><span class="ttl">Deploy</span></div>
+    </div>
+  </div>
+
+  <div class="twocol">
+    <div>
+      <span class="tag">Vertical · timeline</span>
+      <div class="vs">
+        <div class="vstep done"><div class="col1"><span class="dot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></span><span class="vline"></span></div><div class="col2"><div class="ttl">Schema validated <span class="time">14:01:58Z</span></div><div class="desc">12 fields · 0 warnings.</div></div></div>
+        <div class="vstep done"><div class="col1"><span class="dot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></span><span class="vline"></span></div><div class="col2"><div class="ttl">Signed & promoted <span class="time">14:02:03Z</span></div><div class="desc">Signed by data-platform · pushed to registry.</div></div></div>
+        <div class="vstep cur"><div class="col1"><span class="dot">●</span><span class="vline"></span></div><div class="col2"><div class="ttl">Deploying to us-east-1 <span class="time">14:02:11Z</span></div><div class="desc">Rolling out replicas. 2 / 6.</div></div></div>
+        <div class="vstep"><div class="col1"><span class="dot">○</span><span class="vline"></span></div><div class="col2"><div class="ttl">Notify consumers</div><div class="desc">3 downstream consumers will receive a deprecation header.</div></div></div>
+      </div>
+    </div>
+    <div>
+      <span class="tag">Compact · sidebar</span>
+      <div class="vs">
+        <div class="vstep done"><div class="col1"><span class="dot">1</span><span class="vline"></span></div><div class="col2"><div class="ttl">Source</div></div></div>
+        <div class="vstep done"><div class="col1"><span class="dot">2</span><span class="vline"></span></div><div class="col2"><div class="ttl">Schema</div></div></div>
+        <div class="vstep cur"><div class="col1"><span class="dot">3</span><span class="vline"></span></div><div class="col2"><div class="ttl">Mapping</div></div></div>
+        <div class="vstep"><div class="col1"><span class="dot">4</span><span class="vline"></span></div><div class="col2"><div class="ttl">Review</div></div></div>
+        <div class="vstep"><div class="col1"><span class="dot">5</span></div><div class="col2"><div class="ttl">Deploy</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

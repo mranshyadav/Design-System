@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Graphite scale</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .row { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; }
+  .sw { height: 120px; border-radius: 6px; position: relative; border: 1px solid rgba(14,15,18,0.06); }
+  .sw .tag { position: absolute; left: 8px; bottom: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; }
+  .sw.light .tag { color: var(--fg-2); }
+  .sw.dark .tag { color: rgba(244,241,234,0.85); }
+  .meta { margin-top: 10px; font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; text-transform: uppercase; }
+</style>
+</head>
+<body class="sr-preview">
+  <div class="row">
+    <div class="sw dark"  style="background:#0E0F12"><span class="tag">ink</span></div>
+    <div class="sw dark"  style="background:#15171B"><span class="tag">95</span></div>
+    <div class="sw dark"  style="background:#2A2D33"><span class="tag">85</span></div>
+    <div class="sw dark"  style="background:#4A4E57"><span class="tag">70</span></div>
+    <div class="sw dark"  style="background:#6B7079"><span class="tag">55</span></div>
+    <div class="sw light" style="background:#8E939C"><span class="tag">40</span></div>
+    <div class="sw light" style="background:#B4B8BF"><span class="tag">25</span></div>
+    <div class="sw light" style="background:#D6D8DC"><span class="tag">15</span></div>
+    <div class="sw light" style="background:#E7E8EB"><span class="tag">08</span></div>
+    <div class="sw light" style="background:#F1F2F4"><span class="tag">04</span></div>
+  </div>
+  <div class="meta">Graphite · neutral scale · borders, fills, secondary text</div>
+</body>
+</html>

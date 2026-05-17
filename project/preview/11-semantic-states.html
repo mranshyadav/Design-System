@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Semantic states</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .swatch { border-radius: 8px; padding: 14px 16px; border: 1px solid var(--border-1); background: var(--surface); display: flex; flex-direction: column; gap: 12px; }
+  .head { display: flex; align-items: center; gap: 10px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-2); }
+  .strip { height: 56px; border-radius: 6px; display: flex; align-items: center; padding-left: 14px; font-family: var(--font-mono); font-size: 12px; }
+  .hex { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); }
+</style>
+</head>
+<body class="sr-preview">
+  <div class="grid">
+    <div class="swatch">
+      <div class="head"><span class="dot" style="background:#1F6B47"></span><span class="label">Success</span></div>
+      <div class="strip" style="background:rgba(31,107,71,0.10); color:#1F6B47">deployed · OK</div>
+      <div class="hex">#1F6B47 · soft 10%</div>
+    </div>
+    <div class="swatch">
+      <div class="head"><span class="dot" style="background:#8A5A14"></span><span class="label">Warning</span></div>
+      <div class="strip" style="background:rgba(138,90,20,0.10); color:#8A5A14">throttled · review</div>
+      <div class="hex">#8A5A14 · soft 10%</div>
+    </div>
+    <div class="swatch">
+      <div class="head"><span class="dot" style="background:#9A2222"></span><span class="label">Danger</span></div>
+      <div class="strip" style="background:rgba(154,34,34,0.10); color:#9A2222">failed · 2 errors</div>
+      <div class="hex">#9A2222 · soft 10%</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tabs</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .stack { display: grid; gap: 22px; }
+  .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 8px; display: block; }
+
+  /* underline tabs */
+  .ul-tabs { display: flex; gap: 24px; border-bottom: 1px solid var(--border-1); }
+  .ul-tabs button { background: transparent; border: 0; padding: 10px 0; color: var(--fg-2); font: 500 14px var(--font-sans); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; display: inline-flex; align-items: center; gap: 6px; }
+  .ul-tabs button.on { color: var(--fg-1); border-bottom-color: var(--ink); }
+  .ul-tabs button .badge { font-family: var(--font-mono); font-size: 10px; background: var(--bg-3); color: var(--fg-3); padding: 1px 6px; border-radius: 9999px; }
+  .ul-tabs button.on .badge { background: var(--ink); color: var(--paper); }
+
+  /* segmented */
+  .seg-tabs { display: inline-flex; padding: 2px; background: var(--bg-3); border-radius: 6px; }
+  .seg-tabs button { background: transparent; border: 0; padding: 7px 14px; font: 500 13px var(--font-sans); color: var(--fg-2); border-radius: 4px; cursor: pointer; }
+  .seg-tabs button.on { background: var(--surface); color: var(--fg-1); box-shadow: var(--shadow-1); }
+
+  /* pill tabs */
+  .pill-tabs { display: flex; gap: 6px; }
+  .pill-tabs button { background: transparent; border: 1px solid transparent; padding: 6px 12px; font: 500 13px var(--font-sans); color: var(--fg-2); border-radius: 9999px; cursor: pointer; }
+  .pill-tabs button:hover { background: var(--bg-3); color: var(--fg-1); }
+  .pill-tabs button.on { background: rgba(31,63,224,0.08); color: var(--accent); border-color: rgba(31,63,224,0.30); }
+
+  /* vertical tabs */
+  .vrow { display: grid; grid-template-columns: 200px 1fr; gap: 24px; }
+  .v-tabs { display: flex; flex-direction: column; gap: 2px; }
+  .v-tabs button { background: transparent; border: 0; text-align: left; padding: 8px 12px; border-radius: 4px; color: var(--fg-2); font: 500 13px var(--font-sans); cursor: pointer; display: flex; align-items: center; gap: 10px; }
+  .v-tabs button:hover { background: var(--bg-3); color: var(--fg-1); }
+  .v-tabs button.on { background: rgba(31,63,224,0.08); color: var(--accent); box-shadow: inset 2px 0 0 var(--accent); }
+  .panel { background: var(--surface); border: 1px solid var(--border-1); border-radius: 6px; padding: 14px; font-size: 13px; color: var(--fg-2); }
+</style>
+</head>
+<body class="sr-preview">
+<div class="stack">
+  <div>
+    <span class="tag">Underline · primary</span>
+    <div class="ul-tabs">
+      <button class="on">Overview</button>
+      <button>Runs <span class="badge">128</span></button>
+      <button>Schema</button>
+      <button>Consumers <span class="badge">3</span></button>
+      <button>Audit</button>
+      <button>Settings</button>
+    </div>
+  </div>
+
+  <div>
+    <span class="tag">Segmented · secondary</span>
+    <div class="seg-tabs">
+      <button class="on">JSON</button>
+      <button>YAML</button>
+      <button>Protobuf</button>
+      <button>SDL</button>
+    </div>
+  </div>
+
+  <div>
+    <span class="tag">Pill · filters</span>
+    <div class="pill-tabs">
+      <button class="on">All · 8</button>
+      <button>Healthy · 5</button>
+      <button>Needs attention · 2</button>
+      <button>Archived</button>
+    </div>
+  </div>
+
+  <div>
+    <span class="tag">Vertical · settings</span>
+    <div class="vrow">
+      <div class="v-tabs">
+        <button>General</button>
+        <button class="on">Members</button>
+        <button>API keys</button>
+        <button>Webhooks</button>
+        <button>Billing</button>
+      </div>
+      <div class="panel">
+        <strong style="color:var(--fg-1)">Members</strong><br/>
+        14 users in acme-prod · 3 admins · invite by email or SAML.
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

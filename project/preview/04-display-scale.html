@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Display scale</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .row { display: flex; align-items: baseline; gap: 24px; padding: 14px 0; border-bottom: 1px solid var(--border-1); }
+  .row:last-child { border-bottom: 0; }
+  .specimen { font-family: var(--font-display); color: var(--fg-1); line-height: 1; letter-spacing: -0.02em; }
+  .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); letter-spacing: 0.04em; text-transform: uppercase; min-width: 90px; }
+</style>
+</head>
+<body class="sr-preview">
+  <div class="row"><span class="meta">88 / italic</span><span class="specimen" style="font-size:88px; font-style:italic">Precision</span></div>
+  <div class="row"><span class="meta">64 / regular</span><span class="specimen" style="font-size:64px">A precision layer</span></div>
+  <div class="row"><span class="meta">44 / italic</span><span class="specimen" style="font-size:44px; font-style:italic">Typed end-to-end</span></div>
+  <div class="row"><span class="meta">32 / regular</span><span class="specimen" style="font-size:32px">Editorial register</span></div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+/* Shared preview-card shell.
+   Loads Google Fonts via CDN so cards render correctly
+   without needing local woff2 files. */
+
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap");
+
+@import url("../colors_and_type.css");
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+}
+
+body.sr-preview {
+  font-family: var(--font-sans);
+  color: var(--fg-1);
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.sr-preview * {
+  box-sizing: border-box;
+}

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Drawer</title>
+<link rel="stylesheet" href="_preview.css">
+<style>
+  .stage { background: var(--graphite-04); border: 1px dashed var(--border-1); border-radius: 8px; min-height: 380px; position: relative; overflow: hidden; padding: 14px; }
+  .behind { padding: 18px; color: var(--fg-3); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .scrim { position: absolute; inset: 0; background: rgba(14,15,18,0.30); }
+  .drawer {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 380px; background: var(--surface);
+    border-left: 1px solid var(--border-1);
+    box-shadow: -24px 0 48px rgba(14,15,18,0.12);
+    display: flex; flex-direction: column;
+  }
+  .head { padding: 16px 20px; border-bottom: 1px solid var(--border-1); display: flex; align-items: center; justify-content: space-between; }
+  .head .crumb { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); }
+  .head .ttl { font-size: 17px; font-weight: 600; margin-top: 2px; }
+  .x { background: transparent; border: 0; cursor: pointer; color: var(--fg-3); width: 28px; height: 28px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; }
+  .x:hover { background: var(--bg-3); color: var(--fg-1); }
+
+  .body { padding: 18px 20px; flex: 1; overflow: auto; display: flex; flex-direction: column; gap: 14px; }
+  .row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border-1); font-size: 13px; }
+  .row:last-child { border-bottom: 0; }
+  .row .k { color: var(--fg-3); }
+  .row .v { font-family: var(--font-mono); color: var(--fg-1); }
+  .sec { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); }
+  .ttl-pill { display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px; border-radius: 2px; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: #1F6B47; background: rgba(31,107,71,0.08); border: 1px solid rgba(31,107,71,0.3); width: max-content; }
+  .ttl-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: #1F6B47; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .label { font-size: 12px; font-weight: 500; color: var(--fg-2); }
+  textarea, .input { width: 100%; background: var(--bg-3); border: 1px solid var(--border-1); border-radius: 4px; padding: 8px 10px; font: 13px var(--font-mono); color: var(--fg-1); resize: none; font-family: var(--font-mono); }
+  .foot { padding: 12px 20px; border-top: 1px solid var(--border-1); display: flex; justify-content: space-between; align-items: center; }
+  .btn-ghost { background: var(--surface); color: var(--fg-1); border: 1px solid var(--border-1); border-radius: 4px; padding: 8px 12px; font: 500 13px var(--font-sans); }
+  .btn-primary { background: var(--ink); color: var(--paper); border: 0; border-radius: 4px; padding: 8px 12px; font: 500 13px var(--font-sans); }
+</style>
+</head>
+<body class="sr-preview">
+<div class="stage">
+  <div class="behind">— Page content</div>
+  <div class="scrim"></div>
+  <aside class="drawer">
+    <div class="head">
+      <div>
+        <div class="crumb">— Edit · Pipeline</div>
+        <div class="ttl">orders.normalize</div>
+      </div>
+      <button class="x">×</button>
+    </div>
+    <div class="body">
+      <span class="ttl-pill"><span class="dot"></span>deployed · v2.4.1</span>
+      <div>
+        <div class="sec" style="margin-bottom:8px">— Configuration</div>
+        <div class="row"><span class="k">Region</span><span class="v">us-east-1</span></div>
+        <div class="row"><span class="k">Source</span><span class="v">postgres-primary</span></div>
+        <div class="row"><span class="k">Sink</span><span class="v">warehouse-snowflake</span></div>
+        <div class="row"><span class="k">Owner</span><span class="v">data-platform</span></div>
+      </div>
+      <div class="field">
+        <span class="label">Notes</span>
+        <textarea rows="4">Normalize order events from postgres-primary. Strips PII before warehouse export.</textarea>
+      </div>
+      <div class="field">
+        <span class="label">Tags</span>
+        <input class="input" value="critical, finance, pii-clean" />
+      </div>
+    </div>
+    <div class="foot">
+      <button class="btn-ghost">Cancel</button>
+      <button class="btn-primary">Save changes</button>
+    </div>
+  </aside>
+</div>
+</body>
+</html>

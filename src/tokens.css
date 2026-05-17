@@ -1,0 +1,119 @@
+/* SRIIO Design System — CSS Tokens */
+:root {
+  /* Neutrals */
+  --ink:           #0E0F12;
+  --paper:         #F4F1EA;
+  --surface:       #FFFFFF;
+
+  --graphite-95:   #15171B;
+  --graphite-85:   #2A2D33;
+  --graphite-70:   #4A4E57;
+  --graphite-55:   #6B7079;
+  --graphite-40:   #8E939C;
+  --graphite-25:   #B4B8BF;
+  --graphite-15:   #D6D8DC;
+  --graphite-08:   #E7E8EB;
+  --graphite-04:   #F1F2F4;
+  --graphite-02:   #F8F8F9;
+
+  /* Accent */
+  --accent:        #1F3FE0;
+  --accent-hover:  #1A36BF;
+  --accent-press:  #15309A;
+  --accent-soft:   rgba(31, 63, 224, 0.08);
+  --accent-ring:   rgba(31, 63, 224, 0.35);
+
+  /* Semantic */
+  --success:       #1F6B47;
+  --success-soft:  rgba(31, 107, 71, 0.10);
+  --warning:       #8A5A14;
+  --warning-soft:  rgba(138, 90, 20, 0.10);
+  --danger:        #9A2222;
+  --danger-soft:   rgba(154, 34, 34, 0.10);
+
+  /* Type */
+  --font-display:  "Instrument Serif", Georgia, serif;
+  --font-sans:     "Geist", system-ui, -apple-system, sans-serif;
+  --font-mono:     "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Type scale */
+  --fs-10: 0.625rem;
+  --fs-11: 0.6875rem;
+  --fs-12: 0.75rem;
+  --fs-13: 0.8125rem;
+  --fs-14: 0.875rem;
+  --fs-15: 0.9375rem;
+  --fs-16: 1rem;
+  --fs-18: 1.125rem;
+  --fs-20: 1.25rem;
+  --fs-24: 1.5rem;
+  --fs-32: 2rem;
+
+  /* Line height */
+  --lh-tight: 1.05;
+  --lh-snug:  1.2;
+  --lh-base:  1.5;
+  --lh-loose: 1.65;
+
+  /* Letter spacing */
+  --tracking-tight: -0.02em;
+  --tracking-snug:  -0.01em;
+  --tracking-base:   0em;
+  --tracking-wide:   0.04em;
+  --tracking-caps:   0.08em;
+
+  /* Weights */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semi:    600;
+
+  /* Spacing */
+  --space-2:   2px;
+  --space-4:   4px;
+  --space-8:   8px;
+  --space-12:  12px;
+  --space-16:  16px;
+  --space-20:  20px;
+  --space-24:  24px;
+  --space-32:  32px;
+  --space-40:  40px;
+  --space-48:  48px;
+  --space-64:  64px;
+
+  /* Radii */
+  --radius-2:    2px;
+  --radius-4:    4px;
+  --radius-6:    6px;
+  --radius-8:    8px;
+  --radius-12:   12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-1: 0 1px 0 rgba(14,15,18,0.04), 0 1px 2px rgba(14,15,18,0.04);
+  --shadow-2: 0 4px 12px rgba(14,15,18,0.06), 0 1px 2px rgba(14,15,18,0.06);
+  --shadow-3: 0 24px 48px rgba(14,15,18,0.12), 0 2px 4px rgba(14,15,18,0.08);
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.2, 0.7, 0.1, 1.0);
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast:     120ms;
+  --dur-base:     200ms;
+  --dur-slow:     320ms;
+
+  /* Semantic aliases */
+  --fg-1: var(--ink);
+  --fg-2: var(--graphite-70);
+  --fg-3: var(--graphite-55);
+  --fg-4: var(--graphite-40);
+  --fg-on-accent: var(--surface);
+  --fg-link: var(--accent);
+
+  --bg-1: var(--paper);
+  --bg-2: var(--surface);
+  --bg-3: var(--graphite-04);
+  --bg-4: var(--graphite-08);
+
+  --border-1: var(--graphite-15);
+  --border-2: var(--graphite-25);
+  --border-strong: var(--ink);
+}
