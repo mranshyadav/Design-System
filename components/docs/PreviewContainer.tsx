@@ -53,8 +53,8 @@ export function PreviewContainer({ preview, code, componentId }: PreviewContaine
 
   return (
     <div className={clsx(
-      'rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden bg-white dark:bg-gray-900 shadow-card',
-      maximized && 'fixed inset-4 z-[100] shadow-card-lg'
+      'rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden bg-white dark:bg-gray-900',
+      maximized && 'fixed inset-4 z-[100]'
     )}>
       {/* Sticky toolbar */}
       <div className="sticky top-0 z-10 h-11 flex items-center gap-2 px-3 border-b border-gray-100 dark:border-gray-800 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm">
@@ -156,7 +156,7 @@ export function PreviewContainer({ preview, code, componentId }: PreviewContaine
           >
             {device !== 'desktop' ? (
               <div className={clsx(
-                'w-full bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-xl overflow-hidden',
+                'w-full bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden',
                 previewTheme === 'dark' ? 'dark' : ''
               )}>
                 {/* Device frame header */}
