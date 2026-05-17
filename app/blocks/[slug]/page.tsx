@@ -171,15 +171,6 @@ export default function BlockDetailPage({ params }: { params: { slug: string } }
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Back button */}
-        <Link
-          href="/blocks"
-          className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors mb-6"
-        >
-          <ArrowLeft size={15} />
-          Back to blocks
-        </Link>
-
         <div className="grid lg:grid-cols-[1fr_300px] gap-8">
           {/* Main content */}
           <div>

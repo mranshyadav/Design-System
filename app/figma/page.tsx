@@ -3,14 +3,22 @@ import { Figma, ArrowRight, Layers, Palette, Download } from 'lucide-react'
 
 export default function FigmaPage() {
   const resources = [
-    { icon: <Layers size={20} />, title: 'Component Library', desc: 'All 27 components as Figma frames with auto-layout and variants.', badge: 'Free', color: 'bg-blue-50 dark:bg-blue-500/10 text-blue-500' },
+    { icon: <Layers size={20} />, title: 'Component Library', desc: 'All 26 components as Figma frames with auto-layout and variants.', badge: 'Free', color: 'bg-blue-50 dark:bg-blue-500/10 text-blue-500' },
     { icon: <Palette size={20} />, title: 'Design Tokens', desc: 'Color styles, typography, spacing, radius and shadow variables.', badge: 'Free', color: 'bg-violet-50 dark:bg-violet-500/10 text-violet-500' },
     { icon: <Download size={20} />, title: 'UI Blocks Kit', desc: '47+ block layouts as ready-to-use Figma sections and pages.', badge: 'Pro', color: 'bg-amber-50 dark:bg-amber-500/10 text-amber-500' },
   ]
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+      {/* Breadcrumb + header */}
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 border-b border-gray-100 dark:border-gray-800/60">
+          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+            <Link href="/" className="hover:text-gray-900 dark:hover:text-white transition-colors">Home</Link>
+            <span>/</span>
+            <span className="text-gray-900 dark:text-white font-medium">Figma</span>
+          </div>
+        </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-12 rounded-2xl bg-[#1ABCFE]/10 flex items-center justify-center">
@@ -48,8 +56,8 @@ export default function FigmaPage() {
           </div>
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Full Figma kit coming soon</h3>
           <p className="text-sm text-gray-500 dark:text-gray-400 max-w-sm mx-auto mb-6">We're finalizing the complete design system file. Star the GitHub repo to get notified when it launches.</p>
-          <Link href="/" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent-500 hover:bg-accent-600 text-white text-sm font-semibold transition-colors shadow-sm">
-            Back to home <ArrowRight size={14} />
+          <Link href="/blocks" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent-500 hover:bg-accent-600 text-white text-sm font-semibold transition-colors shadow-sm">
+            Browse UI Blocks <ArrowRight size={14} />
           </Link>
         </div>
       </div>
