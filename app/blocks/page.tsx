@@ -1,21 +1,67 @@
 'use client'
 import { useState, useMemo } from 'react'
-import { Search, SlidersHorizontal, X } from 'lucide-react'
 import { blocks, categories } from '@/lib/data'
-import { Sidebar } from '@/components/blocks/Sidebar'
+import { BlocksHero } from '@/components/blocks/BlocksHero'
+import { SearchFilters } from '@/components/blocks/SearchFilters'
 import { BlockCard } from '@/components/blocks/BlockCard'
+import { Sidebar } from '@/components/blocks/Sidebar'
+import { Grid3x3, LayoutGrid } from 'lucide-react'
 import clsx from 'clsx'
+import Link from 'next/link'
+import { Eye, ArrowRight } from 'lucide-react'
+import type { Block } from '@/lib/data'
+
+function BlockListRow({ block }: { block: Block }) {
+  return (
+    <div className="group flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200/80 dark:border-gray-800 hover:border-accent-300 dark:hover:border-accent-700/60 hover:shadow-md transition-all duration-200">
+      {/* Category color strip */}
+      <div className="flex-shrink-0 w-1.5 h-12 rounded-full bg-accent-500/60" />
+
+      {/* Info */}
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 mb-0.5">
+          <h3 className="text-sm font-bold text-gray-900 dark:text-white group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors">{block.title}</h3>
+          {block.isNew && <span className="px-1.5 py-0.5 rounded-full bg-accent-500 text-white text-[8px] font-bold uppercase">New</span>}
+          {block.isPro && <span className="px-1.5 py-0.5 rounded-full bg-amber-500 text-white text-[8px] font-bold uppercase">Pro</span>}
+        </div>
+        <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{block.description}</p>
+      </div>
+
+      {/* Tags */}
+      <div className="hidden md:flex items-center gap-1.5 flex-shrink-0">
+        {block.tags.slice(0, 2).map(tag => (
+          <span key={tag} className="px-2 py-0.5 rounded-md bg-gray-100 dark:bg-gray-800 text-[10px] font-mono text-gray-400">{tag}</span>
+        ))}
+      </div>
+
+      {/* Actions */}
+      <div className="flex items-center gap-2 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
+        <Link href={`/blocks/${block.id}`} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+          <Eye size={12} /> Preview
+        </Link>
+        <ArrowRight size={14} className="text-gray-400 group-hover:text-accent-500 transition-colors" />
+      </div>
+    </div>
+  )
+}
 
 export default function BlocksPage() {
   const [activeCategory, setActiveCategory] = useState('all')
   const [query, setQuery] = useState('')
-  const [showFilters, setShowFilters] = useState(false)
+  const [sortBy, setSortBy] = useState('newest')
   const [activeTags, setActiveTags] = useState<string[]>([])
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
 
   const allTags = useMemo(() => {
     const tags = new Set<string>()
     blocks.forEach(b => b.tags.forEach(t => tags.add(t)))
     return Array.from(tags).sort()
+  }, [])
+
+  const counts = useMemo(() => {
+    const c: Record<string, number> = { all: blocks.length }
+    blocks.forEach(b => { c[b.category] = (c[b.category] ?? 0) + 1 })
+    return c
   }, [])
 
   const filtered = useMemo(() => {
@@ -32,14 +78,13 @@ export default function BlocksPage() {
     if (activeTags.length > 0) {
       result = result.filter(b => activeTags.every(t => b.tags.includes(t)))
     }
+    if (sortBy === 'az') {
+      result = [...result].sort((a, b) => a.title.localeCompare(b.title))
+    } else if (sortBy === 'popular') {
+      result = [...result].sort((a, b) => (b.componentCount ?? 0) - (a.componentCount ?? 0))
+    }
     return result
-  }, [activeCategory, query, activeTags])
-
-  const counts = useMemo(() => {
-    const c: Record<string, number> = { all: blocks.length }
-    blocks.forEach(b => { c[b.category] = (c[b.category] ?? 0) + 1 })
-    return c
-  }, [])
+  }, [activeCategory, query, activeTags, sortBy])
 
   const toggleTag = (tag: string) => {
     setActiveTags(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag])
@@ -47,131 +92,96 @@ export default function BlocksPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-      {/* Page header */}
-      <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-widest text-accent-500 mb-2">UI Blocks</p>
-            <h1 className="text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-3">
-              Browse all blocks
-            </h1>
-            <p className="text-gray-500 dark:text-gray-400 text-base leading-relaxed">
-              Pre-built product UI sections built with SRIIO components. Copy the code, paste into your project, and ship faster.
-            </p>
-          </div>
+      <BlocksHero />
 
-          {/* Search + filter bar */}
-          <div className="mt-7 flex flex-col sm:flex-row gap-3">
-            <div className="relative flex-1 max-w-lg">
-              <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search blocks..."
-                value={query}
-                onChange={e => setQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-500/30 focus:border-accent-400 transition-all"
-              />
-              {query && (
-                <button onClick={() => setQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                  <X size={14} />
-                </button>
-              )}
-            </div>
-            <button
-              onClick={() => setShowFilters(f => !f)}
-              className={clsx(
-                'flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-medium transition-all',
-                showFilters || activeTags.length > 0
-                  ? 'bg-accent-50 dark:bg-accent-500/10 border-accent-200 dark:border-accent-700 text-accent-600 dark:text-accent-400'
-                  : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600'
-              )}
-            >
-              <SlidersHorizontal size={14} />
-              Filters
-              {activeTags.length > 0 && (
-                <span className="ml-0.5 px-1.5 py-0.5 rounded-full bg-accent-500 text-white text-[10px] font-bold">{activeTags.length}</span>
-              )}
-            </button>
-          </div>
+      {/* Main content */}
+      <div id="blocks" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
-          {/* Tag filters */}
-          {showFilters && (
-            <div className="mt-4 flex flex-wrap gap-2">
-              {allTags.map(tag => (
-                <button
-                  key={tag}
-                  onClick={() => toggleTag(tag)}
-                  className={clsx(
-                    'px-3 py-1 rounded-lg text-xs font-mono transition-all border',
-                    activeTags.includes(tag)
-                      ? 'bg-accent-500 text-white border-accent-500'
-                      : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-accent-300 dark:hover:border-accent-700'
-                  )}
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex gap-8">
-          {/* Sidebar */}
-          <Sidebar
+        {/* Search + filter */}
+        <div className="mb-8">
+          <SearchFilters
+            query={query}
+            onQueryChange={setQuery}
             activeCategory={activeCategory}
-            onSelect={setActiveCategory}
-            counts={counts}
+            onCategoryChange={setActiveCategory}
+            sortBy={sortBy}
+            onSortChange={setSortBy}
+            activeTags={activeTags}
+            onTagToggle={toggleTag}
+            resultCount={filtered.length}
+            allTags={allTags}
           />
+        </div>
 
-          {/* Main grid */}
+        {/* Content area */}
+        <div className="flex gap-8">
+
+          {/* Sidebar */}
+          <div className="hidden lg:block">
+            <Sidebar
+              activeCategory={activeCategory}
+              onSelect={setActiveCategory}
+              counts={counts}
+            />
+          </div>
+
+          {/* Grid */}
           <div className="flex-1 min-w-0">
-            {/* Results info */}
-            <div className="flex items-center justify-between mb-6">
+
+            {/* Top bar: view toggle */}
+            <div className="flex items-center justify-between mb-5">
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                <span className="font-semibold text-gray-900 dark:text-white">{filtered.length}</span>{' '}
-                {filtered.length === 1 ? 'block' : 'blocks'}
-                {activeCategory !== 'all' && (
-                  <> in <span className="text-accent-500 font-semibold capitalize">{activeCategory}</span></>
-                )}
-                {query && <> matching <span className="text-accent-500 font-semibold">"{query}"</span></>}
+                <span className="font-semibold text-gray-900 dark:text-white">{filtered.length}</span> blocks
               </p>
-
-              {(activeTags.length > 0 || query) && (
+              <div className="flex items-center gap-1 p-1 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
                 <button
-                  onClick={() => { setActiveTags([]); setQuery('') }}
-                  className="text-xs text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 flex items-center gap-1"
+                  onClick={() => setViewMode('grid')}
+                  className={clsx('p-1.5 rounded-md transition-all', viewMode === 'grid' ? 'bg-accent-500 text-white shadow-sm' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300')}
                 >
-                  <X size={12} /> Clear filters
+                  <Grid3x3 size={14} />
                 </button>
-              )}
-            </div>
-
-            {filtered.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-24 text-center">
-                <div className="w-16 h-16 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-4">
-                  <Search size={24} className="text-gray-400" />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">No blocks found</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 max-w-xs">
-                  Try adjusting your search or filter to find what you're looking for.
-                </p>
                 <button
-                  onClick={() => { setQuery(''); setActiveCategory('all'); setActiveTags([]) }}
-                  className="mt-4 px-4 py-2 rounded-lg bg-accent-500 hover:bg-accent-600 text-white text-sm font-semibold transition-colors"
+                  onClick={() => setViewMode('list')}
+                  className={clsx('p-1.5 rounded-md transition-all', viewMode === 'list' ? 'bg-accent-500 text-white shadow-sm' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300')}
                 >
-                  Clear all filters
+                  <LayoutGrid size={14} />
                 </button>
               </div>
-            ) : (
+            </div>
+
+            {/* Empty state */}
+            {filtered.length === 0 && (
+              <div className="flex flex-col items-center justify-center py-24 text-center">
+                <div className="w-16 h-16 rounded-2xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center mb-4 text-2xl">⊘</div>
+                <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">No blocks found</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 max-w-xs mb-5">Try adjusting your search or selecting a different category.</p>
+                <button
+                  onClick={() => { setQuery(''); setActiveCategory('all'); setActiveTags([]) }}
+                  className="px-5 py-2.5 rounded-xl bg-accent-500 hover:bg-accent-600 text-white text-sm font-semibold transition-colors shadow-sm"
+                >
+                  Reset filters
+                </button>
+              </div>
+            )}
+
+            {/* Blocks grid - when viewMode === 'grid' */}
+            {filtered.length > 0 && viewMode === 'grid' && (
               <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
                 {filtered.map(block => (
                   <BlockCard key={block.id} block={block} />
                 ))}
               </div>
             )}
+
+            {/* Blocks list - when viewMode === 'list' */}
+            {filtered.length > 0 && viewMode === 'list' && (
+              <div className="flex flex-col gap-3">
+                {filtered.map(block => (
+                  <BlockListRow key={block.id} block={block} />
+                ))}
+              </div>
+            )}
+
           </div>
         </div>
       </div>
