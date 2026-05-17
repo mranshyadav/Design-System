@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { Search, X, SlidersHorizontal, Check } from 'lucide-react'
 import clsx from 'clsx'
-import { categories } from '@/lib/data'
 
 interface SearchFiltersProps {
   query: string
@@ -77,24 +76,6 @@ export function SearchFilters(props: SearchFiltersProps) {
             </span>
           )}
         </button>
-      </div>
-
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">
-        {categories.map(cat => (
-          <button
-            key={cat.id}
-            onClick={() => onCategoryChange(cat.id)}
-            className={clsx(
-              'flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border',
-              activeCategory === cat.id
-                ? 'bg-accent-500 text-white border-accent-500 shadow-sm shadow-accent-500/25'
-                : 'bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:border-accent-300 dark:hover:border-accent-600 hover:text-accent-600 dark:hover:text-accent-400'
-            )}
-          >
-            <span className="text-base leading-none">{cat.icon}</span>
-            {cat.label}
-          </button>
-        ))}
       </div>
 
       {showTagFilter && (
