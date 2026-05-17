@@ -135,9 +135,14 @@ function AppContent() {
         <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 'clamp(40px,5vw,64px)', letterSpacing: '-0.02em', lineHeight: 1.05, marginBottom: 8, marginTop: 0 }}>
           SRIIO <em>Component Library</em>
         </h1>
-        <p style={{ color: 'var(--fg-2)', fontSize: 'var(--fs-16)', marginBottom: 64, marginTop: 16, maxWidth: 560 }}>
-          25+ production-ready React components built on the SRIIO design system — technical, minimal, and corporate-trustworthy.
-        </p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginTop: 16, marginBottom: 64, flexWrap: 'wrap' }}>
+          <p style={{ color: 'var(--fg-2)', fontSize: 'var(--fs-16)', margin: 0, maxWidth: 560 }}>
+            25+ production-ready React components built on the SRIIO design system — technical, minimal, and corporate-trustworthy.
+          </p>
+          <a href="/blocks" style={{ flexShrink: 0, border: '1px solid var(--border-1)', borderRadius: 'var(--radius-6)', padding: '8px 16px', fontSize: 'var(--fs-13)', fontWeight: 500, color: 'var(--accent)', textDecoration: 'none', background: 'var(--surface)', whiteSpace: 'nowrap' }}>
+            View Product Blocks →
+          </a>
+        </div>
 
         {/* ── Badges ─────────────────────────────────── */}
         <Section title="Badges">
