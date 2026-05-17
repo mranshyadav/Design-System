@@ -123,10 +123,10 @@ export function DocNavbar({ currentSlug }: DocNavbarProps) {
           </button>
 
           <Link
-            href="/blocks"
+            href="/contact"
             className="ml-1 px-3 py-1.5 rounded-lg bg-accent-500 hover:bg-accent-600 text-white text-xs font-semibold transition-colors whitespace-nowrap"
           >
-            Get started
+            Sign In
           </Link>
         </div>
       </div>

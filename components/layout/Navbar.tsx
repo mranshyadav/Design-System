@@ -17,7 +17,7 @@ const navLinks = [
 ]
 
 export function Navbar() {
-  const [scrolled, setScrolled]    = useState(false)
+  const [scrolled, setScrolled]     = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
 
@@ -51,10 +51,10 @@ export function Navbar() {
             </span>
           </Link>
 
-          {/* Search bar (desktop) */}
+          {/* Search bar */}
           <button
             onClick={openCommandPalette}
-            className="hidden lg:flex items-center gap-3 px-4 py-2 rounded-xl bg-gray-100 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:border-accent-400 hover:bg-white dark:hover:bg-gray-800 transition-all duration-150 w-56 text-sm group"
+            className="hidden lg:flex items-center gap-3 px-4 py-2 rounded-xl bg-gray-100 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:border-accent-400 hover:bg-white dark:hover:bg-gray-800 transition-all duration-150 w-56 text-sm"
           >
             <Search size={14} className="flex-shrink-0" />
             <span className="flex-1 text-left">Search…</span>
@@ -86,24 +86,39 @@ export function Navbar() {
             })}
           </nav>
 
-          {/* Actions */}
-          <div className="flex items-center gap-2">
+          {/* Right actions — matches DocNavbar style */}
+          <div className="flex items-center gap-1.5">
+            {/* Mobile search */}
             <button
               onClick={openCommandPalette}
               className="lg:hidden flex items-center justify-center w-8 h-8 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             >
               <Search size={16} />
             </button>
+
+            {/* GitHub with label */}
             <a
               href="https://github.com/mranshyadav/Design-System"
               target="_blank"
               rel="noreferrer"
-              className="hidden sm:flex items-center justify-center w-8 h-8 rounded-lg text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800 transition-colors"
-              aria-label="GitHub"
+              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             >
-              <Github size={16} />
+              <Github size={15} />
+              <span className="hidden lg:inline">GitHub</span>
             </a>
+
+            {/* Theme toggle */}
             <ThemeToggle />
+
+            {/* Sign In */}
+            <Link
+              href="/contact"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-accent-500 hover:bg-accent-600 text-white text-sm font-semibold transition-colors shadow-sm"
+            >
+              Sign In
+            </Link>
+
+            {/* Mobile menu button */}
             <button
               onClick={() => setMobileOpen(o => !o)}
               className="md:hidden flex items-center justify-center w-8 h-8 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
@@ -135,6 +150,14 @@ export function Navbar() {
               </Link>
             )
           })}
+          <div className="pt-2 border-t border-gray-200 dark:border-gray-800 mt-2">
+            <Link
+              href="/contact"
+              className="block text-center px-4 py-2.5 rounded-xl bg-accent-500 text-white text-sm font-semibold"
+            >
+              Sign In
+            </Link>
+          </div>
         </div>
       )}
     </header>
