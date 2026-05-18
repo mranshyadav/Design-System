@@ -912,7 +912,7 @@ export default function ComponentDocPage({ params }: { params: { slug: string } 
 
         {/* ── center content ── */}
         <main ref={centerRef} className="flex-1 overflow-y-auto scrollbar-hide">
-          <div className="px-8 lg:px-12 py-12">
+          <div className="px-6 lg:px-8 py-10">
 
             {/* breadcrumb */}
             <nav className="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500 mb-6">

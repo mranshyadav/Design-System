@@ -44,7 +44,7 @@
 @layer utilities {
   /* ── single shared container used on every page and in the navbar ── */
   .layout-container {
-    @apply w-full max-w-[1520px] mx-auto px-5 sm:px-8 lg:px-14 2xl:px-[72px];
+    @apply w-full max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10;
   }
 
   .gradient-text {
