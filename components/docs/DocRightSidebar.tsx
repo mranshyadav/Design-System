@@ -22,7 +22,7 @@ const extraItems = [
 
 export function DocRightSidebar({ items, activeId, onNavigate }: DocRightSidebarProps) {
   return (
-    <aside className="hidden xl:flex w-[260px] h-full flex-shrink-0 border-l border-gray-200 dark:border-gray-700/60 flex-col bg-gray-50 dark:bg-gray-900/30">
+    <aside className="hidden xl:flex w-[260px] h-full flex-shrink-0 border-l border-gray-200 dark:border-gray-800 flex-col bg-white dark:bg-gray-950">
       <div className="flex-1 overflow-y-auto scrollbar-hide py-6 px-5">
         {/* Header */}
         <p className="text-[10px] font-semibold uppercase tracking-widest text-gray-400 mb-3">

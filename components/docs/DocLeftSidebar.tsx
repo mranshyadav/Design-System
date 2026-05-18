@@ -28,7 +28,7 @@ export function DocLeftSidebar({ activeId }: DocLeftSidebarProps) {
     : sortedComponents
 
   return (
-    <aside className="hidden lg:flex w-[280px] h-full flex-shrink-0 border-r border-gray-200 dark:border-gray-700/60 flex-col bg-gray-50 dark:bg-gray-900/30">
+    <aside className="hidden lg:flex w-[280px] h-full flex-shrink-0 border-r border-gray-200 dark:border-gray-800 flex-col bg-white dark:bg-gray-950">
       {/* Filter input */}
       <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-800/50">
         <div className="relative">
