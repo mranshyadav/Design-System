@@ -8,7 +8,9 @@ import { usePathname } from 'next/navigation'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const isDocPage = Boolean(pathname?.match(/^\/components\/[^/]+$/))
+  const isDocPage = Boolean(
+    pathname?.match(/^\/components\/[^/]+$/) || pathname?.startsWith('/docs')
+  )
 
   return (
     <html lang="en" suppressHydrationWarning>

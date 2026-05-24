@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import { Copy, Check, ExternalLink } from 'lucide-react'
-import { DocNavbar } from '@/components/docs/DocNavbar'
 import { DocLeftSidebar } from '@/components/docs/DocLeftSidebar'
 import { DocRightSidebar } from '@/components/docs/DocRightSidebar'
 import { components } from '@/lib/data'
@@ -119,11 +118,6 @@ export default function DocsPage() {
 
   return (
     <>
-      <DocNavbar
-        title="Documentation"
-        breadcrumb={[{ label: 'Docs', href: '/docs' }, { label: 'Introduction' }]}
-      />
-
       <div className="layout-container flex overflow-hidden" style={{ height: 'calc(100vh - 72px)' }}>
         <DocLeftSidebar activeId="" />
 
