@@ -8,18 +8,20 @@
 npm install @sriio/ui
 ```
 
-## Live API
-
-All component metadata and code is available via REST:
+## Live API (no setup needed)
 
 ```
-GET https://sriio.dev/api/components            → list all components
-GET https://sriio.dev/api/components?q=button  → search
+GET https://sriio.dev/api/components              → list all 26 components
+GET https://sriio.dev/api/components?q=modal      → search by keyword
 GET https://sriio.dev/api/components?category=Forms → filter by category
-GET https://sriio.dev/api/components/{id}      → full code for one component
+GET https://sriio.dev/api/components/{id}         → full code for one component
 ```
 
-## MCP Server (for Claude Desktop, Cursor, Windsurf, etc.)
+Response includes `code.react`, `code.typescript`, `code.tailwind` — all copy-paste ready.
+
+## MCP Server (Claude Desktop, Cursor, VS Code, Windsurf, JetBrains)
+
+No install, no clone — works instantly via npx:
 
 ```json
 {
@@ -32,80 +34,77 @@ GET https://sriio.dev/api/components/{id}      → full code for one component
 }
 ```
 
-Tools exposed: `list_components`, `get_component`, `search_components`
+**Config file locations:**
+- Claude Desktop (Mac): `~/Library/Application Support/Claude/claude_desktop_config.json`
+- Claude Desktop (Linux): `~/.config/claude/claude_desktop_config.json`
+- Cursor: `~/.cursor/mcp.json`
+- VS Code: `.vscode/mcp.json` (already in this repo)
+- Windsurf: `~/.codeium/windsurf/mcp_config.json`
+- JetBrains: Settings → Tools → AI Assistant → MCP Servers → +
+
+**MCP tools available:**
+- `list_components` — list all components, filter by category or keyword
+- `get_component` — get full React/TypeScript/Tailwind code for any component
+- `search_components` — search by keyword
 
 ---
 
 ## Components (26 total)
 
-Each component entry: id · title · category · variants · import
-
 ### Foundations
-- badge · Badge · Foundations · 7 variants · `import { Badge, BadgeCount } from '@sriio/ui'`
-- avatar · Avatar · Foundations · 4 variants · `import { Avatar, AvatarStack } from '@sriio/ui'`
+- badge · Badge · 7 variants · `import { Badge, BadgeCount } from '@sriio/ui'`
+- avatar · Avatar · 4 variants · `import { Avatar, AvatarStack } from '@sriio/ui'`
 
 ### Display
-- button · Button · Display · 6 variants · `import { Button } from '@sriio/ui'`
-- spinner · Spinner · Display · 4 variants · `import { Spinner, Dots, Skeleton } from '@sriio/ui'`
+- button · Button · 6 variants · `import { Button } from '@sriio/ui'`
+- spinner · Spinner · 4 variants · `import { Spinner, Dots, Skeleton } from '@sriio/ui'`
 
 ### Forms
-- input · Input · Forms · 5 variants · `import { Input, Textarea } from '@sriio/ui'`
-- search · Search · Forms · 3 variants · `import { Search } from '@sriio/ui'`
-- dropdown · Dropdown · Forms · 2 variants · `import { Dropdown } from '@sriio/ui'`
-- radio · Radio Group · Forms · 3 variants · `import { RadioGroup } from '@sriio/ui'`
-- checkbox · Checkbox · Forms · 5 variants · `import { Checkbox, Toggle } from '@sriio/ui'`
+- input · Input · 5 variants · `import { Input, Textarea } from '@sriio/ui'`
+- search · Search · 3 variants · `import { Search } from '@sriio/ui'`
+- dropdown · Dropdown · 2 variants · `import { Dropdown } from '@sriio/ui'`
+- radio · Radio Group · 3 variants · `import { RadioGroup } from '@sriio/ui'`
+- checkbox · Checkbox · 5 variants · `import { Checkbox, Toggle } from '@sriio/ui'`
 
 ### Feedback
-- alert · Alert · Feedback · 5 variants · `import { Alert } from '@sriio/ui'`
-- toast · Toast · Feedback · 4 variants · `import { ToastProvider, useToast } from '@sriio/ui'`
-- progress · Progress · Feedback · 3 variants · `import { ProgressBar, ProgressCircle } from '@sriio/ui'`
-- empty-state · Empty State · Feedback · 3 variants · `import { EmptyState } from '@sriio/ui'`
+- alert · Alert · 5 variants · `import { Alert } from '@sriio/ui'`
+- toast · Toast · 4 variants · `import { ToastProvider, useToast } from '@sriio/ui'`
+- progress · Progress · 3 variants · `import { ProgressBar, ProgressCircle } from '@sriio/ui'`
+- empty-state · Empty State · 3 variants · `import { EmptyState } from '@sriio/ui'`
 
 ### Overlay
-- tooltip · Tooltip · Overlay · 4 variants · `import { Tooltip } from '@sriio/ui'`
-- modal · Modal · Overlay · 2 variants · `import { Modal } from '@sriio/ui'`
-- drawer · Drawer · Overlay · 2 variants · `import { Drawer } from '@sriio/ui'`
-- popover · Popover · Overlay · 2 variants · `import { Popover } from '@sriio/ui'`
+- tooltip · Tooltip · 4 variants · `import { Tooltip } from '@sriio/ui'`
+- modal · Modal · 2 variants · `import { Modal } from '@sriio/ui'`
+- drawer · Drawer · 2 variants · `import { Drawer } from '@sriio/ui'`
+- popover · Popover · 2 variants · `import { Popover } from '@sriio/ui'`
 
 ### Navigation
-- tabs · Tabs · Navigation · 4 variants · `import { Tabs } from '@sriio/ui'`
-- accordion · Accordion · Navigation · 2 variants · `import { Accordion } from '@sriio/ui'`
-- steps · Steps · Navigation · 2 variants · `import { Steps } from '@sriio/ui'`
-- pagination · Pagination · Navigation · 3 variants · `import { Pagination } from '@sriio/ui'`
-- navigation · Navigation · Navigation · 4 variants · `import { TopNav, Sidebar, Breadcrumb, BottomTabs } from '@sriio/ui'`
+- tabs · Tabs · 4 variants · `import { Tabs } from '@sriio/ui'`
+- accordion · Accordion · 2 variants · `import { Accordion } from '@sriio/ui'`
+- steps · Steps · 2 variants · `import { Steps } from '@sriio/ui'`
+- pagination · Pagination · 3 variants · `import { Pagination } from '@sriio/ui'`
+- navigation · Navigation · 4 variants · `import { TopNav, Sidebar, Breadcrumb, BottomTabs } from '@sriio/ui'`
 
 ### Data
-- table · Table · Data · 2 variants · `import { Table } from '@sriio/ui'`
+- table · Table · 2 variants · `import { Table } from '@sriio/ui'`
 
 ### Pickers
-- date-picker · Date Picker · Pickers · 1 variant · `import { DatePicker } from '@sriio/ui'`
-- time-picker · Time Picker · Pickers · 2 variants · `import { TimePicker } from '@sriio/ui'`
-- file-upload · File Upload · Pickers · 2 variants · `import { FileUploadSingle, FileUploadBulk } from '@sriio/ui'`
+- date-picker · Date Picker · 1 variant · `import { DatePicker } from '@sriio/ui'`
+- time-picker · Time Picker · 2 variants · `import { TimePicker } from '@sriio/ui'`
+- file-upload · File Upload · 2 variants · `import { FileUploadSingle, FileUploadBulk } from '@sriio/ui'`
 
 ---
 
-## Usage with AI
-
-To get the full React + TypeScript + Tailwind code for any component:
-
-```
-GET https://sriio.dev/api/components/button
-```
-
-Response includes:
-- `code.react` — copy-paste JSX example
-- `code.typescript` — prop types/interfaces
-- `code.tailwind` — raw HTML with Tailwind classes (no npm needed)
-
 ## Theming
 
-All components use your Tailwind config. Override the `accent` color palette in `tailwind.config.ts`:
+All components use your Tailwind config. Override the `accent` color:
 
 ```js
+// tailwind.config.ts
 theme: {
   extend: {
     colors: {
-      accent: colors.violet,   // or blue, indigo, emerald, etc.
+      accent: colors.violet,  // or blue, emerald, rose, orange…
     }
   }
 }
@@ -115,4 +114,5 @@ theme: {
 
 - Docs: https://sriio.dev/docs
 - GitHub: https://github.com/mranshyadav/Design-System
+- npm: https://www.npmjs.com/package/sriio-ui-mcp
 - License: MIT

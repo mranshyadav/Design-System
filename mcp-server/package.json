@@ -1,19 +1,44 @@
 {
   "name": "sriio-ui-mcp",
   "version": "1.0.0",
-  "description": "MCP server for SRIIO UI — gives any AI model access to component code and docs.",
+  "description": "MCP server for SRIIO UI — instant access to 26 React/Tailwind components in any AI IDE.",
   "type": "module",
   "bin": {
-    "sriio-mcp": "./index.js"
+    "sriio-ui-mcp": "./index.js"
   },
   "scripts": {
     "start": "node index.js",
     "generate": "node generate.mjs"
   },
+  "files": [
+    "index.js",
+    "registry.json"
+  ],
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0"
   },
   "engines": {
     "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "sriio",
+    "ui",
+    "components",
+    "react",
+    "tailwind",
+    "claude",
+    "cursor",
+    "windsurf",
+    "vscode",
+    "ai"
+  ],
+  "author": "mranshyadav",
+  "license": "MIT",
+  "homepage": "https://github.com/mranshyadav/Design-System",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mranshyadav/Design-System.git"
   }
 }
