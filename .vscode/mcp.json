@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "sriio-ui": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${workspaceFolder}/mcp-server/index.js"]
+    }
+  }
+}

@@ -1,0 +1,522 @@
+{
+  "badge": {
+    "title": "Badge",
+    "description": "Small status indicators and count labels for displaying metadata, notifications, or categorization.",
+    "category": "Data Display",
+    "tags": [
+      "badge",
+      "label",
+      "status",
+      "count",
+      "notification"
+    ],
+    "variants": 8,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Badge, BadgeCount } from '@sriio/ui'",
+    "code": {
+      "react": "import { Badge, BadgeCount } from '@sriio/ui'\n\ndefault function BadgeDemo() {\n  return (\n    <div className=\"flex flex-wrap items-center gap-3\">\n      <Badge variant=\"default\">Default</Badge>\n      <Badge variant=\"primary\">Primary</Badge>\n      <Badge variant=\"success\">Success</Badge>\n      <Badge variant=\"warning\">Warning</Badge>\n      <Badge variant=\"danger\">Danger</Badge>\n      <Badge variant=\"outline\">Outline</Badge>\n\n      <div className=\"relative inline-flex\">\n        <button className=\"rounded-full bg-gray-100 p-2\">\n          <span className=\"sr-only\">Notifications</span>\n          🔔\n        </button>\n        <BadgeCount count={12} max={9} />\n      </div>\n\n      <BadgeCount count={3} />\n      <BadgeCount count={0} showZero />\n    </div>\n  )\n}",
+      "typescript": "import { HTMLAttributes } from 'react'\n\ntype BadgeVariant =\n  | 'default'\n  | 'primary'\n  | 'secondary'\n  | 'success'\n  | 'warning'\n  | 'danger'\n  | 'outline'\n  | 'ghost'\n\ninterface BadgeProps extends HTMLAttributes<HTMLSpanElement> {\n  variant?: BadgeVariant\n  size?: 'sm' | 'md' | 'lg'\n  dot?: boolean\n}\n\ninterface BadgeCountProps {\n  count: number\n  max?: number\n  showZero?: boolean\n  offset?: [number, number]\n  className?: string\n}",
+      "tailwind": "<!-- Badge variants -->\n<div class=\"flex flex-wrap items-center gap-3\">\n  <span class=\"inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700\">Default</span>\n  <span class=\"inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-700\">Primary</span>\n  <span class=\"inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-700\">Success</span>\n  <span class=\"inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-700\">Warning</span>\n  <span class=\"inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-700\">Danger</span>\n  <span class=\"inline-flex items-center rounded-full border border-gray-300 px-2.5 py-0.5 text-xs font-medium text-gray-700\">Outline</span>\n\n  <!-- Badge with dot indicator -->\n  <span class=\"inline-flex items-center gap-1.5 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-700\">\n    <span class=\"h-1.5 w-1.5 rounded-full bg-green-500\"></span>\n    Active\n  </span>\n\n  <!-- BadgeCount on icon -->\n  <div class=\"relative inline-flex\">\n    <button class=\"rounded-full bg-gray-100 p-2\">🔔</button>\n    <span class=\"absolute -right-1 -top-1 flex h-4 min-w-[1rem] items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white\">9+</span>\n  </div>\n</div>"
+    }
+  },
+  "avatar": {
+    "title": "Avatar",
+    "description": "User profile images with fallback initials, status indicators, and group stacking support.",
+    "category": "Data Display",
+    "tags": [
+      "avatar",
+      "profile",
+      "image",
+      "user",
+      "stack"
+    ],
+    "variants": 6,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Avatar, AvatarStack } from '@sriio/ui'",
+    "code": {
+      "react": "import { Avatar, AvatarStack } from '@sriio/ui'\n\nconst users = [\n  { name: 'Alice Chen', src: 'https://i.pravatar.cc/150?img=1', status: 'online' },\n  { name: 'Bob Smith', src: 'https://i.pravatar.cc/150?img=2', status: 'away' },\n  { name: 'Carol White', src: 'https://i.pravatar.cc/150?img=3', status: 'busy' },\n  { name: 'David Kim', status: 'offline' },\n]\n\ndefault function AvatarDemo() {\n  return (\n    <div className=\"flex flex-col gap-6\">\n      <div className=\"flex items-center gap-3\">\n        <Avatar src={users[0].src} name={users[0].name} size=\"sm\" status=\"online\" />\n        <Avatar src={users[1].src} name={users[1].name} size=\"md\" status=\"away\" />\n        <Avatar src={users[2].src} name={users[2].name} size=\"lg\" status=\"busy\" />\n        <Avatar name={users[3].name} size=\"xl\" status=\"offline\" />\n      </div>\n\n      <AvatarStack\n        users={users.map(u => ({ src: u.src, name: u.name }))}\n        max={3}\n        size=\"md\"\n      />\n    </div>\n  )\n}",
+      "typescript": "type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'\ntype AvatarStatus = 'online' | 'away' | 'busy' | 'offline'\ntype AvatarShape = 'circle' | 'square'\n\ninterface AvatarProps {\n  src?: string\n  name?: string\n  size?: AvatarSize\n  shape?: AvatarShape\n  status?: AvatarStatus\n  fallbackColor?: string\n  className?: string\n}\n\ninterface AvatarStackUser {\n  src?: string\n  name?: string\n}\n\ninterface AvatarStackProps {\n  users: AvatarStackUser[]\n  max?: number\n  size?: AvatarSize\n  className?: string\n}",
+      "tailwind": "<!-- Single Avatar with status -->\n<div class=\"relative inline-flex\">\n  <img\n    src=\"https://i.pravatar.cc/150?img=1\"\n    alt=\"Alice Chen\"\n    class=\"h-10 w-10 rounded-full object-cover ring-2 ring-white\"\n  />\n  <span class=\"absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-400 ring-2 ring-white\"></span>\n</div>\n\n<!-- Avatar with initials fallback -->\n<div class=\"relative inline-flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 text-sm font-medium text-white\">\n  DK\n</div>\n\n<!-- Avatar Stack -->\n<div class=\"flex -space-x-2\">\n  <img src=\"https://i.pravatar.cc/150?img=1\" class=\"h-8 w-8 rounded-full ring-2 ring-white\" alt=\"User 1\" />\n  <img src=\"https://i.pravatar.cc/150?img=2\" class=\"h-8 w-8 rounded-full ring-2 ring-white\" alt=\"User 2\" />\n  <img src=\"https://i.pravatar.cc/150?img=3\" class=\"h-8 w-8 rounded-full ring-2 ring-white\" alt=\"User 3\" />\n  <div class=\"flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-xs font-medium text-gray-600 ring-2 ring-white\">+4</div>\n</div>"
+    }
+  },
+  "button": {
+    "title": "Button",
+    "description": "Versatile action element with multiple variants, sizes, loading states, and icon support.",
+    "category": "Inputs",
+    "tags": [
+      "button",
+      "action",
+      "cta",
+      "submit",
+      "loading"
+    ],
+    "variants": 10,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Button } from '@sriio/ui'",
+    "code": {
+      "react": "import { Button } from '@sriio/ui'\n\ndefault function ButtonDemo() {\n  return (\n    <div className=\"flex flex-col gap-6\">\n      {/* Variants */}\n      <div className=\"flex flex-wrap gap-3\">\n        <Button variant=\"primary\">Primary</Button>\n        <Button variant=\"secondary\">Secondary</Button>\n        <Button variant=\"outline\">Outline</Button>\n        <Button variant=\"ghost\">Ghost</Button>\n        <Button variant=\"danger\">Danger</Button>\n        <Button variant=\"link\">Link</Button>\n      </div>\n\n      {/* Sizes */}\n      <div className=\"flex flex-wrap items-center gap-3\">\n        <Button size=\"xs\">Extra Small</Button>\n        <Button size=\"sm\">Small</Button>\n        <Button size=\"md\">Medium</Button>\n        <Button size=\"lg\">Large</Button>\n      </div>\n\n      {/* States */}\n      <div className=\"flex flex-wrap gap-3\">\n        <Button variant=\"primary\" loading>Saving...</Button>\n        <Button variant=\"primary\" disabled>Disabled</Button>\n        <Button variant=\"primary\" leftIcon=\"✚\">Add Item</Button>\n        <Button variant=\"outline\" fullWidth>Full Width</Button>\n      </div>\n    </div>\n  )\n}",
+      "typescript": "import { ButtonHTMLAttributes, ReactNode } from 'react'\n\ntype ButtonVariant =\n  | 'primary'\n  | 'secondary'\n  | 'outline'\n  | 'ghost'\n  | 'danger'\n  | 'success'\n  | 'link'\n\ntype ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'\n\ninterface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {\n  variant?: ButtonVariant\n  size?: ButtonSize\n  loading?: boolean\n  fullWidth?: boolean\n  leftIcon?: ReactNode\n  rightIcon?: ReactNode\n  rounded?: boolean\n}",
+      "tailwind": "<!-- Button variants -->\n<div class=\"flex flex-wrap gap-3\">\n  <button class=\"inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50\">Primary</button>\n  <button class=\"inline-flex items-center justify-center rounded-md bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2\">Secondary</button>\n  <button class=\"inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2\">Outline</button>\n  <button class=\"inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2\">Ghost</button>\n  <button class=\"inline-flex items-center justify-center rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2\">Danger</button>\n</div>\n\n<!-- Loading button -->\n<button disabled class=\"inline-flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white opacity-75\">\n  <svg class=\"h-4 w-4 animate-spin\" fill=\"none\" viewBox=\"0 0 24 24\">\n    <circle class=\"opacity-25\" cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"4\"></circle>\n    <path class=\"opacity-75\" fill=\"currentColor\" d=\"M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z\"></path>\n  </svg>\n  Saving...\n</button>"
+    }
+  },
+  "spinner": {
+    "title": "Spinner",
+    "description": "Loading state indicators including spinning circles, animated dots, and skeleton placeholders.",
+    "category": "Feedback",
+    "tags": [
+      "spinner",
+      "loading",
+      "skeleton",
+      "dots",
+      "placeholder"
+    ],
+    "variants": 5,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Spinner, Dots, Skeleton } from '@sriio/ui'",
+    "code": {
+      "react": "import { Spinner, Dots, Skeleton } from '@sriio/ui'\n\ndefault function SpinnerDemo() {\n  return (\n    <div className=\"flex flex-col gap-8\">\n      {/* Spinners */}\n      <div className=\"flex items-center gap-6\">\n        <Spinner size=\"sm\" />\n        <Spinner size=\"md\" color=\"primary\" />\n        <Spinner size=\"lg\" color=\"success\" />\n        <Spinner size=\"xl\" color=\"danger\" />\n      </div>\n\n      {/* Dots */}\n      <div className=\"flex items-center gap-6\">\n        <Dots size=\"sm\" />\n        <Dots size=\"md\" color=\"primary\" />\n        <Dots size=\"lg\" />\n      </div>\n\n      {/* Skeleton placeholders */}\n      <div className=\"w-80 space-y-3\">\n        <Skeleton className=\"h-4 w-3/4\" />\n        <Skeleton className=\"h-4 w-full\" />\n        <Skeleton className=\"h-4 w-1/2\" />\n        <div className=\"flex items-center gap-3 pt-2\">\n          <Skeleton className=\"h-10 w-10 rounded-full\" />\n          <div className=\"flex-1 space-y-2\">\n            <Skeleton className=\"h-3 w-3/4\" />\n            <Skeleton className=\"h-3 w-1/2\" />\n          </div>\n        </div>\n      </div>\n    </div>\n  )\n}",
+      "typescript": "type SpinnerSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'\ntype SpinnerColor = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'white'\n\ninterface SpinnerProps {\n  size?: SpinnerSize\n  color?: SpinnerColor\n  label?: string\n  className?: string\n}\n\ninterface DotsProps {\n  size?: SpinnerSize\n  color?: SpinnerColor\n  className?: string\n}\n\ninterface SkeletonProps {\n  className?: string\n  animate?: boolean\n  rounded?: boolean | string\n}",
+      "tailwind": "<!-- Spinner -->\n<svg class=\"h-6 w-6 animate-spin text-blue-600\" fill=\"none\" viewBox=\"0 0 24 24\">\n  <circle class=\"opacity-25\" cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"4\"></circle>\n  <path class=\"opacity-75\" fill=\"currentColor\" d=\"M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z\"></path>\n</svg>\n\n<!-- Dots -->\n<div class=\"flex items-center gap-1\">\n  <span class=\"h-2 w-2 animate-bounce rounded-full bg-blue-600 [animation-delay:-0.3s]\"></span>\n  <span class=\"h-2 w-2 animate-bounce rounded-full bg-blue-600 [animation-delay:-0.15s]\"></span>\n  <span class=\"h-2 w-2 animate-bounce rounded-full bg-blue-600\"></span>\n</div>\n\n<!-- Skeleton -->\n<div class=\"w-80 space-y-3\">\n  <div class=\"h-4 w-3/4 animate-pulse rounded bg-gray-200\"></div>\n  <div class=\"h-4 w-full animate-pulse rounded bg-gray-200\"></div>\n  <div class=\"h-4 w-1/2 animate-pulse rounded bg-gray-200\"></div>\n  <div class=\"flex items-center gap-3 pt-2\">\n    <div class=\"h-10 w-10 animate-pulse rounded-full bg-gray-200\"></div>\n    <div class=\"flex-1 space-y-2\">\n      <div class=\"h-3 w-3/4 animate-pulse rounded bg-gray-200\"></div>\n      <div class=\"h-3 w-1/2 animate-pulse rounded bg-gray-200\"></div>\n    </div>\n  </div>\n</div>"
+    }
+  },
+  "input": {
+    "title": "Input",
+    "description": "Text input fields and multiline textarea with label, helper text, error states, and icon slots.",
+    "category": "Inputs",
+    "tags": [
+      "input",
+      "text",
+      "form",
+      "textarea",
+      "field"
+    ],
+    "variants": 7,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Input, Textarea } from '@sriio/ui'",
+    "code": {
+      "react": "import { useState } from 'react'\nimport { Input, Textarea } from '@sriio/ui'\n\ndefault function InputDemo() {\n  const [email, setEmail] = useState('')\n  const [bio, setBio] = useState('')\n\n  return (\n    <div className=\"w-full max-w-md space-y-5\">\n      <Input\n        label=\"Full Name\"\n        placeholder=\"Jane Doe\"\n        leftIcon=\"👤\"\n      />\n      <Input\n        label=\"Email Address\"\n        type=\"email\"\n        value={email}\n        onChange={e => setEmail(e.target.value)}\n        placeholder=\"jane@example.com\"\n        helperText=\"We'll never share your email.\"\n      />\n      <Input\n        label=\"Password\"\n        type=\"password\"\n        placeholder=\"Min. 8 characters\"\n        error=\"Password must be at least 8 characters\"\n      />\n      <Input\n        label=\"Username\"\n        placeholder=\"cooluser\"\n        disabled\n        helperText=\"Username cannot be changed.\"\n      />\n      <Textarea\n        label=\"Bio\"\n        value={bio}\n        onChange={e => setBio(e.target.value)}\n        placeholder=\"Tell us about yourself...\"\n        rows={4}\n        maxLength={200}\n        showCount\n      />\n    </div>\n  )\n}",
+      "typescript": "import { InputHTMLAttributes, TextareaHTMLAttributes } from 'react'\n\ninterface InputProps extends InputHTMLAttributes<HTMLInputElement> {\n  label?: string\n  helperText?: string\n  error?: string\n  leftIcon?: React.ReactNode\n  rightIcon?: React.ReactNode\n  size?: 'sm' | 'md' | 'lg'\n  variant?: 'outline' | 'filled' | 'flushed'\n  fullWidth?: boolean\n}\n\ninterface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {\n  label?: string\n  helperText?: string\n  error?: string\n  rows?: number\n  maxLength?: number\n  showCount?: boolean\n  resize?: 'none' | 'vertical' | 'horizontal' | 'both'\n  fullWidth?: boolean\n}",
+      "tailwind": "<!-- Input with label -->\n<div class=\"flex flex-col gap-1.5\">\n  <label class=\"text-sm font-medium text-gray-700\">Email Address</label>\n  <div class=\"relative\">\n    <input\n      type=\"email\"\n      placeholder=\"jane@example.com\"\n      class=\"w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500\"\n    />\n  </div>\n  <p class=\"text-xs text-gray-500\">We'll never share your email.</p>\n</div>\n\n<!-- Input with error -->\n<div class=\"flex flex-col gap-1.5\">\n  <label class=\"text-sm font-medium text-gray-700\">Password</label>\n  <input\n    type=\"password\"\n    class=\"w-full rounded-md border border-red-400 bg-white px-3 py-2 text-sm shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500\"\n  />\n  <p class=\"text-xs text-red-500\">Password must be at least 8 characters</p>\n</div>\n\n<!-- Textarea -->\n<div class=\"flex flex-col gap-1.5\">\n  <label class=\"text-sm font-medium text-gray-700\">Bio</label>\n  <textarea rows=\"4\" placeholder=\"Tell us about yourself...\" class=\"w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-vertical\"></textarea>\n</div>"
+    }
+  },
+  "search": {
+    "title": "Search",
+    "description": "Instant search input with optional suggestions dropdown, keyboard navigation, and clear button.",
+    "category": "Inputs",
+    "tags": [
+      "search",
+      "filter",
+      "find",
+      "autocomplete",
+      "lookup"
+    ],
+    "variants": 4,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Search } from '@sriio/ui'",
+    "code": {
+      "react": "import { useState } from 'react'\nimport { Search } from '@sriio/ui'\n\nconst suggestions = [\n  'React components',\n  'Tailwind CSS',\n  'TypeScript types',\n  'API documentation',\n  'Getting started',\n]\n\ndefault function SearchDemo() {\n  const [query, setQuery] = useState('')\n  const [results, setResults] = useState<string[]>([])\n\n  const handleSearch = (value: string) => {\n    setQuery(value)\n    setResults(\n      value\n        ? suggestions.filter(s =>\n            s.toLowerCase().includes(value.toLowerCase())\n          )\n        : []\n    )\n  }\n\n  return (\n    <div className=\"w-full max-w-md space-y-4\">\n      <Search\n        value={query}\n        onChange={handleSearch}\n        placeholder=\"Search documentation...\"\n        suggestions={results}\n        onSelect={val => setQuery(val)}\n        onClear={() => { setQuery(''); setResults([]) }}\n        loading={false}\n        size=\"md\"\n      />\n    </div>\n  )\n}",
+      "typescript": "interface SearchProps {\n  value?: string\n  onChange?: (value: string) => void\n  onSearch?: (value: string) => void\n  onSelect?: (value: string) => void\n  onClear?: () => void\n  placeholder?: string\n  suggestions?: string[]\n  loading?: boolean\n  disabled?: boolean\n  size?: 'sm' | 'md' | 'lg'\n  variant?: 'outline' | 'filled'\n  debounce?: number\n  className?: string\n}",
+      "tailwind": "<!-- Search input -->\n<div class=\"relative w-full max-w-md\">\n  <div class=\"pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3\">\n    <svg class=\"h-4 w-4 text-gray-400\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n      <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z\" />\n    </svg>\n  </div>\n  <input\n    type=\"search\"\n    placeholder=\"Search...\"\n    class=\"w-full rounded-lg border border-gray-300 bg-white py-2 pl-10 pr-10 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500\"\n  />\n  <button class=\"absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600\">\n    <svg class=\"h-4 w-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n      <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M6 18L18 6M6 6l12 12\" />\n    </svg>\n  </button>\n</div>\n\n<!-- Suggestions dropdown -->\n<div class=\"mt-1 w-full rounded-lg border border-gray-200 bg-white shadow-lg\">\n  <ul class=\"py-1\">\n    <li class=\"cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700\">React components</li>\n    <li class=\"cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700\">Tailwind CSS</li>\n    <li class=\"cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700\">TypeScript types</li>\n  </ul>\n</div>"
+    }
+  },
+  "dropdown": {
+    "title": "Dropdown",
+    "description": "Contextual menu with support for items, sections, icons, keyboard navigation, and nested menus.",
+    "category": "Navigation",
+    "tags": [
+      "dropdown",
+      "menu",
+      "select",
+      "context",
+      "actions"
+    ],
+    "variants": 5,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Dropdown } from '@sriio/ui'",
+    "code": {
+      "react": "import { Dropdown } from '@sriio/ui'\n\ndefault function DropdownDemo() {\n  return (\n    <div className=\"flex items-center gap-4\">\n      <Dropdown\n        trigger={<button className=\"rounded-md bg-blue-600 px-4 py-2 text-sm text-white\">Actions ▾</button>}\n        items={[\n          {\n            section: 'Account',\n            items: [\n              { label: 'Profile', icon: '👤', onClick: () => console.log('profile') },\n              { label: 'Settings', icon: '⚙️', onClick: () => console.log('settings') },\n            ],\n          },\n          {\n            section: 'Danger Zone',\n            items: [\n              { label: 'Delete Account', icon: '🗑️', variant: 'danger', onClick: () => console.log('delete') },\n            ],\n          },\n        ]}\n        placement=\"bottom-start\"\n      />\n\n      <Dropdown\n        trigger={<button className=\"rounded-md border px-3 py-2 text-sm\">Sort by ▾</button>}\n        items={[\n          { label: 'Newest first', onClick: () => {} },\n          { label: 'Oldest first', onClick: () => {} },\n          { label: 'Alphabetical', onClick: () => {} },\n        ]}\n      />\n    </div>\n  )\n}",
+      "typescript": "type DropdownPlacement =\n  | 'bottom-start'\n  | 'bottom-end'\n  | 'bottom'\n  | 'top-start'\n  | 'top-end'\n  | 'top'\n\ninterface DropdownItem {\n  label: string\n  icon?: React.ReactNode\n  onClick?: () => void\n  href?: string\n  disabled?: boolean\n  variant?: 'default' | 'danger'\n  shortcut?: string\n}\n\ninterface DropdownSection {\n  section?: string\n  items: DropdownItem[]\n}\n\ninterface DropdownProps {\n  trigger: React.ReactNode\n  items: (DropdownItem | DropdownSection)[]\n  placement?: DropdownPlacement\n  width?: number | 'trigger' | 'auto'\n  closeOnSelect?: boolean\n  disabled?: boolean\n}",
+      "tailwind": "<!-- Dropdown trigger + menu -->\n<div class=\"relative inline-block text-left\">\n  <button class=\"inline-flex items-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500\">\n    Options\n    <svg class=\"h-4 w-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n      <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 9l-7 7-7-7\" />\n    </svg>\n  </button>\n\n  <!-- Dropdown panel -->\n  <div class=\"absolute left-0 z-10 mt-1 w-48 rounded-md border border-gray-200 bg-white shadow-lg\">\n    <div class=\"py-1\">\n      <p class=\"px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-400\">Account</p>\n      <a href=\"#\" class=\"flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50\">👤 Profile</a>\n      <a href=\"#\" class=\"flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50\">⚙️ Settings</a>\n      <hr class=\"my-1 border-gray-100\" />\n      <button class=\"flex w-full items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50\">🗑️ Delete Account</button>\n    </div>\n  </div>\n</div>"
+    }
+  },
+  "radio": {
+    "title": "RadioGroup",
+    "description": "Single-selection radio button group with horizontal/vertical layouts, descriptions, and card variants.",
+    "category": "Inputs",
+    "tags": [
+      "radio",
+      "select",
+      "choice",
+      "form",
+      "option"
+    ],
+    "variants": 4,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { RadioGroup } from '@sriio/ui'",
+    "code": {
+      "react": "import { useState } from 'react'\nimport { RadioGroup } from '@sriio/ui'\n\nconst plans = [\n  { value: 'free', label: 'Free', description: 'Perfect for hobby projects' },\n  { value: 'pro', label: 'Pro', description: '$9/mo · Unlimited projects' },\n  { value: 'team', label: 'Team', description: '$29/mo · Up to 10 members' },\n  { value: 'enterprise', label: 'Enterprise', description: 'Custom pricing', disabled: true },\n]\n\ndefault function RadioGroupDemo() {\n  const [plan, setPlan] = useState('free')\n  const [size, setSize] = useState('md')\n\n  return (\n    <div className=\"space-y-8\">\n      <RadioGroup\n        label=\"Select a plan\"\n        value={plan}\n        onChange={setPlan}\n        options={plans}\n        orientation=\"vertical\"\n      />\n\n      <RadioGroup\n        label=\"Size\"\n        value={size}\n        onChange={setSize}\n        options={[\n          { value: 'sm', label: 'Small' },\n          { value: 'md', label: 'Medium' },\n          { value: 'lg', label: 'Large' },\n        ]}\n        orientation=\"horizontal\"\n        variant=\"card\"\n      />\n    </div>\n  )\n}",
+      "typescript": "interface RadioOption {\n  value: string\n  label: string\n  description?: string\n  icon?: React.ReactNode\n  disabled?: boolean\n}\n\ninterface RadioGroupProps {\n  label?: string\n  value: string\n  onChange: (value: string) => void\n  options: RadioOption[]\n  orientation?: 'horizontal' | 'vertical'\n  variant?: 'default' | 'card' | 'button'\n  size?: 'sm' | 'md' | 'lg'\n  error?: string\n  helperText?: string\n  name?: string\n  className?: string\n}",
+      "tailwind": "<!-- Radio group vertical -->\n<fieldset>\n  <legend class=\"mb-3 text-sm font-medium text-gray-700\">Select a plan</legend>\n  <div class=\"space-y-2\">\n    <label class=\"flex cursor-pointer items-start gap-3 rounded-lg border border-blue-500 bg-blue-50 p-3\">\n      <input type=\"radio\" name=\"plan\" value=\"free\" checked class=\"mt-0.5 h-4 w-4 text-blue-600\" />\n      <div>\n        <span class=\"block text-sm font-medium text-gray-900\">Free</span>\n        <span class=\"text-xs text-gray-500\">Perfect for hobby projects</span>\n      </div>\n    </label>\n    <label class=\"flex cursor-pointer items-start gap-3 rounded-lg border border-gray-200 p-3 hover:bg-gray-50\">\n      <input type=\"radio\" name=\"plan\" value=\"pro\" class=\"mt-0.5 h-4 w-4 text-blue-600\" />\n      <div>\n        <span class=\"block text-sm font-medium text-gray-900\">Pro</span>\n        <span class=\"text-xs text-gray-500\">$9/mo · Unlimited projects</span>\n      </div>\n    </label>\n    <label class=\"flex cursor-pointer items-start gap-3 rounded-lg border border-gray-200 p-3 opacity-50 cursor-not-allowed\">\n      <input type=\"radio\" name=\"plan\" value=\"enterprise\" disabled class=\"mt-0.5 h-4 w-4 text-blue-600\" />\n      <div>\n        <span class=\"block text-sm font-medium text-gray-900\">Enterprise</span>\n        <span class=\"text-xs text-gray-500\">Custom pricing</span>\n      </div>\n    </label>\n  </div>\n</fieldset>"
+    }
+  },
+  "checkbox": {
+    "title": "Checkbox & Toggle",
+    "description": "Checkbox for multi-selection with indeterminate support, and Toggle for boolean on/off states.",
+    "category": "Inputs",
+    "tags": [
+      "checkbox",
+      "toggle",
+      "switch",
+      "form",
+      "boolean"
+    ],
+    "variants": 5,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Checkbox, Toggle } from '@sriio/ui'",
+    "code": {
+      "react": "import { useState } from 'react'\nimport { Checkbox, Toggle } from '@sriio/ui'\n\ndefault function CheckboxDemo() {\n  const [items, setItems] = useState([\n    { id: 1, label: 'Send email notifications', checked: true },\n    { id: 2, label: 'Enable two-factor auth', checked: false },\n    { id: 3, label: 'Public profile', checked: false },\n  ])\n  const [darkMode, setDarkMode] = useState(false)\n  const [newsletter, setNewsletter] = useState(true)\n\n  const toggle = (id: number) =>\n    setItems(prev => prev.map(i => i.id === id ? { ...i, checked: !i.checked } : i))\n\n  return (\n    <div className=\"space-y-6\">\n      <div className=\"space-y-3\">\n        {items.map(item => (\n          <Checkbox\n            key={item.id}\n            checked={item.checked}\n            onChange={() => toggle(item.id)}\n            label={item.label}\n          />\n        ))}\n        <Checkbox label=\"Disabled option\" disabled />\n      </div>\n\n      <div className=\"space-y-4\">\n        <Toggle\n          checked={darkMode}\n          onChange={setDarkMode}\n          label=\"Dark mode\"\n          size=\"md\"\n        />\n        <Toggle\n          checked={newsletter}\n          onChange={setNewsletter}\n          label=\"Newsletter\"\n          helperText=\"Receive weekly updates\"\n          size=\"sm\"\n        />\n      </div>\n    </div>\n  )\n}",
+      "typescript": "import { InputHTMLAttributes } from 'react'\n\ninterface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {\n  label?: string\n  description?: string\n  checked?: boolean\n  indeterminate?: boolean\n  onChange?: (checked: boolean) => void\n  size?: 'sm' | 'md' | 'lg'\n  error?: string\n}\n\ninterface ToggleProps {\n  checked: boolean\n  onChange: (checked: boolean) => void\n  label?: string\n  helperText?: string\n  size?: 'sm' | 'md' | 'lg'\n  disabled?: boolean\n  color?: 'primary' | 'success' | 'warning' | 'danger'\n  className?: string\n}",
+      "tailwind": "<!-- Checkbox -->\n<label class=\"flex cursor-pointer items-center gap-3\">\n  <input type=\"checkbox\" checked class=\"h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500\" />\n  <span class=\"text-sm text-gray-700\">Send email notifications</span>\n</label>\n\n<!-- Toggle / Switch -->\n<label class=\"flex cursor-pointer items-center gap-3\">\n  <div class=\"relative\">\n    <input type=\"checkbox\" class=\"sr-only peer\" checked />\n    <div class=\"h-6 w-11 rounded-full bg-gray-200 peer-checked:bg-blue-600 peer-focus:ring-2 peer-focus:ring-blue-500 peer-focus:ring-offset-2 transition-colors\"></div>\n    <div class=\"absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform peer-checked:translate-x-5\"></div>\n  </div>\n  <div>\n    <span class=\"block text-sm font-medium text-gray-700\">Dark mode</span>\n    <span class=\"text-xs text-gray-500\">Toggle dark color scheme</span>\n  </div>\n</label>"
+    }
+  },
+  "alert": {
+    "title": "Alert",
+    "description": "Contextual notification banners for success, error, warning, and info messages with optional actions.",
+    "category": "Feedback",
+    "tags": [
+      "alert",
+      "notification",
+      "banner",
+      "message",
+      "status"
+    ],
+    "variants": 6,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Alert } from '@sriio/ui'",
+    "code": {
+      "react": "import { useState } from 'react'\nimport { Alert } from '@sriio/ui'\n\ndefault function AlertDemo() {\n  const [dismissed, setDismissed] = useState<string[]>([])\n  const dismiss = (id: string) => setDismissed(prev => [...prev, id])\n\n  return (\n    <div className=\"w-full max-w-xl space-y-3\">\n      {!dismissed.includes('info') && (\n        <Alert\n          variant=\"info\"\n          title=\"Update available\"\n          description=\"A new version of SRIIO UI is available. Run npm update @sriio/ui to upgrade.\"\n          onDismiss={() => dismiss('info')}\n        />\n      )}\n      <Alert\n        variant=\"success\"\n        title=\"Payment successful\"\n        description=\"Your subscription has been activated. Enjoy all Pro features!\"\n      />\n      <Alert\n        variant=\"warning\"\n        title=\"Trial ending soon\"\n        description=\"Your free trial expires in 3 days.\"\n        action={{ label: 'Upgrade now', onClick: () => console.log('upgrade') }}\n      />\n      <Alert\n        variant=\"danger\"\n        title=\"Deployment failed\"\n        description=\"Build error in src/index.ts at line 42.\"\n        onDismiss={() => {}}\n      />\n    </div>\n  )\n}",
+      "typescript": "interface AlertAction {\n  label: string\n  onClick: () => void\n}\n\ntype AlertVariant = 'info' | 'success' | 'warning' | 'danger' | 'default'\n\ninterface AlertProps {\n  variant?: AlertVariant\n  title?: string\n  description?: string\n  icon?: React.ReactNode\n  action?: AlertAction\n  onDismiss?: () => void\n  dismissible?: boolean\n  className?: string\n}",
+      "tailwind": "<!-- Info alert -->\n<div class=\"flex gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4\">\n  <span class=\"text-blue-500 mt-0.5\">ℹ️</span>\n  <div class=\"flex-1\">\n    <p class=\"text-sm font-medium text-blue-800\">Update available</p>\n    <p class=\"mt-1 text-sm text-blue-700\">A new version is ready to install.</p>\n  </div>\n  <button class=\"text-blue-400 hover:text-blue-600\">✕</button>\n</div>\n\n<!-- Success alert -->\n<div class=\"flex gap-3 rounded-lg border border-green-200 bg-green-50 p-4\">\n  <span class=\"text-green-500 mt-0.5\">✅</span>\n  <div class=\"flex-1\">\n    <p class=\"text-sm font-medium text-green-800\">Payment successful</p>\n    <p class=\"mt-1 text-sm text-green-700\">Your subscription is now active.</p>\n  </div>\n</div>\n\n<!-- Warning alert with action -->\n<div class=\"flex gap-3 rounded-lg border border-yellow-200 bg-yellow-50 p-4\">\n  <span class=\"text-yellow-500 mt-0.5\">⚠️</span>\n  <div class=\"flex-1\">\n    <p class=\"text-sm font-medium text-yellow-800\">Trial ending soon</p>\n    <p class=\"mt-1 text-sm text-yellow-700\">Your trial expires in 3 days.</p>\n    <button class=\"mt-2 text-sm font-medium text-yellow-800 underline hover:text-yellow-900\">Upgrade now →</button>\n  </div>\n</div>"
+    }
+  },
+  "toast": {
+    "title": "Toast",
+    "description": "Ephemeral notification toasts with auto-dismiss, queue support, and action buttons.",
+    "category": "Feedback",
+    "tags": [
+      "toast",
+      "notification",
+      "snackbar",
+      "message",
+      "ephemeral"
+    ],
+    "variants": 5,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { ToastProvider, useToast } from '@sriio/ui'",
+    "code": {
+      "react": "import { ToastProvider, useToast } from '@sriio/ui'\n\nfunction ToastTriggers() {\n  const toast = useToast()\n\n  return (\n    <div className=\"flex flex-wrap gap-3\">\n      <button\n        onClick={() => toast.success('Profile saved successfully!')}\n        className=\"rounded-md bg-green-600 px-4 py-2 text-sm text-white\"\n      >\n        Success Toast\n      </button>\n      <button\n        onClick={() => toast.error('Failed to connect. Please retry.')}\n        className=\"rounded-md bg-red-600 px-4 py-2 text-sm text-white\"\n      >\n        Error Toast\n      </button>\n      <button\n        onClick={() => toast.warning('Storage almost full (90%)', { duration: 6000 })}\n        className=\"rounded-md bg-yellow-500 px-4 py-2 text-sm text-white\"\n      >\n        Warning Toast\n      </button>\n      <button\n        onClick={() => toast.info('New message from Alice', {\n          action: { label: 'View', onClick: () => console.log('view') },\n        })}\n        className=\"rounded-md bg-blue-600 px-4 py-2 text-sm text-white\"\n      >\n        Info with Action\n      </button>\n    </div>\n  )\n}\n\ndefault function ToastDemo() {\n  return (\n    <ToastProvider position=\"bottom-right\" maxToasts={5}>\n      <ToastTriggers />\n    </ToastProvider>\n  )\n}",
+      "typescript": "type ToastVariant = 'default' | 'success' | 'error' | 'warning' | 'info'\ntype ToastPosition =\n  | 'top-left' | 'top-center' | 'top-right'\n  | 'bottom-left' | 'bottom-center' | 'bottom-right'\n\ninterface ToastOptions {\n  duration?: number\n  action?: { label: string; onClick: () => void }\n  icon?: React.ReactNode\n  onDismiss?: () => void\n}\n\ninterface ToastProviderProps {\n  position?: ToastPosition\n  maxToasts?: number\n  children: React.ReactNode\n}\n\ninterface UseToast {\n  success: (message: string, options?: ToastOptions) => void\n  error: (message: string, options?: ToastOptions) => void\n  warning: (message: string, options?: ToastOptions) => void\n  info: (message: string, options?: ToastOptions) => void\n  dismiss: (id: string) => void\n  dismissAll: () => void\n}",
+      "tailwind": "<!-- Toast notification (positioned fixed) -->\n<div class=\"fixed bottom-4 right-4 z-50 flex flex-col gap-2\">\n\n  <!-- Success toast -->\n  <div class=\"flex w-80 items-start gap-3 rounded-lg bg-white p-4 shadow-lg ring-1 ring-black/5\">\n    <span class=\"mt-0.5 text-green-500\">✅</span>\n    <div class=\"flex-1\">\n      <p class=\"text-sm font-medium text-gray-900\">Profile saved!</p>\n    </div>\n    <button class=\"text-gray-400 hover:text-gray-600\">✕</button>\n  </div>\n\n  <!-- Error toast with action -->\n  <div class=\"flex w-80 items-start gap-3 rounded-lg bg-white p-4 shadow-lg ring-1 ring-black/5\">\n    <span class=\"mt-0.5 text-red-500\">❌</span>\n    <div class=\"flex-1\">\n      <p class=\"text-sm font-medium text-gray-900\">Connection failed</p>\n      <button class=\"mt-1 text-xs font-medium text-blue-600 hover:underline\">Retry</button>\n    </div>\n    <button class=\"text-gray-400 hover:text-gray-600\">✕</button>\n  </div>\n\n</div>"
+    }
+  },
+  "progress": {
+    "title": "Progress",
+    "description": "Linear progress bar and circular progress ring for tracking task completion and loading states.",
+    "category": "Feedback",
+    "tags": [
+      "progress",
+      "loading",
+      "bar",
+      "circle",
+      "completion"
+    ],
+    "variants": 6,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { ProgressBar, ProgressCircle } from '@sriio/ui'",
+    "code": {
+      "react": "import { ProgressBar, ProgressCircle } from '@sriio/ui'\n\ndefault function ProgressDemo() {\n  return (\n    <div className=\"space-y-8\">\n      {/* Progress bars */}\n      <div className=\"w-full max-w-md space-y-4\">\n        <ProgressBar value={25} label=\"Uploading...\" showValue />\n        <ProgressBar value={60} color=\"success\" label=\"Processing\" showValue />\n        <ProgressBar value={85} color=\"warning\" size=\"lg\" />\n        <ProgressBar value={100} color=\"primary\" label=\"Complete!\" showValue />\n        <ProgressBar indeterminate label=\"Loading...\" />\n      </div>\n\n      {/* Progress circles */}\n      <div className=\"flex items-center gap-8\">\n        <ProgressCircle value={25} size={80} />\n        <ProgressCircle value={65} size={100} color=\"success\" showValue />\n        <ProgressCircle value={90} size={120} color=\"warning\" showValue label=\"Storage\" />\n        <ProgressCircle indeterminate size={60} />\n      </div>\n    </div>\n  )\n}",
+      "typescript": "type ProgressColor = 'primary' | 'success' | 'warning' | 'danger' | 'default'\ntype ProgressSize = 'xs' | 'sm' | 'md' | 'lg'\n\ninterface ProgressBarProps {\n  value?: number\n  min?: number\n  max?: number\n  color?: ProgressColor\n  size?: ProgressSize\n  label?: string\n  showValue?: boolean\n  indeterminate?: boolean\n  animate?: boolean\n  className?: string\n}\n\ninterface ProgressCircleProps {\n  value?: number\n  min?: number\n  max?: number\n  size?: number\n  strokeWidth?: number\n  color?: ProgressColor\n  showValue?: boolean\n  label?: string\n  indeterminate?: boolean\n  className?: string\n}",
+      "tailwind": "<!-- Progress bar -->\n<div class=\"w-full\">\n  <div class=\"mb-1 flex items-center justify-between\">\n    <span class=\"text-sm font-medium text-gray-700\">Uploading...</span>\n    <span class=\"text-sm text-gray-500\">60%</span>\n  </div>\n  <div class=\"h-2 w-full overflow-hidden rounded-full bg-gray-200\">\n    <div class=\"h-full w-[60%] rounded-full bg-blue-600 transition-all duration-300\"></div>\n  </div>\n</div>\n\n<!-- Indeterminate bar -->\n<div class=\"h-2 w-full overflow-hidden rounded-full bg-gray-200\">\n  <div class=\"h-full w-1/3 animate-[slide_1.5s_ease-in-out_infinite] rounded-full bg-blue-600\"></div>\n</div>\n\n<!-- Progress circle (SVG) -->\n<div class=\"relative inline-flex items-center justify-center\">\n  <svg class=\"h-20 w-20 -rotate-90\" viewBox=\"0 0 36 36\">\n    <circle cx=\"18\" cy=\"18\" r=\"15.9\" fill=\"none\" stroke=\"#e5e7eb\" stroke-width=\"3\"></circle>\n    <circle cx=\"18\" cy=\"18\" r=\"15.9\" fill=\"none\" stroke=\"#2563eb\" stroke-width=\"3\"\n      stroke-dasharray=\"65 35\" stroke-linecap=\"round\"></circle>\n  </svg>\n  <span class=\"absolute text-sm font-semibold text-gray-900\">65%</span>\n</div>"
+    }
+  },
+  "empty-state": {
+    "title": "EmptyState",
+    "description": "Placeholder UI shown when content is absent, with illustration, message, and call-to-action support.",
+    "category": "Data Display",
+    "tags": [
+      "empty",
+      "placeholder",
+      "zero-state",
+      "blank",
+      "no-data"
+    ],
+    "variants": 4,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { EmptyState } from '@sriio/ui'",
+    "code": {
+      "react": "import { EmptyState } from '@sriio/ui'\n\ndefault function EmptyStateDemo() {\n  return (\n    <div className=\"space-y-10\">\n      <EmptyState\n        icon=\"📭\"\n        title=\"No messages yet\"\n        description=\"When you receive messages, they'll appear here.\"\n        action={{\n          label: 'Compose message',\n          onClick: () => console.log('compose'),\n        }}\n      />\n\n      <EmptyState\n        icon=\"🔍\"\n        title=\"No results found\"\n        description='We couldn't find anything matching \"dark mode toggle\". Try a different search.'\n        action={{ label: 'Clear search', onClick: () => {} }}\n        size=\"sm\"\n      />\n\n      <EmptyState\n        icon=\"📁\"\n        title=\"This folder is empty\"\n        description=\"Upload files or create a new folder to get started.\"\n        actions={[\n          { label: 'Upload files', onClick: () => {}, variant: 'primary' },\n          { label: 'New folder', onClick: () => {}, variant: 'outline' },\n        ]}\n      />\n    </div>\n  )\n}",
+      "typescript": "interface EmptyStateAction {\n  label: string\n  onClick: () => void\n  variant?: 'primary' | 'secondary' | 'outline'\n}\n\ninterface EmptyStateProps {\n  icon?: React.ReactNode\n  illustration?: React.ReactNode\n  title: string\n  description?: string\n  action?: EmptyStateAction\n  actions?: EmptyStateAction[]\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n}",
+      "tailwind": "<!-- Empty state -->\n<div class=\"flex flex-col items-center justify-center px-4 py-16 text-center\">\n  <div class=\"mb-4 text-5xl\">📭</div>\n  <h3 class=\"mb-2 text-lg font-semibold text-gray-900\">No messages yet</h3>\n  <p class=\"mb-6 max-w-sm text-sm text-gray-500\">\n    When you receive messages, they'll appear here. Start a conversation to get going.\n  </p>\n  <button class=\"inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700\">\n    Compose message\n  </button>\n</div>\n\n<!-- Small empty state -->\n<div class=\"flex flex-col items-center py-8 text-center\">\n  <div class=\"mb-3 text-3xl\">🔍</div>\n  <p class=\"text-sm font-medium text-gray-900\">No results found</p>\n  <p class=\"mt-1 text-xs text-gray-500\">Try a different search term</p>\n  <button class=\"mt-3 text-xs font-medium text-blue-600 hover:underline\">Clear search</button>\n</div>"
+    }
+  },
+  "tooltip": {
+    "title": "Tooltip",
+    "description": "Contextual floating label that appears on hover or focus, with configurable placement and delay.",
+    "category": "Overlays",
+    "tags": [
+      "tooltip",
+      "hint",
+      "popover",
+      "helper",
+      "label"
+    ],
+    "variants": 5,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Tooltip } from '@sriio/ui'",
+    "code": {
+      "react": "import { Tooltip } from '@sriio/ui'\n\ndefault function TooltipDemo() {\n  return (\n    <div className=\"flex flex-wrap items-center gap-6 p-8\">\n      <Tooltip content=\"This is a default tooltip\" placement=\"top\">\n        <button className=\"rounded-md border px-3 py-2 text-sm\">Top</button>\n      </Tooltip>\n\n      <Tooltip content=\"Appears on the right side\" placement=\"right\">\n        <button className=\"rounded-md border px-3 py-2 text-sm\">Right</button>\n      </Tooltip>\n\n      <Tooltip content=\"Appears below the element\" placement=\"bottom\">\n        <button className=\"rounded-md border px-3 py-2 text-sm\">Bottom</button>\n      </Tooltip>\n\n      <Tooltip\n        content={\n          <div>\n            <p className=\"font-semibold\">Rich tooltip</p>\n            <p className=\"text-xs opacity-80\">Supports any React content</p>\n          </div>\n        }\n        placement=\"top\"\n        maxWidth={200}\n      >\n        <button className=\"rounded-md bg-blue-600 px-3 py-2 text-sm text-white\">Rich</button>\n      </Tooltip>\n\n      <Tooltip content=\"Disabled tooltip\" disabled>\n        <button className=\"rounded-md border px-3 py-2 text-sm opacity-50\" disabled>Disabled</button>\n      </Tooltip>\n    </div>\n  )\n}",
+      "typescript": "type TooltipPlacement =\n  | 'top' | 'top-start' | 'top-end'\n  | 'bottom' | 'bottom-start' | 'bottom-end'\n  | 'left' | 'left-start' | 'left-end'\n  | 'right' | 'right-start' | 'right-end'\n\ninterface TooltipProps {\n  content: React.ReactNode\n  children: React.ReactElement\n  placement?: TooltipPlacement\n  delay?: number\n  maxWidth?: number\n  disabled?: boolean\n  arrow?: boolean\n  className?: string\n}",
+      "tailwind": "<!-- Tooltip wrapper (use JS to toggle visibility) -->\n<div class=\"group relative inline-block\">\n  <button class=\"rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-700\">\n    Hover me\n  </button>\n\n  <!-- Tooltip -->\n  <div class=\"pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 opacity-0 transition-opacity group-hover:opacity-100\">\n    <div class=\"rounded-md bg-gray-900 px-2.5 py-1.5 text-xs text-white whitespace-nowrap shadow-lg\">\n      This is a tooltip\n      <!-- Arrow -->\n      <div class=\"absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-gray-900\"></div>\n    </div>\n  </div>\n</div>"
+    }
+  },
+  "modal": {
+    "title": "Modal",
+    "description": "Accessible dialog overlay with header, body, footer, focus trap, and backdrop dismiss support.",
+    "category": "Overlays",
+    "tags": [
+      "modal",
+      "dialog",
+      "overlay",
+      "popup",
+      "lightbox"
+    ],
+    "variants": 5,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Modal } from '@sriio/ui'",
+    "code": {
+      "react": "import { useState } from 'react'\nimport { Modal } from '@sriio/ui'\n\ndefault function ModalDemo() {\n  const [isOpen, setIsOpen] = useState(false)\n  const [confirmOpen, setConfirmOpen] = useState(false)\n\n  return (\n    <div className=\"flex gap-3\">\n      <button\n        onClick={() => setIsOpen(true)}\n        className=\"rounded-md bg-blue-600 px-4 py-2 text-sm text-white\"\n      >\n        Open Modal\n      </button>\n\n      <button\n        onClick={() => setConfirmOpen(true)}\n        className=\"rounded-md bg-red-600 px-4 py-2 text-sm text-white\"\n      >\n        Confirm Delete\n      </button>\n\n      <Modal\n        isOpen={isOpen}\n        onClose={() => setIsOpen(false)}\n        title=\"Edit Profile\"\n        size=\"md\"\n        footer={\n          <>\n            <button onClick={() => setIsOpen(false)} className=\"rounded-md border px-4 py-2 text-sm\">Cancel</button>\n            <button onClick={() => setIsOpen(false)} className=\"rounded-md bg-blue-600 px-4 py-2 text-sm text-white\">Save changes</button>\n          </>\n        }\n      >\n        <p className=\"text-sm text-gray-600\">Update your profile information below.</p>\n      </Modal>\n\n      <Modal\n        isOpen={confirmOpen}\n        onClose={() => setConfirmOpen(false)}\n        title=\"Delete Account\"\n        variant=\"danger\"\n        size=\"sm\"\n      >\n        <p className=\"text-sm text-gray-600\">Are you sure? This action cannot be undone.</p>\n      </Modal>\n    </div>\n  )\n}",
+      "typescript": "type ModalSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'\ntype ModalVariant = 'default' | 'danger'\n\ninterface ModalProps {\n  isOpen: boolean\n  onClose: () => void\n  title?: string\n  description?: string\n  children?: React.ReactNode\n  footer?: React.ReactNode\n  size?: ModalSize\n  variant?: ModalVariant\n  closeOnBackdrop?: boolean\n  closeOnEscape?: boolean\n  showCloseButton?: boolean\n  className?: string\n}",
+      "tailwind": "<!-- Modal backdrop + dialog -->\n<div class=\"fixed inset-0 z-50 flex items-center justify-center p-4\">\n  <!-- Backdrop -->\n  <div class=\"absolute inset-0 bg-black/50 backdrop-blur-sm\"></div>\n\n  <!-- Dialog -->\n  <div class=\"relative w-full max-w-md rounded-xl bg-white shadow-xl\">\n    <!-- Header -->\n    <div class=\"flex items-center justify-between border-b border-gray-200 px-6 py-4\">\n      <h2 class=\"text-lg font-semibold text-gray-900\">Edit Profile</h2>\n      <button class=\"rounded-md p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600\">✕</button>\n    </div>\n\n    <!-- Body -->\n    <div class=\"px-6 py-4\">\n      <p class=\"text-sm text-gray-600\">Update your profile information below.</p>\n    </div>\n\n    <!-- Footer -->\n    <div class=\"flex justify-end gap-3 border-t border-gray-200 px-6 py-4\">\n      <button class=\"rounded-md border border-gray-300 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50\">Cancel</button>\n      <button class=\"rounded-md bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700\">Save changes</button>\n    </div>\n  </div>\n</div>"
+    }
+  },
+  "drawer": {
+    "title": "Drawer",
+    "description": "Slide-in panel from any edge of the screen for navigation, filters, or detail views.",
+    "category": "Overlays",
+    "tags": [
+      "drawer",
+      "sidebar",
+      "panel",
+      "slide",
+      "off-canvas"
+    ],
+    "variants": 4,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Drawer } from '@sriio/ui'",
+    "code": {
+      "react": "import { useState } from 'react'\nimport { Drawer } from '@sriio/ui'\n\ndefault function DrawerDemo() {\n  const [rightOpen, setRightOpen] = useState(false)\n  const [leftOpen, setLeftOpen] = useState(false)\n\n  return (\n    <div className=\"flex gap-3\">\n      <button\n        onClick={() => setRightOpen(true)}\n        className=\"rounded-md bg-blue-600 px-4 py-2 text-sm text-white\"\n      >\n        Open Right Drawer\n      </button>\n      <button\n        onClick={() => setLeftOpen(true)}\n        className=\"rounded-md border px-4 py-2 text-sm\"\n      >\n        Open Left Drawer\n      </button>\n\n      <Drawer\n        isOpen={rightOpen}\n        onClose={() => setRightOpen(false)}\n        title=\"Notifications\"\n        placement=\"right\"\n        size=\"md\"\n      >\n        <div className=\"space-y-4 p-4\">\n          <p className=\"text-sm text-gray-600\">You have 3 new notifications.</p>\n          <div className=\"rounded-lg border p-3 text-sm\">🔔 Alice commented on your post</div>\n          <div className=\"rounded-lg border p-3 text-sm\">✅ Deployment succeeded</div>\n          <div className=\"rounded-lg border p-3 text-sm\">📧 New message from support</div>\n        </div>\n      </Drawer>\n\n      <Drawer\n        isOpen={leftOpen}\n        onClose={() => setLeftOpen(false)}\n        title=\"Filters\"\n        placement=\"left\"\n        size=\"sm\"\n      >\n        <p className=\"p-4 text-sm text-gray-600\">Filter options go here.</p>\n      </Drawer>\n    </div>\n  )\n}",
+      "typescript": "type DrawerPlacement = 'left' | 'right' | 'top' | 'bottom'\ntype DrawerSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'\n\ninterface DrawerProps {\n  isOpen: boolean\n  onClose: () => void\n  title?: string\n  description?: string\n  children?: React.ReactNode\n  footer?: React.ReactNode\n  placement?: DrawerPlacement\n  size?: DrawerSize\n  closeOnBackdrop?: boolean\n  closeOnEscape?: boolean\n  showCloseButton?: boolean\n  className?: string\n}",
+      "tailwind": "<!-- Right drawer -->\n<div class=\"fixed inset-0 z-50 flex justify-end\">\n  <!-- Backdrop -->\n  <div class=\"absolute inset-0 bg-black/40\" onclick=\"closeDrawer()\"></div>\n\n  <!-- Panel -->\n  <div class=\"relative flex h-full w-80 flex-col bg-white shadow-xl\">\n    <!-- Header -->\n    <div class=\"flex items-center justify-between border-b border-gray-200 px-4 py-4\">\n      <h2 class=\"text-lg font-semibold text-gray-900\">Notifications</h2>\n      <button class=\"rounded p-1 text-gray-400 hover:bg-gray-100\">✕</button>\n    </div>\n\n    <!-- Scrollable body -->\n    <div class=\"flex-1 overflow-y-auto p-4 space-y-3\">\n      <div class=\"rounded-lg border border-gray-200 p-3 text-sm text-gray-700\">🔔 Alice commented on your post</div>\n      <div class=\"rounded-lg border border-gray-200 p-3 text-sm text-gray-700\">✅ Deployment succeeded</div>\n    </div>\n\n    <!-- Footer -->\n    <div class=\"border-t border-gray-200 px-4 py-3\">\n      <button class=\"w-full rounded-md bg-gray-100 px-4 py-2 text-sm text-gray-700 hover:bg-gray-200\">Mark all as read</button>\n    </div>\n  </div>\n</div>"
+    }
+  },
+  "popover": {
+    "title": "Popover",
+    "description": "Floating content panel anchored to a trigger element, ideal for rich contextual interactions.",
+    "category": "Overlays",
+    "tags": [
+      "popover",
+      "floating",
+      "overlay",
+      "panel",
+      "context"
+    ],
+    "variants": 4,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Popover } from '@sriio/ui'",
+    "code": {
+      "react": "import { Popover } from '@sriio/ui'\n\ndefault function PopoverDemo() {\n  return (\n    <div className=\"flex items-center gap-6 p-8\">\n      <Popover\n        trigger={<button className=\"rounded-md border px-3 py-2 text-sm\">User info</button>}\n        placement=\"bottom-start\"\n      >\n        <div className=\"w-56 p-3\">\n          <div className=\"flex items-center gap-3\">\n            <div className=\"h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-lg\">👤</div>\n            <div>\n              <p className=\"text-sm font-semibold text-gray-900\">Alice Chen</p>\n              <p className=\"text-xs text-gray-500\">alice@example.com</p>\n            </div>\n          </div>\n          <hr className=\"my-2\" />\n          <button className=\"w-full rounded px-3 py-1.5 text-left text-sm text-gray-700 hover:bg-gray-50\">View Profile</button>\n          <button className=\"w-full rounded px-3 py-1.5 text-left text-sm text-red-600 hover:bg-red-50\">Sign out</button>\n        </div>\n      </Popover>\n\n      <Popover\n        trigger={<button className=\"rounded-md bg-blue-600 px-3 py-2 text-sm text-white\">Color picker ▾</button>}\n        placement=\"bottom\"\n      >\n        <div className=\"grid grid-cols-5 gap-2 p-3\">\n          {['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet', 'pink', 'gray', 'black'].map(c => (\n            <button key={c} className={`h-6 w-6 rounded-full bg-${c}-500`} />\n          ))}\n        </div>\n      </Popover>\n    </div>\n  )\n}",
+      "typescript": "type PopoverPlacement =\n  | 'top' | 'top-start' | 'top-end'\n  | 'bottom' | 'bottom-start' | 'bottom-end'\n  | 'left' | 'left-start' | 'left-end'\n  | 'right' | 'right-start' | 'right-end'\n\ninterface PopoverProps {\n  trigger: React.ReactElement\n  children: React.ReactNode\n  placement?: PopoverPlacement\n  open?: boolean\n  onOpenChange?: (open: boolean) => void\n  closeOnClickOutside?: boolean\n  closeOnEscape?: boolean\n  arrow?: boolean\n  offset?: number\n  className?: string\n}",
+      "tailwind": "<!-- Popover trigger + panel -->\n<div class=\"relative inline-block\">\n  <button class=\"rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50\">\n    User info\n  </button>\n\n  <!-- Popover panel -->\n  <div class=\"absolute left-0 top-full z-10 mt-2 w-56 rounded-lg border border-gray-200 bg-white shadow-lg\">\n    <!-- Arrow -->\n    <div class=\"absolute -top-1.5 left-4 h-3 w-3 rotate-45 border-l border-t border-gray-200 bg-white\"></div>\n\n    <div class=\"p-3\">\n      <div class=\"flex items-center gap-3 pb-2\">\n        <div class=\"flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-lg\">👤</div>\n        <div>\n          <p class=\"text-sm font-semibold text-gray-900\">Alice Chen</p>\n          <p class=\"text-xs text-gray-500\">alice@example.com</p>\n        </div>\n      </div>\n      <hr class=\"my-2 border-gray-100\" />\n      <button class=\"w-full rounded px-2 py-1.5 text-left text-sm text-gray-700 hover:bg-gray-50\">View Profile</button>\n      <button class=\"w-full rounded px-2 py-1.5 text-left text-sm text-red-600 hover:bg-red-50\">Sign out</button>\n    </div>\n  </div>\n</div>"
+    }
+  },
+  "tabs": {
+    "title": "Tabs",
+    "description": "Horizontal and vertical tab navigation for switching between related content panels.",
+    "category": "Navigation",
+    "tags": [
+      "tabs",
+      "navigation",
+      "panel",
+      "switch",
+      "segment"
+    ],
+    "variants": 6,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Tabs } from '@sriio/ui'",
+    "code": {
+      "react": "import { Tabs } from '@sriio/ui'\n\nconst tabs = [\n  {\n    id: 'overview',\n    label: 'Overview',\n    icon: '📊',\n    content: <p className=\"text-sm text-gray-600\">Overview of your dashboard metrics and activity.</p>,\n  },\n  {\n    id: 'analytics',\n    label: 'Analytics',\n    icon: '📈',\n    badge: 3,\n    content: <p className=\"text-sm text-gray-600\">Detailed analytics and usage reports.</p>,\n  },\n  {\n    id: 'settings',\n    label: 'Settings',\n    icon: '⚙️',\n    content: <p className=\"text-sm text-gray-600\">Configure your preferences and account settings.</p>,\n  },\n  {\n    id: 'billing',\n    label: 'Billing',\n    disabled: true,\n    content: null,\n  },\n]\n\ndefault function TabsDemo() {\n  return (\n    <div className=\"w-full max-w-2xl space-y-8\">\n      <Tabs tabs={tabs} defaultTab=\"overview\" variant=\"underline\" />\n      <Tabs tabs={tabs.slice(0, 3)} defaultTab=\"overview\" variant=\"pills\" />\n      <Tabs tabs={tabs.slice(0, 3)} defaultTab=\"overview\" variant=\"boxed\" />\n    </div>\n  )\n}",
+      "typescript": "interface TabItem {\n  id: string\n  label: string\n  icon?: React.ReactNode\n  badge?: number | string\n  content?: React.ReactNode\n  disabled?: boolean\n}\n\ntype TabsVariant = 'underline' | 'pills' | 'boxed' | 'solid'\ntype TabsOrientation = 'horizontal' | 'vertical'\n\ninterface TabsProps {\n  tabs: TabItem[]\n  defaultTab?: string\n  activeTab?: string\n  onTabChange?: (id: string) => void\n  variant?: TabsVariant\n  orientation?: TabsOrientation\n  size?: 'sm' | 'md' | 'lg'\n  fullWidth?: boolean\n  className?: string\n}",
+      "tailwind": "<!-- Underline tabs -->\n<div>\n  <div class=\"border-b border-gray-200\">\n    <nav class=\"-mb-px flex gap-1\">\n      <button class=\"border-b-2 border-blue-600 px-4 py-2 text-sm font-medium text-blue-600\">Overview</button>\n      <button class=\"border-b-2 border-transparent px-4 py-2 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700\">Analytics</button>\n      <button class=\"border-b-2 border-transparent px-4 py-2 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700\">Settings</button>\n      <button class=\"cursor-not-allowed border-b-2 border-transparent px-4 py-2 text-sm font-medium text-gray-300\" disabled>Billing</button>\n    </nav>\n  </div>\n  <div class=\"py-4\">\n    <p class=\"text-sm text-gray-600\">Overview content goes here.</p>\n  </div>\n</div>\n\n<!-- Pills tabs -->\n<div class=\"flex gap-1 rounded-lg bg-gray-100 p-1\">\n  <button class=\"rounded-md bg-white px-3 py-1.5 text-sm font-medium text-gray-900 shadow\">Overview</button>\n  <button class=\"rounded-md px-3 py-1.5 text-sm font-medium text-gray-500 hover:text-gray-700\">Analytics</button>\n  <button class=\"rounded-md px-3 py-1.5 text-sm font-medium text-gray-500 hover:text-gray-700\">Settings</button>\n</div>"
+    }
+  },
+  "accordion": {
+    "title": "Accordion",
+    "description": "Collapsible content sections with single or multiple expand modes and smooth animations.",
+    "category": "Data Display",
+    "tags": [
+      "accordion",
+      "collapse",
+      "expand",
+      "faq",
+      "disclosure"
+    ],
+    "variants": 4,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Accordion } from '@sriio/ui'",
+    "code": {
+      "react": "import { Accordion } from '@sriio/ui'\n\nconst faqItems = [\n  {\n    id: 'q1',\n    title: 'How do I install SRIIO UI?',\n    content: 'Run npm install @sriio/ui in your project root, then import components as needed.',\n  },\n  {\n    id: 'q2',\n    title: 'Is SRIIO UI accessible?',\n    content: 'Yes! All components follow WAI-ARIA guidelines and support keyboard navigation and screen readers.',\n  },\n  {\n    id: 'q3',\n    title: 'Can I customize the theme?',\n    content: 'Absolutely. SRIIO UI uses CSS variables and Tailwind, making it easy to match your brand.',\n  },\n  {\n    id: 'q4',\n    title: 'Does it support TypeScript?',\n    content: 'Yes, full TypeScript support with exported types for all components and props.',\n  },\n]\n\ndefault function AccordionDemo() {\n  return (\n    <div className=\"w-full max-w-xl space-y-6\">\n      <Accordion\n        items={faqItems}\n        defaultOpen=\"q1\"\n        variant=\"bordered\"\n      />\n\n      <Accordion\n        items={faqItems.slice(0, 3)}\n        multiple\n        variant=\"separated\"\n      />\n    </div>\n  )\n}",
+      "typescript": "interface AccordionItem {\n  id: string\n  title: string\n  content: React.ReactNode\n  icon?: React.ReactNode\n  disabled?: boolean\n}\n\ntype AccordionVariant = 'default' | 'bordered' | 'separated' | 'ghost'\n\ninterface AccordionProps {\n  items: AccordionItem[]\n  defaultOpen?: string | string[]\n  open?: string | string[]\n  onOpenChange?: (open: string | string[]) => void\n  multiple?: boolean\n  variant?: AccordionVariant\n  size?: 'sm' | 'md' | 'lg'\n  className?: string\n}",
+      "tailwind": "<!-- Accordion -->\n<div class=\"w-full divide-y divide-gray-200 rounded-lg border border-gray-200\">\n\n  <!-- Open item -->\n  <div>\n    <button class=\"flex w-full items-center justify-between px-4 py-4 text-left\">\n      <span class=\"text-sm font-medium text-gray-900\">How do I install SRIIO UI?</span>\n      <svg class=\"h-4 w-4 rotate-180 text-gray-500 transition-transform\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 9l-7 7-7-7\" />\n      </svg>\n    </button>\n    <div class=\"px-4 pb-4\">\n      <p class=\"text-sm text-gray-600\">Run npm install @sriio/ui in your project root.</p>\n    </div>\n  </div>\n\n  <!-- Closed item -->\n  <div>\n    <button class=\"flex w-full items-center justify-between px-4 py-4 text-left\">\n      <span class=\"text-sm font-medium text-gray-900\">Is SRIIO UI accessible?</span>\n      <svg class=\"h-4 w-4 text-gray-500 transition-transform\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 9l-7 7-7-7\" />\n      </svg>\n    </button>\n  </div>\n\n</div>"
+    }
+  },
+  "steps": {
+    "title": "Steps",
+    "description": "Visual step-by-step progress indicator for multi-stage workflows, wizards, and onboarding flows.",
+    "category": "Navigation",
+    "tags": [
+      "steps",
+      "wizard",
+      "stepper",
+      "progress",
+      "onboarding"
+    ],
+    "variants": 4,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Steps } from '@sriio/ui'",
+    "code": {
+      "react": "import { useState } from 'react'\nimport { Steps } from '@sriio/ui'\n\nconst steps = [\n  { id: 'account', label: 'Account', description: 'Create your account' },\n  { id: 'profile', label: 'Profile', description: 'Add your details' },\n  { id: 'plan', label: 'Plan', description: 'Choose a subscription' },\n  { id: 'confirm', label: 'Confirm', description: 'Review and confirm' },\n]\n\ndefault function StepsDemo() {\n  const [current, setCurrent] = useState(1)\n\n  return (\n    <div className=\"w-full max-w-2xl space-y-8\">\n      <Steps\n        steps={steps}\n        currentStep={current}\n        variant=\"horizontal\"\n      />\n\n      <div className=\"flex gap-3\">\n        <button\n          onClick={() => setCurrent(s => Math.max(0, s - 1))}\n          disabled={current === 0}\n          className=\"rounded-md border px-4 py-2 text-sm disabled:opacity-40\"\n        >\n          Back\n        </button>\n        <button\n          onClick={() => setCurrent(s => Math.min(steps.length - 1, s + 1))}\n          disabled={current === steps.length - 1}\n          className=\"rounded-md bg-blue-600 px-4 py-2 text-sm text-white disabled:opacity-40\"\n        >\n          Next\n        </button>\n      </div>\n\n      <Steps steps={steps.slice(0, 3)} currentStep={1} variant=\"vertical\" />\n    </div>\n  )\n}",
+      "typescript": "interface Step {\n  id: string\n  label: string\n  description?: string\n  icon?: React.ReactNode\n  optional?: boolean\n}\n\ntype StepsVariant = 'horizontal' | 'vertical'\ntype StepStatus = 'complete' | 'current' | 'upcoming' | 'error'\n\ninterface StepsProps {\n  steps: Step[]\n  currentStep: number\n  variant?: StepsVariant\n  size?: 'sm' | 'md' | 'lg'\n  clickable?: boolean\n  onStepClick?: (index: number) => void\n  className?: string\n}",
+      "tailwind": "<!-- Horizontal steps -->\n<ol class=\"flex items-center w-full\">\n  <!-- Completed step -->\n  <li class=\"flex items-center text-blue-600 flex-1\">\n    <span class=\"flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white text-sm font-medium\">✓</span>\n    <span class=\"mx-3 text-sm font-medium\">Account</span>\n    <div class=\"flex-1 h-px bg-blue-600\"></div>\n  </li>\n\n  <!-- Current step -->\n  <li class=\"flex items-center flex-1\">\n    <span class=\"flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-blue-600 text-sm font-medium text-blue-600\">2</span>\n    <span class=\"mx-3 text-sm font-medium text-gray-900\">Profile</span>\n    <div class=\"flex-1 h-px bg-gray-200\"></div>\n  </li>\n\n  <!-- Upcoming step -->\n  <li class=\"flex items-center\">\n    <span class=\"flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-gray-300 text-sm font-medium text-gray-400\">3</span>\n    <span class=\"ml-3 text-sm font-medium text-gray-400\">Confirm</span>\n  </li>\n</ol>"
+    }
+  },
+  "pagination": {
+    "title": "Pagination",
+    "description": "Page navigation control with page numbers, ellipsis, prev/next buttons, and page-size selector.",
+    "category": "Navigation",
+    "tags": [
+      "pagination",
+      "pages",
+      "navigation",
+      "pager",
+      "list"
+    ],
+    "variants": 4,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Pagination } from '@sriio/ui'",
+    "code": {
+      "react": "import { useState } from 'react'\nimport { Pagination } from '@sriio/ui'\n\ndefault function PaginationDemo() {\n  const [page, setPage] = useState(1)\n  const [pageSize, setPageSize] = useState(10)\n  const total = 243\n\n  return (\n    <div className=\"space-y-6\">\n      <Pagination\n        page={page}\n        total={total}\n        pageSize={pageSize}\n        onPageChange={setPage}\n        showTotal\n      />\n\n      <Pagination\n        page={page}\n        total={total}\n        pageSize={pageSize}\n        onPageChange={setPage}\n        onPageSizeChange={setPageSize}\n        pageSizeOptions={[10, 25, 50, 100]}\n        showTotal\n        showPageSize\n        size=\"sm\"\n      />\n\n      <Pagination\n        page={page}\n        total={total}\n        pageSize={pageSize}\n        onPageChange={setPage}\n        variant=\"minimal\"\n      />\n    </div>\n  )\n}",
+      "typescript": "interface PaginationProps {\n  page: number\n  total: number\n  pageSize?: number\n  onPageChange: (page: number) => void\n  onPageSizeChange?: (size: number) => void\n  pageSizeOptions?: number[]\n  showTotal?: boolean\n  showPageSize?: boolean\n  siblingCount?: number\n  boundaryCount?: number\n  size?: 'sm' | 'md' | 'lg'\n  variant?: 'default' | 'minimal' | 'simple'\n  disabled?: boolean\n  className?: string\n}",
+      "tailwind": "<!-- Pagination -->\n<nav class=\"flex items-center justify-between\">\n  <p class=\"text-sm text-gray-500\">Showing <span class=\"font-medium\">1–10</span> of <span class=\"font-medium\">243</span> results</p>\n\n  <div class=\"flex items-center gap-1\">\n    <!-- Prev -->\n    <button class=\"flex h-8 w-8 items-center justify-center rounded-md border border-gray-300 text-sm text-gray-500 hover:bg-gray-50 disabled:opacity-40\" disabled>‹</button>\n\n    <!-- Pages -->\n    <button class=\"flex h-8 w-8 items-center justify-center rounded-md bg-blue-600 text-sm font-medium text-white\">1</button>\n    <button class=\"flex h-8 w-8 items-center justify-center rounded-md border border-gray-300 text-sm text-gray-700 hover:bg-gray-50\">2</button>\n    <button class=\"flex h-8 w-8 items-center justify-center rounded-md border border-gray-300 text-sm text-gray-700 hover:bg-gray-50\">3</button>\n    <span class=\"flex h-8 w-8 items-center justify-center text-sm text-gray-400\">…</span>\n    <button class=\"flex h-8 w-8 items-center justify-center rounded-md border border-gray-300 text-sm text-gray-700 hover:bg-gray-50\">25</button>\n\n    <!-- Next -->\n    <button class=\"flex h-8 w-8 items-center justify-center rounded-md border border-gray-300 text-sm text-gray-500 hover:bg-gray-50\">›</button>\n  </div>\n</nav>"
+    }
+  },
+  "navigation": {
+    "title": "Navigation",
+    "description": "Complete navigation suite: top navbar, collapsible sidebar, breadcrumb trail, and mobile bottom tabs.",
+    "category": "Navigation",
+    "tags": [
+      "navigation",
+      "navbar",
+      "sidebar",
+      "breadcrumb",
+      "tabs"
+    ],
+    "variants": 8,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { TopNav, Sidebar, Breadcrumb, BottomTabs } from '@sriio/ui'",
+    "code": {
+      "react": "import { TopNav, Sidebar, Breadcrumb, BottomTabs } from '@sriio/ui'\n\nconst navItems = [\n  { label: 'Dashboard', href: '/', icon: '📊', active: true },\n  { label: 'Projects', href: '/projects', icon: '📁', badge: 4 },\n  { label: 'Team', href: '/team', icon: '👥' },\n  { label: 'Settings', href: '/settings', icon: '⚙️' },\n]\n\nconst breadcrumbs = [\n  { label: 'Home', href: '/' },\n  { label: 'Projects', href: '/projects' },\n  { label: 'SRIIO UI' },\n]\n\ndefault function NavigationDemo() {\n  return (\n    <div className=\"min-h-screen flex flex-col\">\n      <TopNav\n        logo={<span className=\"font-bold text-blue-600\">SRIIO UI</span>}\n        items={navItems}\n        rightSlot={<button className=\"rounded-full bg-gray-100 p-2\">👤</button>}\n      />\n\n      <div className=\"flex flex-1\">\n        <Sidebar items={navItems} collapsed={false} />\n\n        <main className=\"flex-1 p-6\">\n          <Breadcrumb items={breadcrumbs} separator=\"/\" />\n          <p className=\"mt-4 text-gray-600\">Main content area</p>\n        </main>\n      </div>\n\n      {/* Mobile bottom nav */}\n      <BottomTabs items={navItems.slice(0, 4)} activeItem=\"/\" />\n    </div>\n  )\n}",
+      "typescript": "interface NavItem {\n  label: string\n  href: string\n  icon?: React.ReactNode\n  badge?: number | string\n  active?: boolean\n  disabled?: boolean\n  children?: NavItem[]\n}\n\ninterface TopNavProps {\n  logo?: React.ReactNode\n  items?: NavItem[]\n  rightSlot?: React.ReactNode\n  sticky?: boolean\n  bordered?: boolean\n  className?: string\n}\n\ninterface SidebarProps {\n  items: NavItem[]\n  collapsed?: boolean\n  onCollapse?: (collapsed: boolean) => void\n  width?: number\n  className?: string\n}\n\ninterface BreadcrumbItem {\n  label: string\n  href?: string\n  icon?: React.ReactNode\n}\n\ninterface BreadcrumbProps {\n  items: BreadcrumbItem[]\n  separator?: React.ReactNode\n  maxItems?: number\n  className?: string\n}\n\ninterface BottomTabsProps {\n  items: NavItem[]\n  activeItem?: string\n  className?: string\n}",
+      "tailwind": "<!-- Top Navigation -->\n<nav class=\"sticky top-0 z-40 flex h-16 items-center justify-between border-b border-gray-200 bg-white px-4 shadow-sm\">\n  <div class=\"flex items-center gap-8\">\n    <a href=\"/\" class=\"text-lg font-bold text-blue-600\">SRIIO UI</a>\n    <div class=\"hidden items-center gap-1 md:flex\">\n      <a href=\"/\" class=\"rounded-md bg-blue-50 px-3 py-2 text-sm font-medium text-blue-600\">Dashboard</a>\n      <a href=\"/projects\" class=\"rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50\">Projects</a>\n      <a href=\"/team\" class=\"rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50\">Team</a>\n    </div>\n  </div>\n  <button class=\"rounded-full bg-gray-100 p-2 text-gray-600 hover:bg-gray-200\">👤</button>\n</nav>\n\n<!-- Breadcrumb -->\n<nav class=\"flex items-center gap-1.5 text-sm\">\n  <a href=\"/\" class=\"text-gray-500 hover:text-gray-700\">Home</a>\n  <span class=\"text-gray-400\">/</span>\n  <a href=\"/projects\" class=\"text-gray-500 hover:text-gray-700\">Projects</a>\n  <span class=\"text-gray-400\">/</span>\n  <span class=\"font-medium text-gray-900\">SRIIO UI</span>\n</nav>"
+    }
+  },
+  "table": {
+    "title": "Table",
+    "description": "Feature-rich data table with sorting, filtering, pagination, row selection, and column customization.",
+    "category": "Data Display",
+    "tags": [
+      "table",
+      "data",
+      "grid",
+      "sort",
+      "filter"
+    ],
+    "variants": 5,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { Table } from '@sriio/ui'",
+    "code": {
+      "react": "import { useState } from 'react'\nimport { Table } from '@sriio/ui'\n\nconst users = [\n  { id: 1, name: 'Alice Chen', email: 'alice@example.com', role: 'Admin', status: 'Active', joined: '2023-01-15' },\n  { id: 2, name: 'Bob Smith', email: 'bob@example.com', role: 'Editor', status: 'Active', joined: '2023-03-22' },\n  { id: 3, name: 'Carol White', email: 'carol@example.com', role: 'Viewer', status: 'Inactive', joined: '2023-06-10' },\n  { id: 4, name: 'David Kim', email: 'david@example.com', role: 'Editor', status: 'Active', joined: '2024-01-05' },\n]\n\nconst columns = [\n  { key: 'name', label: 'Name', sortable: true },\n  { key: 'email', label: 'Email' },\n  { key: 'role', label: 'Role', sortable: true },\n  {\n    key: 'status',\n    label: 'Status',\n    render: (val: string) => (\n      <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${val === 'Active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>\n        {val}\n      </span>\n    ),\n  },\n  { key: 'joined', label: 'Joined', sortable: true },\n]\n\ndefault function TableDemo() {\n  const [selected, setSelected] = useState<number[]>([])\n\n  return (\n    <Table\n      data={users}\n      columns={columns}\n      rowKey=\"id\"\n      selectable\n      selectedRows={selected}\n      onSelectionChange={setSelected}\n      striped\n      hoverable\n      bordered={false}\n    />\n  )\n}",
+      "typescript": "interface TableColumn<T = unknown> {\n  key: string\n  label: string\n  sortable?: boolean\n  width?: number | string\n  align?: 'left' | 'center' | 'right'\n  render?: (value: unknown, row: T) => React.ReactNode\n  className?: string\n}\n\ninterface TableProps<T = Record<string, unknown>> {\n  data: T[]\n  columns: TableColumn<T>[]\n  rowKey: keyof T\n  loading?: boolean\n  selectable?: boolean\n  selectedRows?: (string | number)[]\n  onSelectionChange?: (keys: (string | number)[]) => void\n  onRowClick?: (row: T) => void\n  striped?: boolean\n  hoverable?: boolean\n  bordered?: boolean\n  stickyHeader?: boolean\n  emptyText?: string\n  className?: string\n}",
+      "tailwind": "<!-- Data table -->\n<div class=\"overflow-hidden rounded-lg border border-gray-200 shadow-sm\">\n  <table class=\"w-full text-sm\">\n    <thead class=\"border-b border-gray-200 bg-gray-50\">\n      <tr>\n        <th class=\"w-10 px-4 py-3\"><input type=\"checkbox\" class=\"h-4 w-4 rounded border-gray-300 text-blue-600\" /></th>\n        <th class=\"px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 cursor-pointer hover:text-gray-700\">\n          Name ↕\n        </th>\n        <th class=\"px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500\">Email</th>\n        <th class=\"px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500\">Role</th>\n        <th class=\"px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500\">Status</th>\n      </tr>\n    </thead>\n    <tbody class=\"divide-y divide-gray-100 bg-white\">\n      <tr class=\"hover:bg-gray-50\">\n        <td class=\"px-4 py-3\"><input type=\"checkbox\" class=\"h-4 w-4 rounded border-gray-300 text-blue-600\" /></td>\n        <td class=\"px-4 py-3 font-medium text-gray-900\">Alice Chen</td>\n        <td class=\"px-4 py-3 text-gray-500\">alice@example.com</td>\n        <td class=\"px-4 py-3 text-gray-700\">Admin</td>\n        <td class=\"px-4 py-3\"><span class=\"rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700\">Active</span></td>\n      </tr>\n      <tr class=\"hover:bg-gray-50\">\n        <td class=\"px-4 py-3\"><input type=\"checkbox\" class=\"h-4 w-4 rounded border-gray-300 text-blue-600\" /></td>\n        <td class=\"px-4 py-3 font-medium text-gray-900\">Bob Smith</td>\n        <td class=\"px-4 py-3 text-gray-500\">bob@example.com</td>\n        <td class=\"px-4 py-3 text-gray-700\">Editor</td>\n        <td class=\"px-4 py-3\"><span class=\"rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-500\">Inactive</span></td>\n      </tr>\n    </tbody>\n  </table>\n</div>"
+    }
+  },
+  "date-picker": {
+    "title": "DatePicker",
+    "description": "Calendar-based date selector with range support, disabled dates, and locale formatting.",
+    "category": "Inputs",
+    "tags": [
+      "date",
+      "calendar",
+      "picker",
+      "form",
+      "schedule"
+    ],
+    "variants": 5,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { DatePicker } from '@sriio/ui'",
+    "code": {
+      "react": "import { useState } from 'react'\nimport { DatePicker } from '@sriio/ui'\n\ndefault function DatePickerDemo() {\n  const [single, setSingle] = useState<Date | null>(null)\n  const [range, setRange] = useState<{ start: Date | null; end: Date | null }>({\n    start: null,\n    end: null,\n  })\n\n  return (\n    <div className=\"space-y-6\">\n      <DatePicker\n        label=\"Start date\"\n        value={single}\n        onChange={setSingle}\n        placeholder=\"Select a date\"\n        minDate={new Date()}\n        format=\"MM/dd/yyyy\"\n      />\n\n      <DatePicker\n        label=\"Travel dates\"\n        mode=\"range\"\n        startDate={range.start}\n        endDate={range.end}\n        onRangeChange={setRange}\n        placeholder=\"Select date range\"\n        numberOfMonths={2}\n      />\n\n      <DatePicker\n        label=\"Meeting date\"\n        value={single}\n        onChange={setSingle}\n        disabledDates={[\n          new Date(2025, 0, 1),\n          new Date(2025, 11, 25),\n        ]}\n        disabledDaysOfWeek={[0, 6]}\n        helperText=\"Weekdays only\"\n      />\n    </div>\n  )\n}",
+      "typescript": "type DatePickerMode = 'single' | 'range' | 'multiple'\n\ninterface DatePickerProps {\n  label?: string\n  value?: Date | null\n  onChange?: (date: Date | null) => void\n  mode?: DatePickerMode\n  startDate?: Date | null\n  endDate?: Date | null\n  onRangeChange?: (range: { start: Date | null; end: Date | null }) => void\n  placeholder?: string\n  format?: string\n  minDate?: Date\n  maxDate?: Date\n  disabledDates?: Date[]\n  disabledDaysOfWeek?: number[]\n  numberOfMonths?: number\n  locale?: string\n  helperText?: string\n  error?: string\n  disabled?: boolean\n  className?: string\n}",
+      "tailwind": "<!-- Date picker input -->\n<div class=\"flex flex-col gap-1.5\">\n  <label class=\"text-sm font-medium text-gray-700\">Start Date</label>\n  <div class=\"relative\">\n    <div class=\"pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3\">\n      <svg class=\"h-4 w-4 text-gray-400\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z\" />\n      </svg>\n    </div>\n    <input type=\"text\" placeholder=\"MM/DD/YYYY\" class=\"w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500\" />\n  </div>\n</div>\n\n<!-- Calendar dropdown -->\n<div class=\"mt-1 w-72 rounded-xl border border-gray-200 bg-white p-4 shadow-xl\">\n  <div class=\"mb-3 flex items-center justify-between\">\n    <button class=\"rounded p-1 text-gray-400 hover:text-gray-700\">‹</button>\n    <span class=\"text-sm font-semibold text-gray-900\">January 2025</span>\n    <button class=\"rounded p-1 text-gray-400 hover:text-gray-700\">›</button>\n  </div>\n  <div class=\"grid grid-cols-7 gap-1 text-center text-xs font-medium text-gray-400\">\n    <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>\n  </div>\n  <div class=\"mt-1 grid grid-cols-7 gap-1 text-center text-sm\">\n    <button class=\"rounded-full py-1 text-gray-300\">29</button>\n    <button class=\"rounded-full py-1 hover:bg-gray-100\">1</button>\n    <button class=\"rounded-full bg-blue-600 py-1 text-white\">2</button>\n    <button class=\"rounded-full py-1 hover:bg-gray-100\">3</button>\n    <button class=\"rounded-full py-1 hover:bg-gray-100\">4</button>\n    <button class=\"rounded-full py-1 text-gray-300 cursor-not-allowed\">5</button>\n    <button class=\"rounded-full py-1 text-gray-300 cursor-not-allowed\">6</button>\n  </div>\n</div>"
+    }
+  },
+  "time-picker": {
+    "title": "TimePicker",
+    "description": "Time selection input with clock face, scroll wheels, and 12/24-hour format support.",
+    "category": "Inputs",
+    "tags": [
+      "time",
+      "clock",
+      "picker",
+      "form",
+      "schedule"
+    ],
+    "variants": 4,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { TimePicker } from '@sriio/ui'",
+    "code": {
+      "react": "import { useState } from 'react'\nimport { TimePicker } from '@sriio/ui'\n\ndefault function TimePickerDemo() {\n  const [time, setTime] = useState<string | null>(null)\n  const [rangeStart, setRangeStart] = useState<string | null>(null)\n  const [rangeEnd, setRangeEnd] = useState<string | null>(null)\n\n  return (\n    <div className=\"space-y-6 max-w-xs\">\n      <TimePicker\n        label=\"Meeting time\"\n        value={time}\n        onChange={setTime}\n        placeholder=\"Select time\"\n        format=\"12h\"\n        minuteStep={15}\n      />\n\n      <TimePicker\n        label=\"Start time\"\n        value={rangeStart}\n        onChange={setRangeStart}\n        format=\"24h\"\n        minuteStep={5}\n        helperText=\"24-hour format\"\n      />\n\n      <TimePicker\n        label=\"End time\"\n        value={rangeEnd}\n        onChange={setRangeEnd}\n        format=\"24h\"\n        minuteStep={5}\n        minTime={rangeStart ?? undefined}\n        disabled={!rangeStart}\n        helperText={rangeStart ? 'Must be after start time' : 'Select a start time first'}\n      />\n    </div>\n  )\n}",
+      "typescript": "type TimeFormat = '12h' | '24h'\n\ninterface TimePickerProps {\n  label?: string\n  value?: string | null\n  onChange?: (time: string | null) => void\n  placeholder?: string\n  format?: TimeFormat\n  minuteStep?: number\n  secondStep?: number\n  showSeconds?: boolean\n  minTime?: string\n  maxTime?: string\n  disabled?: boolean\n  helperText?: string\n  error?: string\n  clearable?: boolean\n  className?: string\n}",
+      "tailwind": "<!-- Time picker input -->\n<div class=\"flex flex-col gap-1.5\">\n  <label class=\"text-sm font-medium text-gray-700\">Meeting time</label>\n  <div class=\"relative\">\n    <div class=\"pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3\">\n      <svg class=\"h-4 w-4 text-gray-400\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z\" />\n      </svg>\n    </div>\n    <input type=\"text\" placeholder=\"HH:MM AM\" class=\"w-full rounded-md border border-gray-300 py-2 pl-10 pr-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500\" />\n  </div>\n</div>\n\n<!-- Time picker dropdown panel -->\n<div class=\"mt-1 w-52 rounded-xl border border-gray-200 bg-white shadow-xl\">\n  <div class=\"flex divide-x divide-gray-100\">\n    <!-- Hours column -->\n    <div class=\"flex-1 overflow-y-auto py-2 max-h-48 scrollbar-hide\">\n      <div class=\"px-2 py-1 text-center text-xs font-medium text-gray-400 uppercase\">Hr</div>\n      <button class=\"w-full rounded py-1.5 text-sm text-gray-500 hover:bg-gray-50\">11</button>\n      <button class=\"w-full rounded bg-blue-600 py-1.5 text-sm font-semibold text-white\">12</button>\n      <button class=\"w-full rounded py-1.5 text-sm text-gray-500 hover:bg-gray-50\">01</button>\n    </div>\n    <!-- Minutes column -->\n    <div class=\"flex-1 overflow-y-auto py-2 max-h-48 scrollbar-hide\">\n      <div class=\"px-2 py-1 text-center text-xs font-medium text-gray-400 uppercase\">Min</div>\n      <button class=\"w-full rounded py-1.5 text-sm text-gray-500 hover:bg-gray-50\">45</button>\n      <button class=\"w-full rounded bg-blue-600 py-1.5 text-sm font-semibold text-white\">00</button>\n      <button class=\"w-full rounded py-1.5 text-sm text-gray-500 hover:bg-gray-50\">15</button>\n    </div>\n    <!-- AM/PM -->\n    <div class=\"flex w-14 flex-col py-2\">\n      <div class=\"px-2 py-1 text-center text-xs font-medium text-gray-400 uppercase\">—</div>\n      <button class=\"rounded bg-blue-600 py-1.5 text-sm font-semibold text-white mx-1\">AM</button>\n      <button class=\"rounded py-1.5 text-sm text-gray-500 hover:bg-gray-50 mx-1\">PM</button>\n    </div>\n  </div>\n</div>"
+    }
+  },
+  "file-upload": {
+    "title": "FileUpload",
+    "description": "Drag-and-drop file upload for single or multiple files with progress tracking and file previews.",
+    "category": "Inputs",
+    "tags": [
+      "upload",
+      "file",
+      "drag-drop",
+      "attachment",
+      "media"
+    ],
+    "variants": 4,
+    "npm": "npm install @sriio/ui",
+    "importLine": "import { FileUploadSingle, FileUploadBulk } from '@sriio/ui'",
+    "code": {
+      "react": "import { useState } from 'react'\nimport { FileUploadSingle, FileUploadBulk } from '@sriio/ui'\n\ndefault function FileUploadDemo() {\n  const [avatar, setAvatar] = useState<File | null>(null)\n  const [files, setFiles] = useState<File[]>([])\n\n  const handleUpload = async (file: File) => {\n    const formData = new FormData()\n    formData.append('file', file)\n    await fetch('/api/upload', { method: 'POST', body: formData })\n  }\n\n  return (\n    <div className=\"space-y-8 max-w-lg\">\n      <FileUploadSingle\n        label=\"Profile photo\"\n        value={avatar}\n        onChange={setAvatar}\n        accept=\"image/*\"\n        maxSize={2 * 1024 * 1024}\n        onUpload={handleUpload}\n        preview\n        helperText=\"PNG, JPG up to 2MB\"\n      />\n\n      <FileUploadBulk\n        label=\"Attachments\"\n        files={files}\n        onChange={setFiles}\n        accept=\".pdf,.doc,.docx,.txt\"\n        maxSize={10 * 1024 * 1024}\n        maxFiles={5}\n        onUpload={async (file) => handleUpload(file)}\n        helperText=\"PDF, DOC up to 10MB each. Max 5 files.\"\n      />\n    </div>\n  )\n}",
+      "typescript": "interface FileUploadSingleProps {\n  label?: string\n  value?: File | null\n  onChange?: (file: File | null) => void\n  accept?: string\n  maxSize?: number\n  onUpload?: (file: File) => Promise<void>\n  preview?: boolean\n  previewUrl?: string\n  disabled?: boolean\n  helperText?: string\n  error?: string\n  className?: string\n}\n\ninterface UploadedFile {\n  file: File\n  progress?: number\n  status?: 'pending' | 'uploading' | 'done' | 'error'\n  error?: string\n}\n\ninterface FileUploadBulkProps {\n  label?: string\n  files?: File[]\n  onChange?: (files: File[]) => void\n  accept?: string\n  maxSize?: number\n  maxFiles?: number\n  onUpload?: (file: File) => Promise<void>\n  disabled?: boolean\n  helperText?: string\n  error?: string\n  className?: string\n}",
+      "tailwind": "<!-- Single file upload dropzone -->\n<div class=\"flex flex-col gap-1.5\">\n  <label class=\"text-sm font-medium text-gray-700\">Profile photo</label>\n  <div class=\"flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 px-6 py-10 text-center hover:border-blue-400 hover:bg-blue-50 transition-colors cursor-pointer\">\n    <div class=\"mb-3 text-4xl\">📁</div>\n    <p class=\"text-sm font-medium text-gray-700\">Drag & drop your file here</p>\n    <p class=\"mt-1 text-xs text-gray-500\">or <span class=\"text-blue-600 underline cursor-pointer\">browse to upload</span></p>\n    <p class=\"mt-2 text-xs text-gray-400\">PNG, JPG up to 2MB</p>\n    <input type=\"file\" class=\"sr-only\" accept=\"image/*\" />\n  </div>\n</div>\n\n<!-- File list with progress -->\n<ul class=\"mt-4 space-y-2\">\n  <li class=\"flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-3\">\n    <span class=\"text-2xl\">📄</span>\n    <div class=\"flex-1 min-w-0\">\n      <p class=\"truncate text-sm font-medium text-gray-900\">document.pdf</p>\n      <div class=\"mt-1 h-1.5 w-full overflow-hidden rounded-full bg-gray-200\">\n        <div class=\"h-full w-3/4 rounded-full bg-blue-600 transition-all\"></div>\n      </div>\n      <p class=\"mt-0.5 text-xs text-gray-500\">75% · 1.2 MB</p>\n    </div>\n    <button class=\"text-gray-400 hover:text-gray-600\">✕</button>\n  </li>\n  <li class=\"flex items-center gap-3 rounded-lg border border-green-200 bg-green-50 p-3\">\n    <span class=\"text-2xl\">📄</span>\n    <div class=\"flex-1 min-w-0\">\n      <p class=\"truncate text-sm font-medium text-gray-900\">report.docx</p>\n      <p class=\"text-xs text-green-600\">✓ Uploaded</p>\n    </div>\n    <button class=\"text-gray-400 hover:text-gray-600\">✕</button>\n  </li>\n</ul>"
+    }
+  }
+}

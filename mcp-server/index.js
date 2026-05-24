@@ -1,13 +1,18 @@
 #!/usr/bin/env node
 /**
- * SRIIO UI MCP Server
+ * SRIIO UI — MCP Server
  *
- * Exposes SRIIO UI components to any MCP-compatible AI (Claude Desktop, Cursor, Windsurf, etc.)
+ * Works 100% offline — reads from bundled registry.json.
+ * No API key, no network, no deploy required.
  *
- * Install:
+ * ─── Setup (one-time per machine) ─────────────────────────────────────────────
+ *
  *   cd mcp-server && npm install
  *
- * Add to Claude Desktop (~/.config/claude/claude_desktop_config.json):
+ * ─── Claude Desktop ───────────────────────────────────────────────────────────
+ *   Mac:   ~/Library/Application Support/Claude/claude_desktop_config.json
+ *   Linux: ~/.config/claude/claude_desktop_config.json
+ *
  *   {
  *     "mcpServers": {
  *       "sriio-ui": {
@@ -17,8 +22,62 @@
  *     }
  *   }
  *
- * Or use the live API (no install needed):
- *   base URL: https://sriio.dev/api/components
+ * ─── Cursor ───────────────────────────────────────────────────────────────────
+ *   File: ~/.cursor/mcp.json  (or Cursor Settings → MCP)
+ *
+ *   {
+ *     "mcpServers": {
+ *       "sriio-ui": {
+ *         "command": "node",
+ *         "args": ["/absolute/path/to/mcp-server/index.js"]
+ *       }
+ *     }
+ *   }
+ *
+ * ─── VS Code (v1.102+) ────────────────────────────────────────────────────────
+ *   File: .vscode/mcp.json  (project-level) or User Settings → MCP
+ *
+ *   {
+ *     "servers": {
+ *       "sriio-ui": {
+ *         "type": "stdio",
+ *         "command": "node",
+ *         "args": ["/absolute/path/to/mcp-server/index.js"]
+ *       }
+ *     }
+ *   }
+ *
+ * ─── Windsurf ─────────────────────────────────────────────────────────────────
+ *   File: ~/.codeium/windsurf/mcp_config.json
+ *
+ *   {
+ *     "mcpServers": {
+ *       "sriio-ui": {
+ *         "command": "node",
+ *         "args": ["/absolute/path/to/mcp-server/index.js"]
+ *       }
+ *     }
+ *   }
+ *
+ * ─── JetBrains (IntelliJ, WebStorm, etc.) ────────────────────────────────────
+ *   Settings → Tools → AI Assistant → Model Context Protocol (MCP)
+ *   Click + → add command: node /absolute/path/to/mcp-server/index.js
+ *
+ * ─── Continue.dev (VS Code extension) ────────────────────────────────────────
+ *   File: ~/.continue/config.json
+ *
+ *   {
+ *     "mcpServers": [
+ *       { "name": "sriio-ui", "command": "node /absolute/path/to/mcp-server/index.js" }
+ *     ]
+ *   }
+ *
+ * ─── Cline / Roo-Cline (VS Code extension) ───────────────────────────────────
+ *   Cline sidebar → Settings (gear) → MCP Servers → Add Server
+ *   Command: node /absolute/path/to/mcp-server/index.js
+ *
+ * ─── GitHub Copilot (VS Code Agent Mode) ─────────────────────────────────────
+ *   Same as VS Code above — uses .vscode/mcp.json
  */
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js'
@@ -27,28 +86,29 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js'
+import { readFileSync } from 'fs'
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
 
-// ── Component registry (inlined so the server is self-contained) ──────────────
-// This mirrors lib/registry.ts — update both if you add new components.
-const BASE_URL = 'https://sriio.dev/api/components'
+// ── Load local registry (no network needed) ───────────────────────────────────
+const __dir = dirname(fileURLToPath(import.meta.url))
+const registry = JSON.parse(readFileSync(join(__dir, 'registry.json'), 'utf8'))
+const ids = Object.keys(registry)
 
-async function fetchComponents(query = '', category = '') {
-  const params = new URLSearchParams()
-  if (query)    params.set('q', query)
-  if (category) params.set('category', category)
-  const url = `${BASE_URL}?${params}`
-  const res = await fetch(url)
-  if (!res.ok) throw new Error(`API error: ${res.status}`)
-  return res.json()
-}
-
-async function fetchComponent(slug) {
-  const res = await fetch(`${BASE_URL}/${slug}`)
-  if (!res.ok) {
-    if (res.status === 404) return null
-    throw new Error(`API error: ${res.status}`)
-  }
-  return res.json()
+function searchRegistry(query = '', category = '') {
+  const q = query.toLowerCase()
+  const cat = category.toLowerCase()
+  return ids
+    .map(id => ({ id, ...registry[id] }))
+    .filter(c => {
+      const matchesQ = !q || (
+        c.title.toLowerCase().includes(q) ||
+        c.description.toLowerCase().includes(q) ||
+        c.tags.some(t => t.toLowerCase().includes(q))
+      )
+      const matchesCat = !cat || c.category.toLowerCase().includes(cat)
+      return matchesQ && matchesCat
+    })
 }
 
 // ── MCP Server ────────────────────────────────────────────────────────────────
@@ -67,35 +127,34 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       inputSchema: {
         type: 'object',
         properties: {
-          query:    { type: 'string', description: 'Search term (matches title, description, tags)' },
-          category: { type: 'string', description: 'Filter by category, e.g. "Forms", "Overlay", "Feedback"' },
+          query:    { type: 'string', description: 'Search keyword (title, description, tags)' },
+          category: { type: 'string', description: 'Filter by category: Foundations, Display, Forms, Feedback, Overlay, Navigation, Data, Pickers' },
         },
       },
     },
     {
       name: 'get_component',
       description:
-        'Get the full code for a specific SRIIO UI component by its id. ' +
-        'Returns React JSX, TypeScript types, and plain Tailwind HTML — all copy-paste ready.',
+        'Get copy-paste code for a SRIIO UI component. Returns React JSX, TypeScript props, and raw Tailwind HTML.',
       inputSchema: {
         type: 'object',
         required: ['id'],
         properties: {
           id: {
             type: 'string',
-            description: 'Component id, e.g. "button", "modal", "date-picker"',
+            description: 'Component id — e.g. "button", "modal", "date-picker". Use list_components to see all ids.',
           },
           format: {
             type: 'string',
             enum: ['react', 'typescript', 'tailwind', 'all'],
-            description: 'Which code format to return (default: all)',
+            description: 'Code format to return (default: all)',
           },
         },
       },
     },
     {
       name: 'search_components',
-      description: 'Search SRIIO UI components by keyword. Returns matching components with import lines.',
+      description: 'Search SRIIO UI components by keyword. Returns matched components with import lines.',
       inputSchema: {
         type: 'object',
         required: ['query'],
@@ -111,62 +170,61 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   const { name, arguments: args } = request.params
 
   try {
+    // ── list_components ───────────────────────────────────────────────────────
     if (name === 'list_components') {
-      const data = await fetchComponents(args?.query ?? '', args?.category ?? '')
-      const lines = data.components.map(c =>
-        `• **${c.title}** (\`${c.id}\`) — ${c.description}\n  Import: \`${c.importLine}\``
+      const results = searchRegistry(args?.query, args?.category)
+      const lines = results.map(c =>
+        `• **${c.title}** (\`${c.id}\`) [${c.category}] — ${c.description}\n  Import: \`${c.importLine}\``
       )
       return {
         content: [{
           type: 'text',
-          text: `## SRIIO UI Components (${data.total} total)\n\n${lines.join('\n\n')}`,
+          text: `## SRIIO UI — ${results.length} component${results.length !== 1 ? 's' : ''}\n\n${lines.join('\n\n')}`,
         }],
       }
     }
 
+    // ── get_component ─────────────────────────────────────────────────────────
     if (name === 'get_component') {
-      const comp = await fetchComponent(args.id)
+      const comp = registry[args.id]
       if (!comp) {
+        const suggestions = ids.filter(id => id.includes(args.id) || args.id.includes(id)).slice(0, 3)
+        const hint = suggestions.length ? `\nDid you mean: ${suggestions.map(s => `\`${s}\``).join(', ')}?` : ''
         return {
-          content: [{ type: 'text', text: `Component "${args.id}" not found. Use list_components to see all ids.` }],
+          content: [{ type: 'text', text: `Component \`${args.id}\` not found.${hint}\nUse \`list_components\` to see all ${ids.length} ids.` }],
           isError: true,
         }
       }
 
       const fmt = args?.format ?? 'all'
-      const sections = []
+      const sections = [
+        `## ${comp.title}`,
+        `> ${comp.description}`,
+        `**Install:** \`${comp.npm}\``,
+        `**Import:** \`${comp.importLine}\``,
+        `**Category:** ${comp.category} · **Variants:** ${comp.variants}`,
+      ]
 
-      sections.push(`## ${comp.title}`)
-      sections.push(`> ${comp.description}`)
-      sections.push(`**Install:** \`${comp.npm}\``)
-      sections.push(`**Import:** \`${comp.importLine}\``)
-      sections.push(`**Category:** ${comp.category} · **Variants:** ${comp.variants}`)
-
-      if (fmt === 'react' || fmt === 'all') {
-        sections.push(`\n### React / JSX\n\`\`\`tsx\n${comp.code.react}\n\`\`\``)
-      }
-      if (fmt === 'typescript' || fmt === 'all') {
-        sections.push(`\n### TypeScript Props\n\`\`\`typescript\n${comp.code.typescript}\n\`\`\``)
-      }
-      if (fmt === 'tailwind' || fmt === 'all') {
-        sections.push(`\n### Tailwind HTML (no npm needed)\n\`\`\`html\n${comp.code.tailwind}\n\`\`\``)
-      }
+      if (fmt === 'react'      || fmt === 'all') sections.push(`\n### React / JSX\n\`\`\`tsx\n${comp.code.react}\n\`\`\``)
+      if (fmt === 'typescript' || fmt === 'all') sections.push(`\n### TypeScript Props\n\`\`\`typescript\n${comp.code.typescript}\n\`\`\``)
+      if (fmt === 'tailwind'   || fmt === 'all') sections.push(`\n### Tailwind HTML (zero npm)\n\`\`\`html\n${comp.code.tailwind}\n\`\`\``)
 
       return { content: [{ type: 'text', text: sections.join('\n') }] }
     }
 
+    // ── search_components ─────────────────────────────────────────────────────
     if (name === 'search_components') {
-      const data = await fetchComponents(args.query)
-      if (data.total === 0) {
-        return { content: [{ type: 'text', text: `No components matched "${args.query}".` }] }
+      const results = searchRegistry(args.query)
+      if (results.length === 0) {
+        return { content: [{ type: 'text', text: `No components matched \`${args.query}\`.` }] }
       }
-      const lines = data.components.map(c =>
+      const lines = results.map(c =>
         `• **${c.title}** (\`${c.id}\`) — ${c.description}`
       )
       return {
         content: [{
           type: 'text',
-          text: `Found ${data.total} component(s) for "${args.query}":\n\n${lines.join('\n')}`,
+          text: `Found **${results.length}** match${results.length !== 1 ? 'es' : ''} for "${args.query}":\n\n${lines.join('\n')}`,
         }],
       }
     }

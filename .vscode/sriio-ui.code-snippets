@@ -1,0 +1,265 @@
+{
+  "SRIIO Badge": {
+    "prefix": ["sriio-badge", "badge"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": ["import { Badge, BadgeCount } from '@sriio/ui'", ""],
+    "description": "SRIIO UI — Badge import"
+  },
+  "SRIIO Avatar": {
+    "prefix": ["sriio-avatar", "avatar"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": ["import { Avatar, AvatarStack } from '@sriio/ui'", ""],
+    "description": "SRIIO UI — Avatar import"
+  },
+  "SRIIO Button": {
+    "prefix": ["sriio-button", "btn"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { Button } from '@sriio/ui'",
+      "",
+      "<Button variant=\"${1|primary,secondary,outline,ghost,danger|}\" size=\"${2|md,sm,lg|}\"${3| loading|}>${4:Label}</Button>"
+    ],
+    "description": "SRIIO UI — Button component"
+  },
+  "SRIIO Spinner": {
+    "prefix": ["sriio-spinner", "spinner"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": ["import { Spinner, Dots, Skeleton } from '@sriio/ui'", ""],
+    "description": "SRIIO UI — Spinner import"
+  },
+  "SRIIO Input": {
+    "prefix": ["sriio-input", "input"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { Input, Textarea } from '@sriio/ui'",
+      "",
+      "<Input",
+      "  label=\"${1:Label}\"",
+      "  placeholder=\"${2:Placeholder}\"",
+      "  value={${3:value}}",
+      "  onChange={${4:e => setValue(e.target.value)}}",
+      "/>"
+    ],
+    "description": "SRIIO UI — Input component"
+  },
+  "SRIIO Search": {
+    "prefix": ["sriio-search", "search"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": ["import { Search } from '@sriio/ui'", ""],
+    "description": "SRIIO UI — Search import"
+  },
+  "SRIIO Dropdown": {
+    "prefix": ["sriio-dropdown", "dropdown"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": ["import { Dropdown } from '@sriio/ui'", ""],
+    "description": "SRIIO UI — Dropdown import"
+  },
+  "SRIIO RadioGroup": {
+    "prefix": ["sriio-radio", "radiogroup"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": ["import { RadioGroup } from '@sriio/ui'", ""],
+    "description": "SRIIO UI — RadioGroup import"
+  },
+  "SRIIO Checkbox": {
+    "prefix": ["sriio-checkbox", "checkbox", "toggle"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { Checkbox, Toggle } from '@sriio/ui'",
+      "",
+      "<Checkbox label=\"${1:Label}\" checked={${2:checked}} onChange={${3:setChecked}} />"
+    ],
+    "description": "SRIIO UI — Checkbox / Toggle"
+  },
+  "SRIIO Alert": {
+    "prefix": ["sriio-alert", "alert"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { Alert } from '@sriio/ui'",
+      "",
+      "<Alert variant=\"${1|info,success,warning,danger|}\" title=\"${2:Title}\">${3:Message}</Alert>"
+    ],
+    "description": "SRIIO UI — Alert component"
+  },
+  "SRIIO Toast": {
+    "prefix": ["sriio-toast", "toast", "useToast"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { useToast } from '@sriio/ui'",
+      "",
+      "const toast = useToast()",
+      "toast.${1|success,error,warning,info|}('${2:Message}')"
+    ],
+    "description": "SRIIO UI — useToast hook"
+  },
+  "SRIIO ToastProvider": {
+    "prefix": ["sriio-toast-provider", "ToastProvider"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { ToastProvider } from '@sriio/ui'",
+      "",
+      "<ToastProvider position=\"${1|top-right,top-left,bottom-right,bottom-left,top-center|}\">{children}</ToastProvider>"
+    ],
+    "description": "SRIIO UI — ToastProvider wrapper"
+  },
+  "SRIIO Progress": {
+    "prefix": ["sriio-progress", "progressbar"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { ProgressBar, ProgressCircle } from '@sriio/ui'",
+      "",
+      "<ProgressBar value={${1:50}} showPercent />"
+    ],
+    "description": "SRIIO UI — ProgressBar / ProgressCircle"
+  },
+  "SRIIO EmptyState": {
+    "prefix": ["sriio-empty", "emptystate"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { EmptyState } from '@sriio/ui'",
+      "",
+      "<EmptyState",
+      "  title=\"${1:Nothing here yet}\"",
+      "  description=\"${2:Get started by creating your first item.}\"",
+      "/>"
+    ],
+    "description": "SRIIO UI — EmptyState component"
+  },
+  "SRIIO Tooltip": {
+    "prefix": ["sriio-tooltip", "tooltip"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { Tooltip } from '@sriio/ui'",
+      "",
+      "<Tooltip content=\"${1:Tooltip text}\" placement=\"${2|top,bottom,left,right|}\">",
+      "  ${3:<button>Hover me</button>}",
+      "</Tooltip>"
+    ],
+    "description": "SRIIO UI — Tooltip component"
+  },
+  "SRIIO Modal": {
+    "prefix": ["sriio-modal", "modal", "dialog"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { Modal } from '@sriio/ui'",
+      "",
+      "<Modal",
+      "  open={${1:open}}",
+      "  onClose={() => ${2:setOpen}(false)}",
+      "  title=\"${3:Title}\"",
+      ">",
+      "  ${4:Content}",
+      "</Modal>"
+    ],
+    "description": "SRIIO UI — Modal dialog"
+  },
+  "SRIIO Drawer": {
+    "prefix": ["sriio-drawer", "drawer", "slideover"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { Drawer } from '@sriio/ui'",
+      "",
+      "<Drawer",
+      "  open={${1:open}}",
+      "  onClose={() => ${2:setOpen}(false)}",
+      "  title=\"${3:Title}\"",
+      ">",
+      "  ${4:Content}",
+      "</Drawer>"
+    ],
+    "description": "SRIIO UI — Drawer slide-over"
+  },
+  "SRIIO Popover": {
+    "prefix": ["sriio-popover", "popover"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { Popover } from '@sriio/ui'",
+      "",
+      "<Popover trigger={${1:<button>Open</button>}} placement=\"${2|bottom-start,bottom,bottom-end,top-start,top,top-end|}\">",
+      "  ${3:Content}",
+      "</Popover>"
+    ],
+    "description": "SRIIO UI — Popover component"
+  },
+  "SRIIO Tabs": {
+    "prefix": ["sriio-tabs", "tabs"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { Tabs } from '@sriio/ui'",
+      "",
+      "<Tabs",
+      "  tabs={[",
+      "    { id: '${1:tab1}', label: '${2:Tab 1}' },",
+      "    { id: '${3:tab2}', label: '${4:Tab 2}' },",
+      "  ]}",
+      "  activeId={${5:activeTab}}",
+      "  onChange={${6:setActiveTab}}",
+      "  variant=\"${7|underline,segmented,pill,vertical|}\"",
+      "/>"
+    ],
+    "description": "SRIIO UI — Tabs component"
+  },
+  "SRIIO Accordion": {
+    "prefix": ["sriio-accordion", "accordion"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": ["import { Accordion } from '@sriio/ui'", ""],
+    "description": "SRIIO UI — Accordion import"
+  },
+  "SRIIO Steps": {
+    "prefix": ["sriio-steps", "steps", "wizard"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": ["import { Steps } from '@sriio/ui'", ""],
+    "description": "SRIIO UI — Steps / wizard import"
+  },
+  "SRIIO Pagination": {
+    "prefix": ["sriio-pagination", "pagination"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { Pagination } from '@sriio/ui'",
+      "",
+      "<Pagination page={${1:page}} totalPages={${2:10}} onPageChange={${3:setPage}} />"
+    ],
+    "description": "SRIIO UI — Pagination component"
+  },
+  "SRIIO Navigation": {
+    "prefix": ["sriio-nav", "topnav", "sidebar", "breadcrumb"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": ["import { TopNav, Sidebar, Breadcrumb, BottomTabs } from '@sriio/ui'", ""],
+    "description": "SRIIO UI — Navigation import"
+  },
+  "SRIIO Table": {
+    "prefix": ["sriio-table", "table"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": ["import { Table } from '@sriio/ui'", ""],
+    "description": "SRIIO UI — Table import"
+  },
+  "SRIIO DatePicker": {
+    "prefix": ["sriio-date", "datepicker"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { DatePicker } from '@sriio/ui'",
+      "",
+      "<DatePicker value={${1:date}} onChange={${2:setDate}} placeholder=\"${3:Pick a date}\" />"
+    ],
+    "description": "SRIIO UI — DatePicker component"
+  },
+  "SRIIO TimePicker": {
+    "prefix": ["sriio-time", "timepicker"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { TimePicker } from '@sriio/ui'",
+      "",
+      "<TimePicker value={${1:time}} onChange={${2:setTime}} format=\"${3|12h,24h|}\" />"
+    ],
+    "description": "SRIIO UI — TimePicker component"
+  },
+  "SRIIO FileUpload": {
+    "prefix": ["sriio-upload", "fileupload", "dropzone"],
+    "scope": "typescriptreact,javascriptreact",
+    "body": [
+      "import { FileUploadSingle, FileUploadBulk } from '@sriio/ui'",
+      "",
+      "<FileUploadSingle value={${1:file}} onChange={${2:setFile}} accept=\"${3:image/*}\" />"
+    ],
+    "description": "SRIIO UI — FileUpload component"
+  }
+}
