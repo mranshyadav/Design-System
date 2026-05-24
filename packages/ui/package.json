@@ -1,0 +1,41 @@
+{
+  "name": "@sriio/ui",
+  "version": "1.0.0",
+  "description": "Production-ready React + Tailwind CSS components. Zero runtime dependencies.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "tsup": "^8",
+    "typescript": "^5"
+  },
+  "keywords": ["react", "tailwind", "ui", "components", "sriio", "typescript"],
+  "author": "mranshyadav",
+  "license": "MIT",
+  "homepage": "https://sriio.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mranshyadav/Design-System.git",
+    "directory": "packages/ui"
+  }
+}
