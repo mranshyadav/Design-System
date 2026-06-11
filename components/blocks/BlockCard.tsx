@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Eye, Copy, Check, Bookmark, BookmarkCheck, ExternalLink } from 'lucide-react'
 import type { Block } from '@/lib/data'
 import { PreviewMockup } from './PreviewMockup'
+import { copyText } from '@/lib/copy'
 import clsx from 'clsx'
 
 const categoryColors: Record<string, { bg: string; text: string; darkBg: string; darkText: string }> = {
@@ -26,7 +27,20 @@ export function BlockCard({ block }: { block: Block }) {
   const [copied, setCopied] = useState(false)
   const [bookmarked, setBookmarked] = useState(false)
 
-  const handleCopy = () => {
+  const handleCopy = async () => {
+    const componentName = block.title.replace(/\s+/g, '')
+    const code = `import { ${componentName} } from '@/components/blocks/${block.category}'
+
+export default function Example() {
+  return (
+    <${componentName}
+      title="${block.title}"
+      description="${block.description}"
+    />
+  )
+}`
+    const ok = await copyText(code)
+    if (!ok) return
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }

@@ -14,12 +14,6 @@ interface DocRightSidebarProps {
   onNavigate: (id: string) => void
 }
 
-const extraItems = [
-  { id: 'props-api', label: 'Props API' },
-  { id: 'accessibility', label: 'Accessibility' },
-  { id: 'changelog', label: 'Changelog' },
-]
-
 export function DocRightSidebar({ items, activeId, onNavigate }: DocRightSidebarProps) {
   return (
     <aside className="hidden xl:flex w-[260px] h-full flex-shrink-0 border-x border-gray-200 dark:border-gray-800 flex-col bg-white dark:bg-gray-950">
@@ -63,29 +57,13 @@ export function DocRightSidebar({ items, activeId, onNavigate }: DocRightSidebar
 
         {/* Divider */}
         {items.length > 0 && (
-          <div className="my-3 border-t border-gray-100 dark:border-gray-800" />
+          <div className="my-4 border-t border-gray-100 dark:border-gray-800" />
         )}
-
-        {/* Static extra items */}
-        <div className="space-y-0.5">
-          {extraItems.map(item => (
-            <button
-              key={item.id}
-              className="w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-sm text-left text-gray-500 dark:text-gray-500 hover:text-gray-800 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-gray-200 dark:bg-gray-700 flex-shrink-0" />
-              <span className="truncate">{item.label}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Divider */}
-        <div className="my-4 border-t border-gray-100 dark:border-gray-800" />
 
         {/* Footer links */}
         <div className="space-y-1">
           <a
-            href="https://github.com"
+            href="https://github.com/mranshyadav/Design-System"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs text-gray-500 dark:text-gray-500 hover:text-gray-800 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
@@ -95,7 +73,7 @@ export function DocRightSidebar({ items, activeId, onNavigate }: DocRightSidebar
             <ExternalLink size={9} className="ml-auto opacity-0 group-hover:opacity-60 transition-opacity" />
           </a>
           <a
-            href="https://github.com/issues/new"
+            href="https://github.com/mranshyadav/Design-System/issues/new"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs text-gray-500 dark:text-gray-500 hover:text-gray-800 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"

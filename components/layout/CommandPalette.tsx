@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
-import { Search, ArrowRight, Package, Layout, Hash } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { Search, ArrowRight, Package, Layout } from 'lucide-react'
 import { components, blocks } from '@/lib/data'
 import clsx from 'clsx'
 
@@ -9,9 +10,10 @@ export function CommandPalette() {
   const [query, setQuery]   = useState('')
   const [active, setActive] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
+  const router = useRouter()
 
   useEffect(() => {
-    const handler = (e: Event) => { setOpen(true); setQuery('') }
+    const handler = () => { setOpen(true); setQuery('') }
     const keydown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); setOpen(o => !o); setQuery('') }
       if (e.key === 'Escape') setOpen(false)
@@ -29,6 +31,17 @@ export function CommandPalette() {
   const matchedBlocks     = q ? blocks.filter(b => b.title.toLowerCase().includes(q) || b.tags.some(t => t.includes(q))).slice(0, 4) : blocks.slice(0, 3)
   const allResults = [...matchedComponents.map(c => ({ ...c, type: 'component' as const })), ...matchedBlocks.map(b => ({ ...b, type: 'block' as const }))]
 
+  const navigateTo = (result: { id: string; type: 'component' | 'block' }) => {
+    setOpen(false)
+    router.push(result.type === 'component' ? `/components/${result.id}` : `/blocks/${result.id}`)
+  }
+
+  const handleInputKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setActive(a => Math.min(a + 1, allResults.length - 1)) }
+    if (e.key === 'ArrowUp')   { e.preventDefault(); setActive(a => Math.max(a - 1, 0)) }
+    if (e.key === 'Enter' && allResults[active]) { e.preventDefault(); navigateTo(allResults[active]) }
+  }
+
   if (!open) return null
 
   return (
@@ -45,6 +58,7 @@ export function CommandPalette() {
             ref={inputRef}
             value={query}
             onChange={e => setQuery(e.target.value)}
+            onKeyDown={handleInputKeyDown}
             placeholder="Search components, blocks…"
             className="flex-1 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 text-sm outline-none"
           />
@@ -67,7 +81,8 @@ export function CommandPalette() {
                 <button
                   key={c.id}
                   className={clsx('w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-colors', i === active ? 'bg-accent-50 dark:bg-accent-500/10' : 'hover:bg-gray-100 dark:hover:bg-gray-800')}
-                  onClick={() => setOpen(false)}
+                  onClick={() => navigateTo({ id: c.id, type: 'component' })}
+                  onMouseEnter={() => setActive(i)}
                 >
                   <div className="w-7 h-7 rounded-lg bg-accent-100 dark:bg-accent-500/20 flex items-center justify-center text-accent-500 flex-shrink-0">
                     <Package size={13} />
@@ -92,7 +107,8 @@ export function CommandPalette() {
                 <button
                   key={b.id}
                   className={clsx('w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-colors', matchedComponents.length + i === active ? 'bg-accent-50 dark:bg-accent-500/10' : 'hover:bg-gray-100 dark:hover:bg-gray-800')}
-                  onClick={() => setOpen(false)}
+                  onClick={() => navigateTo({ id: b.id, type: 'block' })}
+                  onMouseEnter={() => setActive(matchedComponents.length + i)}
                 >
                   <div className="w-7 h-7 rounded-lg bg-emerald-100 dark:bg-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 flex-shrink-0">
                     <Layout size={13} />

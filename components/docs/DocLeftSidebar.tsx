@@ -11,8 +11,8 @@ interface DocLeftSidebarProps {
 
 const gettingStartedLinks = [
   { label: 'Introduction', href: '/docs', icon: BookOpen },
-  { label: 'Installation', href: '/docs/installation', icon: Package },
-  { label: 'Theming', href: '/docs/theming', icon: Palette },
+  { label: 'Installation', href: '/docs#installation', icon: Package },
+  { label: 'Theming', href: '/docs#theming', icon: Palette },
 ]
 
 const sortedComponents = [...components].sort((a, b) => a.title.localeCompare(b.title))

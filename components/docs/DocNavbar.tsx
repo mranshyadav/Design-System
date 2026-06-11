@@ -72,7 +72,9 @@ export function DocNavbar({ currentSlug }: DocNavbarProps) {
 
         {/* CENTER: Search */}
         <div className="flex-1 flex justify-center px-4">
-          <button className="flex items-center gap-2 w-full max-w-xs h-8 px-3 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-xs text-gray-400 dark:text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent('open-command-palette'))}
+            className="flex items-center gap-2 w-full max-w-xs h-8 px-3 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-xs text-gray-400 dark:text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
             <Search size={13} />
             <span className="flex-1 text-left">Search docs...</span>
             <kbd className="hidden sm:flex items-center gap-0.5 text-[10px] font-mono bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded px-1 py-0.5 text-gray-400">⌘K</kbd>

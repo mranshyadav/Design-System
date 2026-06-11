@@ -6,6 +6,7 @@ import {
   Maximize2, AlignRight, Sun, Moon, ExternalLink,
 } from 'lucide-react'
 import clsx from 'clsx'
+import { copyText } from '@/lib/copy'
 
 type DeviceSize = 'desktop' | 'tablet' | 'mobile'
 type CodeTab = 'preview' | 'react' | 'html' | 'tailwind' | 'typescript'
@@ -38,7 +39,8 @@ export function PreviewContainer({ preview, code, componentId }: PreviewContaine
   }
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(getCode())
+    const ok = await copyText(getCode())
+    if (!ok) return
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -53,14 +55,14 @@ export function PreviewContainer({ preview, code, componentId }: PreviewContaine
 
   return (
     <div className={clsx(
-      'rounded-2xl border border-gray-200 dark:border-gray-800 overflow-hidden bg-white dark:bg-gray-900',
-      maximized && 'fixed inset-4 z-[100]'
+      'rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900',
+      maximized ? 'fixed inset-4 z-[100] overflow-y-auto shadow-2xl' : 'overflow-hidden'
     )}>
       {/* Sticky toolbar */}
       <div className="sticky top-0 z-10 h-11 flex items-center gap-2 px-3 border-b border-gray-100 dark:border-gray-800 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm">
         {/* Left: Edit on GitHub */}
         <a
-          href={`https://github.com/sriio/ui/blob/main/components/${componentId}.tsx`}
+          href="https://github.com/mranshyadav/Design-System/tree/main/packages/ui/src"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"

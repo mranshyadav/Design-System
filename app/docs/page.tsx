@@ -1,10 +1,12 @@
 'use client'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
-import { Copy, Check, ExternalLink } from 'lucide-react'
+import { Copy, Check, ArrowDown } from 'lucide-react'
+import { DocNavbar } from '@/components/docs/DocNavbar'
 import { DocLeftSidebar } from '@/components/docs/DocLeftSidebar'
 import { DocRightSidebar } from '@/components/docs/DocRightSidebar'
 import { components } from '@/lib/data'
+import { copyText } from '@/lib/copy'
 
 // ── TOC ───────────────────────────────────────────────────────────────────────
 const tocItems = [
@@ -22,8 +24,9 @@ const tocItems = [
 // ── Code block ────────────────────────────────────────────────────────────────
 function Code({ code, lang = 'bash' }: { code: string; lang?: string }) {
   const [copied, setCopied] = useState(false)
-  function copy() {
-    navigator.clipboard.writeText(code.trim())
+  async function copy() {
+    const ok = await copyText(code.trim())
+    if (!ok) return
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -117,7 +120,9 @@ export default function DocsPage() {
   }, [])
 
   return (
-    <>
+    <div className="h-screen overflow-hidden flex flex-col bg-white dark:bg-gray-950">
+      <DocNavbar />
+
       <div className="layout-container flex overflow-hidden" style={{ height: 'calc(100vh - 72px)' }}>
         <DocLeftSidebar activeId="" />
 
@@ -533,12 +538,12 @@ function ThemeToggle() {
             {/* Footer nav */}
             <div className="flex items-center justify-between mt-16 pt-8 border-t border-gray-100 dark:border-gray-800">
               <div />
-              <Link
-                href="/docs/installation"
+              <button
+                onClick={() => handleNavigate('installation')}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-800 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors"
               >
-                Installation guide <ExternalLink size={13} />
-              </Link>
+                Installation guide <ArrowDown size={13} />
+              </button>
             </div>
 
           </div>
@@ -547,6 +552,6 @@ function ThemeToggle() {
         {/* ── Right TOC ── */}
         <DocRightSidebar items={tocItems} activeId={activeId} onNavigate={handleNavigate} />
       </div>
-    </>
+    </div>
   )
 }

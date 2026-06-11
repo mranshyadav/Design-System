@@ -5,13 +5,15 @@ import { notFound } from 'next/navigation'
 import { ArrowLeft, Eye, Code2, Copy, Check, ExternalLink, Bookmark, BookmarkCheck, Share2 } from 'lucide-react'
 import { blocks } from '@/lib/data'
 import { PreviewMockup } from '@/components/blocks/PreviewMockup'
+import { copyText } from '@/lib/copy'
 import clsx from 'clsx'
 
 function CodeBlock({ code }: { code: string }) {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(code)
+    const ok = await copyText(code)
+    if (!ok) return
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -63,7 +65,8 @@ export default function Example() {
 }`
 
   const handleCopyCode = async () => {
-    await navigator.clipboard.writeText(sampleCode)
+    const ok = await copyText(sampleCode)
+    if (!ok) return
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }

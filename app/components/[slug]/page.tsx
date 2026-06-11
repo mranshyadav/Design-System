@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { Copy, Check, Package } from 'lucide-react'
 import { components } from '@/lib/data'
+import { copyText } from '@/lib/copy'
 import { DocNavbar } from '@/components/docs/DocNavbar'
 import { DocLeftSidebar } from '@/components/docs/DocLeftSidebar'
 import { DocRightSidebar } from '@/components/docs/DocRightSidebar'
@@ -850,7 +851,12 @@ function buildCode(id: string, imports: string, label: string) {
 
 function InstallSnippet({ text }: { text: string }) {
   const [copied, setCopied] = useState(false)
-  const copy = () => { navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 2000) }
+  const copy = async () => {
+    const ok = await copyText(text)
+    if (!ok) return
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
   return (
     <div className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-gray-950 border border-gray-800">
       <code className="text-sm font-mono text-gray-300">{text}</code>

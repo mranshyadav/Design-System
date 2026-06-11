@@ -21,18 +21,18 @@ const footerLinks = {
   'Resources': [
     { label: 'Documentation',    href: '/docs' },
     { label: 'GitHub Repository',href: 'https://github.com/mranshyadav/Design-System' },
-    { label: 'Changelog',        href: '/changelog' },
-    { label: 'Roadmap',          href: '/roadmap' },
-    { label: 'Contributing',     href: '/contributing' },
-    { label: 'License (MIT)',    href: '/license' },
+    { label: 'Changelog',        href: 'https://github.com/mranshyadav/Design-System/releases' },
+    { label: 'Roadmap',          href: 'https://github.com/mranshyadav/Design-System/issues' },
+    { label: 'Contributing',     href: 'https://github.com/mranshyadav/Design-System/pulls' },
+    { label: 'License (MIT)',    href: 'https://github.com/mranshyadav/Design-System' },
   ],
   'Design System': [
-    { label: 'Design Tokens',    href: '/docs/tokens' },
-    { label: 'Typography',       href: '/docs/typography' },
-    { label: 'Color Palette',    href: '/docs/colors' },
-    { label: 'Spacing Scale',    href: '/docs/spacing' },
-    { label: 'Icons',            href: '/docs/icons' },
-    { label: 'Motion',           href: '/docs/motion' },
+    { label: 'Installation',     href: '/docs#installation' },
+    { label: 'Tailwind Setup',   href: '/docs#tailwind-setup' },
+    { label: 'Theming',          href: '/docs#theming' },
+    { label: 'AI & IDE Setup',   href: '/docs#ai-integration' },
+    { label: 'REST API',         href: '/docs#rest-api' },
+    { label: 'Dark Mode',        href: '/docs#dark-mode' },
   ],
 }
 
@@ -57,8 +57,8 @@ export function Footer() {
             <div className="flex items-center gap-3">
               {[
                 { href: 'https://github.com/mranshyadav/Design-System', Icon: Github, label: 'GitHub' },
-                { href: '#', Icon: Twitter, label: 'Twitter' },
-                { href: '#', Icon: Linkedin, label: 'LinkedIn' },
+                { href: 'https://twitter.com', Icon: Twitter, label: 'Twitter' },
+                { href: 'https://linkedin.com', Icon: Linkedin, label: 'LinkedIn' },
               ].map(({ href, Icon, label }) => (
                 <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label}
                   className="flex items-center justify-center w-9 h-9 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-500 hover:text-gray-900 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-600 transition-colors shadow-card">
@@ -108,9 +108,9 @@ export function Footer() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
           <p>© {new Date().getFullYear()} SRIIO UI. Released under the MIT license.</p>
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Privacy</Link>
-            <Link href="/terms"   className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Terms</Link>
-            <Link href="/cookies" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Cookies</Link>
+            <Link href="/about"   className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">About</Link>
+            <Link href="/contact" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Contact</Link>
+            <a href="https://github.com/mranshyadav/Design-System" target="_blank" rel="noreferrer" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">GitHub</a>
           </div>
         </div>
       </div>

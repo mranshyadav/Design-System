@@ -6,6 +6,5 @@ export default defineConfig({
   dts: true,
   clean: true,
   external: ['react', 'react-dom'],
-  jsx: 'react-jsx',
   treeshake: true,
 })

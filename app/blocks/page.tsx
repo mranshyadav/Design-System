@@ -1,5 +1,5 @@
 'use client'
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { blocks, categories } from '@/lib/data'
 import { SearchFilters } from '@/components/blocks/SearchFilters'
 import { BlockCard } from '@/components/blocks/BlockCard'
@@ -50,6 +50,15 @@ export default function BlocksPage() {
   const [sortBy, setSortBy] = useState('newest')
   const [activeTags, setActiveTags] = useState<string[]>([])
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
+
+  // Apply ?cat= and ?tag= from the URL (footer links, block tag links)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const cat = params.get('cat')
+    const tag = params.get('tag')
+    if (cat && blocks.some(b => b.category === cat)) setActiveCategory(cat)
+    if (tag && blocks.some(b => b.tags.includes(tag))) setActiveTags([tag])
+  }, [])
 
   const allTags = useMemo(() => {
     const tags = new Set<string>()

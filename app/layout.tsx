@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {!isDocPage && <CommandPalette />}
+          <CommandPalette />
           {!isDocPage && <Navbar />}
           <main className={isDocPage ? 'overflow-hidden h-screen' : undefined}>
             {children}
